@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\onesocketserver.exe
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\onesocketserver.pdb
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.Properties.Resources.resources
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.exe
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.pdb
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\SkKit.dll
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\NLog.dll
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\SkKit.pdb
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\NLog.xml
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.csproj.CopyComplete
