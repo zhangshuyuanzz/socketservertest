@@ -21,5 +21,32 @@ namespace onesocketserver
             SkServer ServerHandle = new SkServer(11220);
             ServerHandle.SkStartListen();
         }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            logger.Debug("TextBox1_TextChanged");
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+            logger.Debug("Label1_Click");
+        }
+
+        private void TextBox15_TextChanged(object sender, EventArgs e)
+        {
+            logger.Debug("TextBox15_TextChanged");
+
+        }
+
+        private void TextBox13_TextChanged(object sender, EventArgs e)
+        {
+            logger.Debug("TextBox13_TextChanged");
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            logger.Debug("Form1_Load");
+        }
     }
 }

@@ -10,3 +10,5 @@ C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\NLog.dl
 C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\SkKit.pdb
 C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\bin\Debug\NLog.xml
 C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\onesocketserver\obj\Debug\onesocketserver.Form1.resources
