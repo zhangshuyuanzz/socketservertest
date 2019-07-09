@@ -76,7 +76,7 @@ namespace SkKit
             while (true) {
                 logger.Debug("now listen!!");
                 Socket clientsocket = _socket.Accept();
-                logger.Debug("there is a listen!!");
+                logger.Debug("there is a client!!", clientsocket);
                 clientsocket.Send(Encoding.UTF8.GetBytes("zheshige fuwuduan!!!!!!!!!!"));
                 Thread subfunc = new Thread(ReceiveMessage);
                 subfunc.Start(clientsocket);
@@ -84,10 +84,11 @@ namespace SkKit
         }
         private void ReceiveMessage(object SkHadle)
         {
+            Socket clientSk = (Socket)SkHadle;
             try
             {
                 logger.Debug("ReceiveMessage");
-                Socket clientSk = (Socket)SkHadle;
+                clientSk = (Socket)SkHadle;
                 byte[] getbufer = new byte[1024 * 10];
                 while (true)
                 {
@@ -110,6 +111,7 @@ namespace SkKit
             catch (Exception e)
             {
                 logger.Error("error [{}]", e.ToString());
+                SocketClose(clientSk);
             }
             logger.Debug("socket conn disconned");
         }
@@ -142,6 +144,15 @@ namespace SkKit
                 TagsL.Add(OneIDInfo);
             }
             return RetParse; 
+        }
+        public bool SocketClose(Socket ClientFd)
+        {
+            bool CloseRet = true;
+            if (ClientFd != null) {
+                ClientFd.Shutdown(SocketShutdown.Both);
+                ClientFd.Close();
+            }
+            return CloseRet;
         }
     }
 }
