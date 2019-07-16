@@ -61,6 +61,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)*  $(SolutionDir)SocketServer\bin\Debug /f /y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)*  $(SolutionDir)SocketServer\bin\Debug /f /y
+xcopy $(TargetDir)*  $(SolutionDir)Fujidev\bin\Debug /f /y</PostBuildEvent>
   </PropertyGroup>
 </Project>

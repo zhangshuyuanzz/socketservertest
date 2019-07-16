@@ -1,0 +1,14 @@
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.Form1.resources
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.Properties.Resources.resources
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\bin\Debug\Fujidev.exe
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\bin\Debug\Fujidev.pdb
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\bin\Debug\SkKit.dll
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\bin\Debug\NLog.dll
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\bin\Debug\SkKit.pdb
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\bin\Debug\NLog.xml
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.exe
+C:\Users\Administrator\Desktop\onesocketserver\Fujidev\obj\Debug\Fujidev.pdb
