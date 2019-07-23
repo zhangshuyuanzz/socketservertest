@@ -24,9 +24,13 @@ namespace SkKit
         private string ip;
         private int port;
         private Socket _socket = null;
-
+        
+        private Dictionary<string , Socket> DevSkList = new Dictionary<string , Socket>();
         public delegate void ServerDataEventHandler(List<DevTagIndo> tags);
         public ServerDataEventHandler Server_get_handle;
+
+        public delegate void ServerConnEventHandler(object handle);
+        public ServerConnEventHandler Server_conn_handle;
 
         private NLOG logger = new NLOG("SkServer");
         public SkServer(string ip, int port)
@@ -39,6 +43,7 @@ namespace SkKit
             logger.Debug("SkServer[{}]", port);
             this.ip = "0.0.0.0";
             this.port = port;
+
         }
 
         public bool SkStartListen()
@@ -76,8 +81,20 @@ namespace SkKit
             while (true) {
                 logger.Debug("now listen!!");
                 Socket clientsocket = _socket.Accept();
+
+                string ip = (clientsocket.RemoteEndPoint as IPEndPoint).Address.ToString();
+                logger.Debug("conn ip [{}]",ip);
+                if (DevSkList.ContainsKey(ip))
+                {
+                    DevSkList[ip] = clientsocket;
+                }
+                else
+                {
+                    DevSkList.Add(ip, clientsocket);
+                }
                 logger.Debug("there is a client!!", clientsocket);
                 clientsocket.Send(Encoding.UTF8.GetBytes("zheshige fuwuduan!!!!!!!!!!"));
+                Server_conn_handle?.Invoke(this);
                 Thread subfunc = new Thread(ReceiveMessage);
                 subfunc.Start(clientsocket);
             }
@@ -102,10 +119,7 @@ namespace SkKit
                     logger.Debug("set msg[{}]", BitConverter.ToString(GetData));
 
                     SkParseFrame(TagsL, GetData);
-                    if (Server_get_handle != null)
-                    {
-                        Server_get_handle(TagsL);
-                    }
+                    Server_get_handle?.Invoke(TagsL);
                 }
             }
             catch (Exception e)
@@ -118,6 +132,10 @@ namespace SkKit
         public bool SkParseFrame(List<DevTagIndo> TagsL, byte[] InData)
         {
             bool RetParse = true;
+            if (InData.Length == 0) {
+                logger.Error("InData.Length == 0");
+                return false;
+            }
             if (InData[0] != 0xFE || InData[1] != 0xFE) {
                 logger.Error("error get frame [{}] [{}]", InData[0], InData[1]);
                 return false;
@@ -153,6 +171,18 @@ namespace SkKit
                 ClientFd.Close();
             }
             return CloseRet;
+        }
+        public void CoSendFile(string ip ,string path)
+        {
+            logger.Debug("CoSendFile--ip[{}]path[{}]", ip, path);
+            if (DevSkList.ContainsKey(ip))
+            {
+                DevSkList[ip].SendFile(path);
+            }
+            else
+            {
+                logger.Debug("no this device");
+            }
         }
     }
 }

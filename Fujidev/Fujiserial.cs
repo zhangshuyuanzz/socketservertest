@@ -115,8 +115,14 @@ namespace Fujidev
         public bool Serial_write_date(byte[] src_data)
         {
             bool ret_write = false;
-
-            serial_comm.Write(src_data, 0, src_data.Length);
+            try
+            {
+                serial_comm.Write(src_data, 0, src_data.Length);
+            }
+            catch (Exception e)
+            {
+                logger.Error(" error [{}]",e.ToString());
+            }
 
             return ret_write;
         }

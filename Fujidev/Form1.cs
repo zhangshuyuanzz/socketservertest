@@ -71,6 +71,7 @@ namespace Fujidev
             }
 
             Devserial.Serial_write_date(bframe);
+            test_try_parse_float();
         }
         void CBserialData(byte[] data)
         {
@@ -100,38 +101,109 @@ namespace Fujidev
             this.Dispose();
             this.Close();
         }
+        public void test_try_parse_float()
+        {
+            string ss = "-1.000000E+03m3/d!AC\r+2.000000E+08m/s!88\r";
+            byte[] frame = System.Text.Encoding.ASCII.GetBytes(ss);
+            int count = 1;
+            ParsedevValue((byte)count, frame);
+        }
+
+
+        private string[] Split(byte[] data, int c)
+        {
+            int idx = 0;
+            string[] res = new string[c];
+            for (int i = 0; i < c; i++)
+            {
+                int c1 = idx;
+                int c2 = idx;
+                byte crc = 0;
+                for (; idx < data.Length; idx++)
+                {
+                    byte v = data[idx];
+                    if (c1 == c2 && (v < 43 || (v > 57 && v != 69)))
+                    {
+                        c2 = idx;
+                    }
+                    if (data[idx] == 33)
+                    {
+                        idx += 4;
+                        logger.Debug("idx [{}]  Length[{}]", idx, data.Length);
+                        if (idx >= data.Length) {
+                            break;
+                        }
+                        if (data[idx] == 10)
+                            idx++;
+                        break;
+                    }
+                    crc += data[idx];
+                }
+
+                res[i] = System.Text.Encoding.ASCII.GetString(data, c1, c2 - c1 + 1);
+                logger.Debug("res [{}]",res[i]);
+            }
+
+            return res;
+        }
+
+        private float ChangeDataToD(String data)
+        {
+            decimal v = 0.0M;
+            try
+            {
+                if (data.Contains("E") || data.Contains("e"))
+                {
+                    data = data.Substring(0, data.Length - 1).Trim();
+                    v = Convert.ToDecimal(Decimal.Parse(data.ToString(), System.Globalization.NumberStyles.Float));
+                    logger.Debug("vvvvvvvvvvv[{}]",v);
+                }
+                else
+                {
+                    logger.Debug("---------------------------------------------");
+                    v = decimal.Parse(data);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            logger.Debug("data[{}]v[{}]ToString[{}]", data, v, v.ToString());
+
+            logger.Debug("to[{}]v[{}]", float.Parse(v.ToString()),(float)v);
+
+            return float.Parse(v.ToString());
+        }
+
         public float ParsedevValue(byte para_mark, byte[] framedata)
         {
-            float f = 0;
-            if (framedata == null || para_mark == 0)
-            {
-                return f;
+            logger.Debug("ParsedevValue");
+            string[] values = Split(framedata, 2);
+            int a =0;
+            float[] dd = new float[2];
+            while (a != 2 ) {
+                dd[a] = ChangeDataToD(values[a]);
+                logger.Debug("ChangeDataToD   [{}]",dd);
+                a++;
             }
-            byte[] parse_point = framedata;
-
-            while ((para_mark - 1) != 0)
+            Dev_set_parse_value(dd);
+            return 0;
+        }
+        public void Dev_set_parse_value(float[] value)
+        {
+            int cont = 0;
+            foreach (float s in value)
             {
-                parse_point = (uint8*)strchr((sint8*)parse_point, 0x0d) + 1;
-                if (parse_point == NULL)
+                logger.Debug("s[{}]cont[{}]",s,cont);
+                if (cont == 0)
                 {
-                    return 0;
+                    this.currentin.Text = ((decimal)s).ToString();
                 }
-                QL_Ddebug_log(RGB_BLUE, "parse_point[%s]", parse_point)
-                para_mark--;
+                else {
+                    this.totalin.Text = ((decimal)s).ToString();
+                }
+                cont++;
             }
-            sint32 pos = atoi((sint8*)parse_point);
-            parse_point++;
-            sint32 neg = 0;
-            parse_point = ql_strchr((sint8*)parse_point, 0x2d, 0x2b);
-
-            parse_point++;
-            neg = atoi((sint8*)parse_point);
-            f = pos * ql_pow(10, neg);
-            QL_Ddebug_log(RGB_BLUE, "f[%f]neg[%d]pos[%d]", f, neg, pos)
-
-
-
-            return f;
         }
     }
 }

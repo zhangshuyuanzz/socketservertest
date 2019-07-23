@@ -8,7 +8,6 @@ namespace SocketServer
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private Dictionary<int, System.Windows.Forms.TextBox> allboxs = new Dictionary<int, System.Windows.Forms.TextBox>();
         /// <summary>
         /// 清理所有正在使用的资源。
         /// </summary>
@@ -32,52 +31,22 @@ namespace SocketServer
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.dev1 = new System.Windows.Forms.Label();
+            this.dev2 = new System.Windows.Forms.Label();
+            this.dev3 = new System.Windows.Forms.Label();
+            this.ip1 = new System.Windows.Forms.TextBox();
+            this.ip2 = new System.Windows.Forms.TextBox();
+            this.ip3 = new System.Windows.Forms.TextBox();
+            this.ip = new System.Windows.Forms.Label();
+            this.tagtotal = new System.Windows.Forms.Label();
+            this.tag3 = new System.Windows.Forms.TextBox();
+            this.tag2 = new System.Windows.Forms.TextBox();
+            this.tag1 = new System.Windows.Forms.TextBox();
+            this.utime = new System.Windows.Forms.Label();
+            this.utime3 = new System.Windows.Forms.TextBox();
+            this.utime2 = new System.Windows.Forms.TextBox();
+            this.utime1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-
-            // 
-            // add allboxs
-            // 
-            allboxs.Add(1, this.textBox1);
-            allboxs.Add(2, this.textBox2);
-            allboxs.Add(3, this.textBox3);
-            allboxs.Add(4, this.textBox4);
-            allboxs.Add(5, this.textBox5);
-            allboxs.Add(6, this.textBox6);
-            allboxs.Add(7, this.textBox7);
-            allboxs.Add(8, this.textBox8);
-            allboxs.Add(9, this.textBox9);
-            allboxs.Add(10, this.textBox10);
-            allboxs.Add(11, this.textBox11);
-            allboxs.Add(12, this.textBox12);
-            allboxs.Add(13, this.textBox13);
-            allboxs.Add(14, this.textBox14);
-            allboxs.Add(15, this.textBox15);
-            allboxs.Add(16, this.textBox16);
-            allboxs.Add(17, this.textBox17);
-            allboxs.Add(18, this.textBox18);
-            allboxs.Add(19, this.textBox19);
-            allboxs.Add(20, this.textBox20);
-
             // 
             // label1
             // 
@@ -87,11 +56,12 @@ namespace SocketServer
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("隶书", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(124, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(786, 70);
+            this.label1.Size = new System.Drawing.Size(534, 70);
             this.label1.TabIndex = 0;
-            this.label1.Text = "socket server console";
+            this.label1.Text = "server console";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // dateTimePicker1
@@ -102,225 +72,182 @@ namespace SocketServer
             this.dateTimePicker1.Size = new System.Drawing.Size(146, 25);
             this.dateTimePicker1.TabIndex = 1;
             // 
-            // textBox11
+            // dev1
             // 
-            this.textBox11.Location = new System.Drawing.Point(518, 82);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 25);
-            this.textBox11.TabIndex = 22;
-            this.textBox11.Text = "textBox11";
+            this.dev1.AutoSize = true;
+            this.dev1.Location = new System.Drawing.Point(36, 129);
+            this.dev1.Name = "dev1";
+            this.dev1.Size = new System.Drawing.Size(60, 15);
+            this.dev1.TabIndex = 2;
+            this.dev1.Text = "采集机1";
             // 
-            // textBox10
+            // dev2
             // 
-            this.textBox10.Location = new System.Drawing.Point(164, 361);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 25);
-            this.textBox10.TabIndex = 21;
-            this.textBox10.Text = "textBox10";
+            this.dev2.AutoSize = true;
+            this.dev2.Location = new System.Drawing.Point(36, 214);
+            this.dev2.Name = "dev2";
+            this.dev2.Size = new System.Drawing.Size(60, 15);
+            this.dev2.TabIndex = 3;
+            this.dev2.Text = "采集机2";
             // 
-            // textBox9
+            // dev3
             // 
-            this.textBox9.Location = new System.Drawing.Point(164, 330);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 25);
-            this.textBox9.TabIndex = 20;
-            this.textBox9.Text = "textBox9";
+            this.dev3.AutoSize = true;
+            this.dev3.Location = new System.Drawing.Point(36, 296);
+            this.dev3.Name = "dev3";
+            this.dev3.Size = new System.Drawing.Size(60, 15);
+            this.dev3.TabIndex = 4;
+            this.dev3.Text = "采集机3";
+            this.dev3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // textBox8
+            // ip1
             // 
-            this.textBox8.Location = new System.Drawing.Point(164, 299);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 25);
-            this.textBox8.TabIndex = 19;
-            this.textBox8.Text = "textBox8";
+            this.ip1.Location = new System.Drawing.Point(136, 126);
+            this.ip1.Name = "ip1";
+            this.ip1.Size = new System.Drawing.Size(100, 25);
+            this.ip1.TabIndex = 5;
+            this.ip1.Text = "0";
             // 
-            // textBox7
+            // ip2
             // 
-            this.textBox7.Location = new System.Drawing.Point(164, 268);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 25);
-            this.textBox7.TabIndex = 18;
-            this.textBox7.Text = "textBox7";
+            this.ip2.Location = new System.Drawing.Point(136, 204);
+            this.ip2.Name = "ip2";
+            this.ip2.Size = new System.Drawing.Size(100, 25);
+            this.ip2.TabIndex = 6;
+            this.ip2.Text = "0";
             // 
-            // textBox6
+            // ip3
             // 
-            this.textBox6.Location = new System.Drawing.Point(164, 237);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 25);
-            this.textBox6.TabIndex = 17;
-            this.textBox6.Text = "textBox6";
+            this.ip3.Location = new System.Drawing.Point(136, 286);
+            this.ip3.Name = "ip3";
+            this.ip3.Size = new System.Drawing.Size(100, 25);
+            this.ip3.TabIndex = 7;
+            this.ip3.Text = "0";
             // 
-            // textBox5
+            // ip
             // 
-            this.textBox5.Location = new System.Drawing.Point(164, 206);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 25);
-            this.textBox5.TabIndex = 16;
-            this.textBox5.Text = "textBox5";
+            this.ip.AutoSize = true;
+            this.ip.Location = new System.Drawing.Point(178, 91);
+            this.ip.Name = "ip";
+            this.ip.Size = new System.Drawing.Size(23, 15);
+            this.ip.TabIndex = 8;
+            this.ip.Text = "IP";
             // 
-            // textBox4
+            // tagtotal
             // 
-            this.textBox4.Location = new System.Drawing.Point(164, 175);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 25);
-            this.textBox4.TabIndex = 15;
-            this.textBox4.Text = "textBox4";
+            this.tagtotal.AutoSize = true;
+            this.tagtotal.Location = new System.Drawing.Point(346, 91);
+            this.tagtotal.Name = "tagtotal";
+            this.tagtotal.Size = new System.Drawing.Size(79, 15);
+            this.tagtotal.TabIndex = 12;
+            this.tagtotal.Text = "tag count";
             // 
-            // textBox3
+            // tag3
             // 
-            this.textBox3.Location = new System.Drawing.Point(164, 144);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 25);
-            this.textBox3.TabIndex = 14;
-            this.textBox3.Text = "textBox3";
+            this.tag3.Location = new System.Drawing.Point(337, 289);
+            this.tag3.Name = "tag3";
+            this.tag3.Size = new System.Drawing.Size(100, 25);
+            this.tag3.TabIndex = 11;
+            this.tag3.Text = "0";
             // 
-            // textBox1
+            // tag2
             // 
-            this.textBox1.Location = new System.Drawing.Point(164, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 25);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.Text = "textBox1";
+            this.tag2.Location = new System.Drawing.Point(337, 207);
+            this.tag2.Name = "tag2";
+            this.tag2.Size = new System.Drawing.Size(100, 25);
+            this.tag2.TabIndex = 10;
+            this.tag2.Text = "0";
             // 
-            // textBox2
+            // tag1
             // 
-            this.textBox2.Location = new System.Drawing.Point(164, 110);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 25);
-            this.textBox2.TabIndex = 32;
-            this.textBox2.Text = "textBox2";
+            this.tag1.Location = new System.Drawing.Point(337, 129);
+            this.tag1.Name = "tag1";
+            this.tag1.Size = new System.Drawing.Size(100, 25);
+            this.tag1.TabIndex = 9;
+            this.tag1.Text = "0";
             // 
-            // textBox12
+            // utime
             // 
-            this.textBox12.Location = new System.Drawing.Point(518, 113);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 25);
-            this.textBox12.TabIndex = 31;
-            this.textBox12.Text = "textBox12";
+            this.utime.AutoSize = true;
+            this.utime.Location = new System.Drawing.Point(629, 91);
+            this.utime.Name = "utime";
+            this.utime.Size = new System.Drawing.Size(67, 15);
+            this.utime.TabIndex = 16;
+            this.utime.Text = "当前时间";
             // 
-            // textBox13
+            // utime3
             // 
-            this.textBox13.Location = new System.Drawing.Point(518, 144);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(100, 25);
-            this.textBox13.TabIndex = 30;
-            this.textBox13.Text = "textBox13";
+            this.utime3.Location = new System.Drawing.Point(538, 286);
+            this.utime3.Name = "utime3";
+            this.utime3.Size = new System.Drawing.Size(240, 25);
+            this.utime3.TabIndex = 15;
+            this.utime3.Text = "0";
             // 
-            // textBox14
+            // utime2
             // 
-            this.textBox14.Location = new System.Drawing.Point(518, 175);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(100, 25);
-            this.textBox14.TabIndex = 29;
-            this.textBox14.Text = "textBox14";
+            this.utime2.Location = new System.Drawing.Point(538, 204);
+            this.utime2.Name = "utime2";
+            this.utime2.Size = new System.Drawing.Size(240, 25);
+            this.utime2.TabIndex = 14;
+            this.utime2.Text = "0";
             // 
-            // textBox15
+            // utime1
             // 
-            this.textBox15.Location = new System.Drawing.Point(518, 206);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(100, 25);
-            this.textBox15.TabIndex = 28;
-            this.textBox15.Text = "textBox15";
-            // 
-            // textBox16
-            // 
-            this.textBox16.Location = new System.Drawing.Point(518, 237);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(100, 25);
-            this.textBox16.TabIndex = 27;
-            this.textBox16.Text = "textBox16";
-            // 
-            // textBox17
-            // 
-            this.textBox17.Location = new System.Drawing.Point(518, 268);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(100, 25);
-            this.textBox17.TabIndex = 26;
-            this.textBox17.Text = "textBox17";
-            // 
-            // textBox18
-            // 
-            this.textBox18.Location = new System.Drawing.Point(518, 299);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(100, 25);
-            this.textBox18.TabIndex = 25;
-            this.textBox18.Text = "textBox18";
-            // 
-            // textBox19
-            // 
-            this.textBox19.Location = new System.Drawing.Point(518, 330);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(100, 25);
-            this.textBox19.TabIndex = 24;
-            this.textBox19.Text = "textBox19";
-            // 
-            // textBox20
-            // 
-            this.textBox20.Location = new System.Drawing.Point(518, 361);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(100, 25);
-            this.textBox20.TabIndex = 23;
-            this.textBox20.Text = "textBox20";
+            this.utime1.Location = new System.Drawing.Point(538, 126);
+            this.utime1.Name = "utime1";
+            this.utime1.Size = new System.Drawing.Size(240, 25);
+            this.utime1.TabIndex = 13;
+            this.utime1.Text = "0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.textBox13);
-            this.Controls.Add(this.textBox14);
-            this.Controls.Add(this.textBox15);
-            this.Controls.Add(this.textBox16);
-            this.Controls.Add(this.textBox17);
-            this.Controls.Add(this.textBox18);
-            this.Controls.Add(this.textBox19);
-            this.Controls.Add(this.textBox20);
-            this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.utime);
+            this.Controls.Add(this.utime3);
+            this.Controls.Add(this.utime2);
+            this.Controls.Add(this.utime1);
+            this.Controls.Add(this.tagtotal);
+            this.Controls.Add(this.tag3);
+            this.Controls.Add(this.tag2);
+            this.Controls.Add(this.tag1);
+            this.Controls.Add(this.ip);
+            this.Controls.Add(this.ip3);
+            this.Controls.Add(this.ip2);
+            this.Controls.Add(this.ip1);
+            this.Controls.Add(this.dev3);
+            this.Controls.Add(this.dev2);
+            this.Controls.Add(this.dev1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "大狗熊";
-
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Form1Closed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1Closed);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.Label dev1;
+        private System.Windows.Forms.Label dev2;
+        private System.Windows.Forms.Label dev3;
+        private System.Windows.Forms.TextBox ip1;
+        private System.Windows.Forms.TextBox ip2;
+        private System.Windows.Forms.TextBox ip3;
+        private System.Windows.Forms.Label ip;
+        private System.Windows.Forms.Label tagtotal;
+        private System.Windows.Forms.TextBox tag3;
+        private System.Windows.Forms.TextBox tag2;
+        private System.Windows.Forms.TextBox tag1;
+        private System.Windows.Forms.Label utime;
+        private System.Windows.Forms.TextBox utime3;
+        private System.Windows.Forms.TextBox utime2;
+        private System.Windows.Forms.TextBox utime1;
     }
 }
 

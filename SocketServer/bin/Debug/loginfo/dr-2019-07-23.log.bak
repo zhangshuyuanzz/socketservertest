@@ -1,0 +1,229 @@
+2019-07-23 00:01:21.1729 [DEBUG]：struct Form1
+2019-07-23 00:01:21.2607 [DEBUG]：SkServer[11220]
+2019-07-23 00:01:21.3027 [DEBUG]：SkStartListen
+2019-07-23 00:01:21.3164 [DEBUG]：111111
+2019-07-23 00:01:21.3164 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 00:01:21.3603 [DEBUG]：222
+2019-07-23 00:01:21.3613 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 00:01:21.3613 [DEBUG]：开始监听
+2019-07-23 00:01:21.3613 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 00:01:21.3613 [DEBUG]：now listen!!
+2019-07-23 00:01:21.3613 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 00:01:21.3613 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 00:01:21.3886 [DEBUG]：struct Form1  end
+2019-07-23 00:01:28.5924 [DEBUG]：form1_closed
+2019-07-23 10:14:36.6003 [DEBUG]：struct Form1
+2019-07-23 10:14:36.6887 [DEBUG]：SkServer[11220]
+2019-07-23 10:14:36.7297 [DEBUG]：SkStartListen
+2019-07-23 10:14:36.7473 [DEBUG]：111111
+2019-07-23 10:14:36.7473 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:14:36.7873 [DEBUG]：222
+2019-07-23 10:14:36.7873 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:14:36.7873 [DEBUG]：开始监听
+2019-07-23 10:14:36.7873 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 10:14:36.7961 [DEBUG]：now listen!!
+2019-07-23 10:14:36.7961 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:14:36.7961 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 10:14:36.8175 [DEBUG]：struct Form1  end
+2019-07-23 10:14:37.0401 [DEBUG]：there is a client!!
+2019-07-23 10:14:37.0401 [DEBUG]：now listen!!
+2019-07-23 10:14:37.0469 [DEBUG]：ReceiveMessage
+2019-07-23 10:16:13.5727 [DEBUG]：form1_closed
+2019-07-23 10:18:50.4692 [DEBUG]：struct Form1
+2019-07-23 10:18:50.5658 [DEBUG]：SkServer[11220]
+2019-07-23 10:18:50.5990 [DEBUG]：SkStartListen
+2019-07-23 10:18:50.6146 [DEBUG]：111111
+2019-07-23 10:18:50.6146 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:18:50.6536 [DEBUG]：222
+2019-07-23 10:18:50.6556 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:18:50.6556 [DEBUG]：开始监听
+2019-07-23 10:18:50.6556 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 10:18:50.6556 [DEBUG]：now listen!!
+2019-07-23 10:18:50.6556 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:18:50.6556 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 10:18:50.6815 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:18:50.6815 [DEBUG]：struct Form1  end
+2019-07-23 10:18:57.1443 [DEBUG]：there is a client!!
+2019-07-23 10:18:57.1443 [DEBUG]：now listen!!
+2019-07-23 10:18:57.1443 [DEBUG]：ReceiveMessage
+2019-07-23 10:20:19.5131 [DEBUG]：form1_closed
+2019-07-23 10:21:41.5850 [DEBUG]：struct Form1
+2019-07-23 10:21:41.6826 [DEBUG]：SkServer[11220]
+2019-07-23 10:21:41.7226 [DEBUG]：SkStartListen
+2019-07-23 10:21:41.7382 [DEBUG]：111111
+2019-07-23 10:21:41.7382 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:21:41.7768 [DEBUG]：222
+2019-07-23 10:21:41.7768 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:21:41.7768 [DEBUG]：开始监听
+2019-07-23 10:21:41.7797 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 10:21:41.7797 [DEBUG]：now listen!!
+2019-07-23 10:21:41.7797 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:21:41.7797 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 10:21:41.8031 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:21:41.8031 [DEBUG]：struct Form1  end
+2019-07-23 10:21:48.4648 [DEBUG]：form1_closed
+2019-07-23 10:59:15.6035 [DEBUG]：struct Form1
+2019-07-23 10:59:15.7022 [DEBUG]：SkServer[11220]
+2019-07-23 10:59:15.7393 [DEBUG]：SkStartListen
+2019-07-23 10:59:15.7540 [DEBUG]：111111
+2019-07-23 10:59:15.7540 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:59:15.7920 [DEBUG]：222
+2019-07-23 10:59:15.7920 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 10:59:15.7920 [DEBUG]：开始监听
+2019-07-23 10:59:15.7950 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 10:59:15.7950 [DEBUG]：now listen!!
+2019-07-23 10:59:15.7950 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:59:15.7950 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 10:59:15.8174 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 10:59:15.8174 [DEBUG]：struct Form1  end
+2019-07-23 10:59:16.4655 [DEBUG]：there is a client!!
+2019-07-23 10:59:16.4674 [DEBUG]：now listen!!
+2019-07-23 10:59:16.4674 [DEBUG]：ReceiveMessage
+2019-07-23 10:59:49.1584 [DEBUG]：form1_closed
+2019-07-23 11:01:37.1478 [DEBUG]：struct Form1
+2019-07-23 11:01:37.2376 [DEBUG]：SkServer[11220]
+2019-07-23 11:01:37.2756 [DEBUG]：SkStartListen
+2019-07-23 11:01:37.2922 [DEBUG]：111111
+2019-07-23 11:01:37.2922 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:01:37.3313 [DEBUG]：222
+2019-07-23 11:01:37.3313 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:01:37.3313 [DEBUG]：开始监听
+2019-07-23 11:01:37.3313 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 11:01:37.3313 [DEBUG]：now listen!!
+2019-07-23 11:01:37.3313 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:01:37.3420 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 11:01:37.3576 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:01:37.3576 [DEBUG]：struct Form1  end
+2019-07-23 11:01:39.1983 [DEBUG]：form1_closed
+2019-07-23 11:04:11.9720 [DEBUG]：struct Form1
+2019-07-23 11:04:12.0623 [DEBUG]：SkServer[11220]
+2019-07-23 11:04:12.1013 [DEBUG]：SkStartListen
+2019-07-23 11:04:12.1160 [DEBUG]：111111
+2019-07-23 11:04:12.1160 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:04:12.1565 [DEBUG]：222
+2019-07-23 11:04:12.1565 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:04:12.1565 [DEBUG]：开始监听
+2019-07-23 11:04:12.1565 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 11:04:12.1565 [DEBUG]：now listen!!
+2019-07-23 11:04:12.1565 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:04:12.1711 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 11:04:12.1965 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:04:12.1965 [DEBUG]：struct Form1  end
+2019-07-23 11:04:18.2049 [DEBUG]：there is a client!!
+2019-07-23 11:04:18.2049 [DEBUG]：now listen!!
+2019-07-23 11:04:18.2225 [DEBUG]：ReceiveMessage
+2019-07-23 11:17:12.1095 [DEBUG]：Connected[true]
+2019-07-23 11:17:12.1095 [DEBUG]：get buffer lenth [0]client["192.168.0.88:45822"]
+2019-07-23 11:17:12.1095 [DEBUG]：set msg[""]
+2019-07-23 11:17:12.1583 [ERROR]：error ["System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 SkKit.SkServer.SkParseFrame(List`1 TagsL, Byte[] InData) 位置 C:\Users\Administrator\Desktop\onesocketserver\SkKit\SkServer.cs:行号 121
+   在 SkKit.SkServer.ReceiveMessage(Object SkHadle) 位置 C:\Users\Administrator\Desktop\onesocketserver\SkKit\SkServer.cs:行号 104"]
+2019-07-23 11:17:12.1583 [DEBUG]：socket conn disconned
+2019-07-23 11:17:27.2000 [DEBUG]：there is a client!!
+2019-07-23 11:17:27.2019 [DEBUG]：now listen!!
+2019-07-23 11:17:27.2019 [DEBUG]：ReceiveMessage
+2019-07-23 11:17:30.9585 [DEBUG]：Connected[true]
+2019-07-23 11:17:30.9585 [DEBUG]：get buffer lenth [46]client["192.168.0.88:33464"]
+2019-07-23 11:17:30.9712 [DEBUG]：set msg["FE-FE-07-0A-00-88-5A-BE-49-0B-00-C0-83-24-48-0C-00-00-00-00-00-0D-00-00-00-00-00-0E-00-99-19-88-43-0F-00-BA-27-8F-3F-10-00-8D-2E-A1-40-FE"]
+2019-07-23 11:17:30.9712 [DEBUG]：DevCount [7] 
+2019-07-23 11:17:30.9712 [DEBUG]：OneTagdata["0A-00-88-5A-BE-49"]
+2019-07-23 11:17:30.9858 [DEBUG]：tag info ID[1]value[1559377]
+2019-07-23 11:17:30.9858 [DEBUG]：TagStr["10:1559377"]
+2019-07-23 11:17:30.9858 [DEBUG]：OneTagdata["0B-00-C0-83-24-48"]
+2019-07-23 11:17:30.9858 [DEBUG]：tag info ID[2]value[168463]
+2019-07-23 11:17:30.9858 [DEBUG]：TagStr["11:168463"]
+2019-07-23 11:17:30.9858 [DEBUG]：OneTagdata["0C-00-00-00-00-00"]
+2019-07-23 11:17:30.9858 [DEBUG]：tag info ID[3]value[0]
+2019-07-23 11:17:30.9858 [DEBUG]：TagStr["12:0"]
+2019-07-23 11:17:30.9858 [DEBUG]：OneTagdata["0D-00-00-00-00-00"]
+2019-07-23 11:17:30.9985 [DEBUG]：tag info ID[4]value[0]
+2019-07-23 11:17:30.9985 [DEBUG]：TagStr["13:0"]
+2019-07-23 11:17:30.9985 [DEBUG]：OneTagdata["0E-00-99-19-88-43"]
+2019-07-23 11:17:30.9985 [DEBUG]：tag info ID[5]value[272.2]
+2019-07-23 11:17:30.9985 [DEBUG]：TagStr["14:272.2"]
+2019-07-23 11:17:30.9985 [DEBUG]：OneTagdata["0F-00-BA-27-8F-3F"]
+2019-07-23 11:17:30.9985 [DEBUG]：tag info ID[6]value[1.1184]
+2019-07-23 11:17:30.9985 [DEBUG]：TagStr["15:1.1184"]
+2019-07-23 11:17:30.9985 [DEBUG]：OneTagdata["10-00-8D-2E-A1-40"]
+2019-07-23 11:17:30.9985 [DEBUG]：tag info ID[7]value[5.036932]
+2019-07-23 11:17:30.9985 [DEBUG]：TagStr["16:5.036932"]
+2019-07-23 11:17:30.9985 [DEBUG]：updateDevInfo
+2019-07-23 11:17:30.9985 [DEBUG]：TagStr["10:1559377"]
+2019-07-23 11:17:31.0288 [ERROR]：error ["System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.ThrowHelper.ThrowKeyNotFoundException()
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 SocketServer.Form1.UpdateDevInfo(List`1 tagslist) 位置 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\Form1.cs:行号 79
+   在 SkKit.SkServer.ReceiveMessage(Object SkHadle) 位置 C:\Users\Administrator\Desktop\onesocketserver\SkKit\SkServer.cs:行号 107"]
+2019-07-23 11:17:31.0297 [DEBUG]：socket conn disconned
+2019-07-23 11:18:01.5244 [DEBUG]：there is a client!!
+2019-07-23 11:18:01.5244 [DEBUG]：now listen!!
+2019-07-23 11:18:01.5244 [DEBUG]：ReceiveMessage
+2019-07-23 11:18:01.5429 [ERROR]：error ["System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 SkKit.SkServer.ReceiveMessage(Object SkHadle) 位置 C:\Users\Administrator\Desktop\onesocketserver\SkKit\SkServer.cs:行号 96"]
+2019-07-23 11:18:01.5429 [DEBUG]：socket conn disconned
+2019-07-23 11:18:34.5283 [DEBUG]：there is a client!!
+2019-07-23 11:18:34.5311 [DEBUG]：ReceiveMessage
+2019-07-23 11:18:34.5311 [DEBUG]：now listen!!
+2019-07-23 11:18:41.1428 [DEBUG]：form1_closed
+2019-07-23 11:18:54.7700 [DEBUG]：struct Form1
+2019-07-23 11:18:54.8608 [DEBUG]：SkServer[11220]
+2019-07-23 11:18:54.8959 [DEBUG]：SkStartListen
+2019-07-23 11:18:54.9135 [DEBUG]：111111
+2019-07-23 11:18:54.9135 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:18:54.9525 [DEBUG]：222
+2019-07-23 11:18:54.9525 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:18:54.9525 [DEBUG]：开始监听
+2019-07-23 11:18:54.9525 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 11:18:54.9525 [DEBUG]：now listen!!
+2019-07-23 11:18:54.9525 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:18:54.9525 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 11:18:54.9769 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:18:54.9769 [DEBUG]：struct Form1  end
+2019-07-23 11:19:34.1894 [DEBUG]：form1_closed
+2019-07-23 11:21:48.7465 [DEBUG]：struct Form1
+2019-07-23 11:21:48.8353 [DEBUG]：SkServer[11220]
+2019-07-23 11:21:48.8734 [DEBUG]：SkStartListen
+2019-07-23 11:21:48.8734 [DEBUG]：111111
+2019-07-23 11:21:48.8890 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:21:48.9280 [DEBUG]：222
+2019-07-23 11:21:48.9280 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:21:48.9280 [DEBUG]：开始监听
+2019-07-23 11:21:48.9280 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 11:21:48.9358 [DEBUG]：now listen!!
+2019-07-23 11:21:48.9358 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:21:48.9358 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 11:21:48.9554 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:21:48.9554 [DEBUG]：struct Form1  end
+2019-07-23 11:21:55.7594 [DEBUG]：there is a client!!
+2019-07-23 11:21:55.7594 [DEBUG]：now listen!!
+2019-07-23 11:21:55.7643 [DEBUG]：ReceiveMessage
+2019-07-23 11:21:58.1577 [DEBUG]：form1_closed
+2019-07-23 11:22:08.8095 [DEBUG]：struct Form1
+2019-07-23 11:22:08.9091 [DEBUG]：SkServer[11220]
+2019-07-23 11:22:08.9549 [DEBUG]：SkStartListen
+2019-07-23 11:22:08.9706 [DEBUG]：111111
+2019-07-23 11:22:08.9706 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:22:09.0106 [DEBUG]：222
+2019-07-23 11:22:09.0106 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-07-23 11:22:09.0106 [DEBUG]：开始监听
+2019-07-23 11:22:09.0135 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-07-23 11:22:09.0135 [DEBUG]：now listen!!
+2019-07-23 11:22:09.0135 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:22:09.0135 [DEBUG]：file ["this is my first file !!
+ very nice happy!!"]
+2019-07-23 11:22:09.0370 [DEBUG]：path[".\config\zhang.txt"]
+2019-07-23 11:22:09.0370 [DEBUG]：struct Form1  end
+2019-07-23 11:22:14.2376 [DEBUG]：there is a client!!
+2019-07-23 11:22:14.2376 [DEBUG]：now listen!!
+2019-07-23 11:22:14.2376 [DEBUG]：ReceiveMessage
+2019-07-23 11:22:33.4207 [DEBUG]：form1_closed
