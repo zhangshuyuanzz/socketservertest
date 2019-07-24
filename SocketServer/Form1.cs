@@ -16,6 +16,9 @@ namespace SocketServer
         readonly NLOG logger = new NLOG("Form1");
         private Dictionary<int, System.Windows.Forms.TextBox> allboxs = new Dictionary<int, System.Windows.Forms.TextBox>();
         private string filepath = @".\config\zhang.txt";
+        private Dictionary<string, TagInfo> DevList = new Dictionary<string, TagInfo>();
+
+        private Dictionary<string ,int > IpToBoxIndex = new Dictionary < string ,int >(); // ipid  boxid
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +28,7 @@ namespace SocketServer
             SkServer ServerHandle = new SkServer(11220);
             ServerHandle.SkStartListen();
             ServerHandle.Server_get_handle += new SkServer.ServerDataEventHandler(UpdateDevInfo);
-            ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(SendFile);
+            ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(ConnedNotification);
             logger.Debug("struct Form1  end");
             
         }
@@ -66,23 +69,62 @@ namespace SocketServer
             this.Dispose();
             this.Close();
         }
-        public void UpdateDevInfo(List<DevTagIndo> tagslist)
+        public void UpdateDevInfo(List<DevTagIndo> tagslist,string ip)
         {
-            logger.Debug("updateDevInfo");
+            logger.Debug("updateDevInfo---ip[{}]", ip);
+            if (DevList.ContainsKey(ip) == false || IpToBoxIndex.ContainsKey(ip+"1") == false) {
+                return;
+            }
+            TagInfo onetag = DevList[ip];
             foreach (DevTagIndo s in tagslist)
             {
+                if (onetag.TagList.ContainsKey(s.ID))
+                {
+                    onetag.TagList[s.ID] = s.value;
+                }
+                else
+                {
+                    onetag.TagList.Add(s.ID, s.value);
+                }
                 logger.Debug("TagStr[{ }]", s.TagStr);
-                allboxs[s.ID].Text = s.TagStr;
             }
-        }
-        public void SendFile(object handle)
-        {
-            SkServer ServerHandle = (SkServer)handle;
-            logger.Debug("SendFile");
-            SkKit.COconfig filefd = new COconfig();
-            logger.Debug("file [{}]", filefd.CoGetFileStr(filepath));
-            ServerHandle.CoSendFile("192.168.0.88", filepath);
+            onetag.CuTime = DateTime.Now.ToString();
+            allboxs[IpToBoxIndex[ip + "2"]].Text = onetag.TagList.Count.ToString();
+            allboxs[IpToBoxIndex[ip + "3"]].Text = onetag.CuTime;
 
+        }
+        public void ConnedNotification(object handle,string ip)
+        {
+            logger.Debug("ConnedNotification--ip[{}]", ip);
+
+            if (DevList.ContainsKey(ip) == false)
+            {
+                SkServer ServerHandle = (SkServer)handle;
+                SkKit.COconfig filefd = new COconfig();
+                ServerHandle.CoSendFile("192.168.0.88", filepath);
+
+                TagInfo onedev = new TagInfo();
+                DevList.Add(ip, onedev);
+            }
+            else {
+                logger.Debug("has this ip");
+            }
+            foreach(KeyValuePair<string, int> s in IpToBoxIndex) {
+                logger.Debug("Key[{}]Value[{}]", s.Key,s.Value);
+            }
+            if (IpToBoxIndex.ContainsKey(ip + "1") == false)
+            {
+                int count = DevList.Count;
+                IpToBoxIndex.Add(ip + "1", count * 10 + 1);
+                IpToBoxIndex.Add(ip + "2", count * 10 + 2);
+                IpToBoxIndex.Add(ip + "3", count * 10 + 3);
+                allboxs[count * 10 + 1].Text = ip;
+                logger.Debug("id[{}]", count * 10 + 1);
+            }
+            else {
+                logger.Debug("IpToBoxIndex has this ip");
+            }
+            logger.Debug("ConnedNotification end");
         }
     }
 }

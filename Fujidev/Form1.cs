@@ -12,14 +12,17 @@ namespace Fujidev
 {
     public partial class Form1 : Form
     {
-        readonly NLOG logger = new NLOG("Fujidev");
+        static readonly NLOG logger = new NLOG("Fujidev");
         Fujiserial Devserial = new Fujiserial();
         public Form1()
         {
             logger.Debug("InitializeComponent--");
             InitializeComponent();
-            
             Devserial.Serial_read_handle += new Fujiserial.SerialDataEventHandler(CBserialData);
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
+
         }
 
         private void But_Click(object sender, EventArgs e)
@@ -204,6 +207,13 @@ namespace Fujidev
                 }
                 cont++;
             }
+        }
+        static void MyHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Exception e = (Exception)args.ExceptionObject;
+            Console.WriteLine("MyHandler caught : " + e.Message);
+            logger.Debug("MyHandler caught : " + e.Message);
+            logger.Debug("error caught : [{}]" + e.ToString());
         }
     }
 }

@@ -26,10 +26,10 @@ namespace SkKit
         private Socket _socket = null;
         
         private Dictionary<string , Socket> DevSkList = new Dictionary<string , Socket>();
-        public delegate void ServerDataEventHandler(List<DevTagIndo> tags);
+        public delegate void ServerDataEventHandler(List<DevTagIndo> tags,string ip);
         public ServerDataEventHandler Server_get_handle;
 
-        public delegate void ServerConnEventHandler(object handle);
+        public delegate void ServerConnEventHandler(object handle,string ip);
         public ServerConnEventHandler Server_conn_handle;
 
         private NLOG logger = new NLOG("SkServer");
@@ -54,6 +54,8 @@ namespace SkKit
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             logger.Debug("111111");
             logger.Debug("IP[{}port[{}]", ip, port);
+            _socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 1000);
+
             try
             {
                 IPAddress address = IPAddress.Parse(ip);
@@ -92,34 +94,39 @@ namespace SkKit
                 {
                     DevSkList.Add(ip, clientsocket);
                 }
-                logger.Debug("there is a client!!", clientsocket);
-                clientsocket.Send(Encoding.UTF8.GetBytes("zheshige fuwuduan!!!!!!!!!!"));
-                Server_conn_handle?.Invoke(this);
-                Thread subfunc = new Thread(ReceiveMessage);
-                subfunc.Start(clientsocket);
+                logger.Debug("there is a client!!");
+                Server_conn_handle?.Invoke(this,ip);
+               // Thread subfunc = new Thread(ReceiveMessage);
+                //subfunc.Start(clientsocket);
             }
         }
         private void ReceiveMessage(object SkHadle)
         {
+            logger.Debug("ReceiveMessage");
             Socket clientSk = (Socket)SkHadle;
+            string ip = (clientSk.RemoteEndPoint as IPEndPoint).Address.ToString();
+
             try
             {
-                logger.Debug("ReceiveMessage");
-                clientSk = (Socket)SkHadle;
                 byte[] getbufer = new byte[1024 * 10];
                 while (true)
                 {
                     List<DevTagIndo> TagsL = new List<DevTagIndo>();
                     int lenth = clientSk.Receive(getbufer);
-                    logger.Debug("Connected[{}]", clientSk.Connected);
+                    if (lenth == 0) {
+                        logger.Debug("receive data is zero");
+                        continue;
+                    }
+                    logger.Debug("Connected[{}]get data lenth[{}]", clientSk.Connected, lenth);
                     byte[] GetData = new byte[lenth];
 
                     Array.Copy(getbufer, GetData, lenth);
-                    logger.Debug("get buffer lenth [{}]client[{}]", lenth, clientSk.RemoteEndPoint.ToString());
+                    logger.Debug("get buffer client[{}]", clientSk.RemoteEndPoint.ToString());
+
                     logger.Debug("set msg[{}]", BitConverter.ToString(GetData));
 
                     SkParseFrame(TagsL, GetData);
-                    Server_get_handle?.Invoke(TagsL);
+                    Server_get_handle?.Invoke(TagsL,ip);
                 }
             }
             catch (Exception e)
@@ -155,7 +162,7 @@ namespace SkKit
 
                 int TagID = (int)BitConverter.ToUInt16(OneTagdata,0);
                 OneIDInfo.value = BitConverter.ToSingle(OneTagdata,2);
-                OneIDInfo.ID = num + 1;
+                OneIDInfo.ID = TagID;
                 OneIDInfo.TagStr = TagID.ToString() + ":" + OneIDInfo.value.ToString();
                 logger.Debug("tag info ID[{}]value[{}]", OneIDInfo.ID, OneIDInfo.value);
                 logger.Debug("TagStr[{}]", OneIDInfo.TagStr);
@@ -172,17 +179,22 @@ namespace SkKit
             }
             return CloseRet;
         }
-        public void CoSendFile(string ip ,string path)
+        public void CoSendFile(string ip ,string path) 
         {
             logger.Debug("CoSendFile--ip[{}]path[{}]", ip, path);
             if (DevSkList.ContainsKey(ip))
             {
-                DevSkList[ip].SendFile(path);
+                logger.Debug("1111111");
+                byte[] a = new byte[5] { 1,1,1,1,1};
+                DevSkList[ip].Send(a);
+                //DevSkList[ip].SendFile(path);
             }
             else
             {
                 logger.Debug("no this device");
             }
+            logger.Debug("CoSendFile end");
+
         }
     }
 }

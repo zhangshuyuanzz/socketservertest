@@ -104,7 +104,7 @@ namespace SocketServer
             // 
             this.ip1.Location = new System.Drawing.Point(136, 126);
             this.ip1.Name = "ip1";
-            this.ip1.Size = new System.Drawing.Size(100, 25);
+            this.ip1.Size = new System.Drawing.Size(122, 25);
             this.ip1.TabIndex = 5;
             this.ip1.Text = "0";
             // 
@@ -112,7 +112,7 @@ namespace SocketServer
             // 
             this.ip2.Location = new System.Drawing.Point(136, 204);
             this.ip2.Name = "ip2";
-            this.ip2.Size = new System.Drawing.Size(100, 25);
+            this.ip2.Size = new System.Drawing.Size(122, 25);
             this.ip2.TabIndex = 6;
             this.ip2.Text = "0";
             // 
@@ -120,7 +120,7 @@ namespace SocketServer
             // 
             this.ip3.Location = new System.Drawing.Point(136, 286);
             this.ip3.Name = "ip3";
-            this.ip3.Size = new System.Drawing.Size(100, 25);
+            this.ip3.Size = new System.Drawing.Size(122, 25);
             this.ip3.TabIndex = 7;
             this.ip3.Text = "0";
             // 

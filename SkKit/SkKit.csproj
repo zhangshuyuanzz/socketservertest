@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="COconfig.cs" />
+    <Compile Include="TagInfo.cs" />
     <Compile Include="nLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkServer.cs" />
