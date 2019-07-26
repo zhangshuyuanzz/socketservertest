@@ -52,9 +52,7 @@ namespace SkKit
             bool ret = false;
 
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            logger.Debug("111111");
             logger.Debug("IP[{}port[{}]", ip, port);
-            _socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 1000);
 
             try
             {
@@ -83,6 +81,7 @@ namespace SkKit
             while (true) {
                 logger.Debug("now listen!!");
                 Socket clientsocket = _socket.Accept();
+//                clientsocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 500);
 
                 string ip = (clientsocket.RemoteEndPoint as IPEndPoint).Address.ToString();
                 logger.Debug("conn ip [{}]",ip);
@@ -96,8 +95,8 @@ namespace SkKit
                 }
                 logger.Debug("there is a client!!");
                 Server_conn_handle?.Invoke(this,ip);
-               // Thread subfunc = new Thread(ReceiveMessage);
-                //subfunc.Start(clientsocket);
+                Thread subfunc = new Thread(ReceiveMessage);
+                subfunc.Start(clientsocket);
             }
         }
         private void ReceiveMessage(object SkHadle)
@@ -105,6 +104,7 @@ namespace SkKit
             logger.Debug("ReceiveMessage");
             Socket clientSk = (Socket)SkHadle;
             string ip = (clientSk.RemoteEndPoint as IPEndPoint).Address.ToString();
+            logger.Debug("ip[{}]",ip);
 
             try
             {
@@ -115,7 +115,13 @@ namespace SkKit
                     int lenth = clientSk.Receive(getbufer);
                     if (lenth == 0) {
                         logger.Debug("receive data is zero");
-                        continue;
+                        if (SocketJudgeIsConn(clientSk) == false)
+                        {
+                            break;
+                        }
+                        else {
+                            continue;
+                        }
                     }
                     logger.Debug("Connected[{}]get data lenth[{}]", clientSk.Connected, lenth);
                     byte[] GetData = new byte[lenth];
@@ -156,7 +162,7 @@ namespace SkKit
             byte num;
             byte []OneTagdata = new byte[6];
             for (num = 0; num < DevCount; num++) {
-                DevTagIndo OneIDInfo = new DevTagIndo();
+                DevTagIndo OneIDInfo = new DevTagIndo(); 
                 Array.Copy(InData,3+num*6, OneTagdata,0,6);
                 logger.Debug("OneTagdata[{}]", BitConverter.ToString(OneTagdata));
 
@@ -170,6 +176,33 @@ namespace SkKit
             }
             return RetParse; 
         }
+        public bool SocketJudgeIsConn(Socket ClientFd)
+        {
+            bool ret = true;
+            byte[] buffer = new byte[100];
+            try
+            {
+                if (ClientFd.Poll(0, SelectMode.SelectRead))
+                {
+                    int nRead = ClientFd.Receive(buffer);
+                    if (nRead == 0)
+                    {
+                        logger.Debug("socket连接已断开");
+                        SocketClose(ClientFd);
+                        ret = false;
+                    }
+                }
+            }
+            catch (SocketException ex)
+            {
+                logger.Debug("error[{}]",ex.ToString());
+                logger.Debug("socket连接已断开");
+                SocketClose(ClientFd);
+                ret = false;
+            }
+            return ret;
+        }
+
         public bool SocketClose(Socket ClientFd)
         {
             bool CloseRet = true;
@@ -184,10 +217,7 @@ namespace SkKit
             logger.Debug("CoSendFile--ip[{}]path[{}]", ip, path);
             if (DevSkList.ContainsKey(ip))
             {
-                logger.Debug("1111111");
-                byte[] a = new byte[5] { 1,1,1,1,1};
-                DevSkList[ip].Send(a);
-                //DevSkList[ip].SendFile(path);
+                DevSkList[ip].SendFile(path);
             }
             else
             {

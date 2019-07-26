@@ -15,7 +15,7 @@ namespace SocketServer
     {
         readonly NLOG logger = new NLOG("Form1");
         private Dictionary<int, System.Windows.Forms.TextBox> allboxs = new Dictionary<int, System.Windows.Forms.TextBox>();
-        private string filepath = @".\config\zhang.txt";
+        private string filepath = @".\config\";
         private Dictionary<string, TagInfo> DevList = new Dictionary<string, TagInfo>();
 
         private Dictionary<string ,int > IpToBoxIndex = new Dictionary < string ,int >(); // ipid  boxid
@@ -95,13 +95,22 @@ namespace SocketServer
         }
         public void ConnedNotification(object handle,string ip)
         {
-            logger.Debug("ConnedNotification--ip[{}]", ip);
+            string IsExistPath = filepath + ip + ".xml";
+            logger.Debug("ConnedNotification--ip[{}]IsExistPath[{}]", ip, IsExistPath);
 
             if (DevList.ContainsKey(ip) == false)
             {
                 SkServer ServerHandle = (SkServer)handle;
-                SkKit.COconfig filefd = new COconfig();
-                ServerHandle.CoSendFile("192.168.0.88", filepath);
+
+                if (System.IO.File.Exists(IsExistPath))
+                {
+                    logger.Debug("thie file is exist!!!");
+                    ServerHandle.CoSendFile(ip, IsExistPath);
+                }
+                else
+                {
+                    logger.Debug("thie file is not exist!!!");
+                }
 
                 TagInfo onedev = new TagInfo();
                 DevList.Add(ip, onedev);
