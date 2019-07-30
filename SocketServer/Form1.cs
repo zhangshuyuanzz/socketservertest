@@ -38,6 +38,8 @@ namespace SocketServer
             allboxs.Add(11, this.ip1);
             allboxs.Add(12, this.tag1);
             allboxs.Add(13, this.utime1);
+            allboxs.Add(14, this.dev1IDT);
+
             allboxs.Add(21, this.ip2);
             allboxs.Add(22, this.tag2);
             allboxs.Add(23, this.utime2);
@@ -76,6 +78,7 @@ namespace SocketServer
                 return;
             }
             TagInfo onetag = DevList[ip];
+            string IDstr = "this";
             foreach (DevTagIndo s in tagslist)
             {
                 if (onetag.TagList.ContainsKey(s.ID))
@@ -86,6 +89,8 @@ namespace SocketServer
                 {
                     onetag.TagList.Add(s.ID, s.value);
                 }
+                IDstr += ":" + s.ID.ToString();
+                allboxs[IpToBoxIndex[ip + "4"]].Text = IDstr;
                 logger.Debug("TagStr[{ }]", s.TagStr);
             }
             onetag.CuTime = DateTime.Now.ToString();
@@ -105,6 +110,7 @@ namespace SocketServer
                 if (System.IO.File.Exists(IsExistPath))
                 {
                     logger.Debug("thie file is exist!!!");
+                    System.Threading.Thread.Sleep(1000);
                     ServerHandle.CoSendFile(ip, IsExistPath);
                 }
                 else
@@ -127,6 +133,8 @@ namespace SocketServer
                 IpToBoxIndex.Add(ip + "1", count * 10 + 1);
                 IpToBoxIndex.Add(ip + "2", count * 10 + 2);
                 IpToBoxIndex.Add(ip + "3", count * 10 + 3);
+                IpToBoxIndex.Add(ip + "4", count * 10 + 4);
+
                 allboxs[count * 10 + 1].Text = ip;
                 logger.Debug("id[{}]", count * 10 + 1);
             }
@@ -134,6 +142,11 @@ namespace SocketServer
                 logger.Debug("IpToBoxIndex has this ip");
             }
             logger.Debug("ConnedNotification end");
+        }
+
+        private void Label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

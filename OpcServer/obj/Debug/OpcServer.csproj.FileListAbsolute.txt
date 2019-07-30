@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\bin\Debug\OpcServer.exe
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\bin\Debug\OpcServer.pdb
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.Form1.resources
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.Properties.Resources.resources
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.exe
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.pdb
