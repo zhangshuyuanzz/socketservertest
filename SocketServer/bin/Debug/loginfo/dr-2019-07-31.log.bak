@@ -1,0 +1,27 @@
+2019-07-31 16:34:41.6090 [DEBUG]£ºstruct Form1
+2019-07-31 16:34:41.6519 [DEBUG]£ºfile exist!!
+2019-07-31 16:34:41.6773 [DEBUG]£ºOpenConnection[".\DB\OpcServer.db"]
+2019-07-31 16:34:41.8101 [DEBUG]£ºOpcDateWrite
+2019-07-31 16:34:41.8101 [DEBUG]£º after buf[REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )]
+2019-07-31 16:34:41.8101 [DEBUG]£ºsql["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
+2019-07-31 16:34:41.8159 [DEBUG]£ºsql11["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
+2019-07-31 16:34:41.8511 [DEBUG]£ºc[1]
+2019-07-31 17:24:29.1258 [DEBUG]£ºform1_closed
+2019-07-31 17:24:36.2464 [DEBUG]£ºstruct Form1
+2019-07-31 17:24:36.2835 [DEBUG]£ºfile exist!!
+2019-07-31 17:24:36.2981 [DEBUG]£ºOpenConnection[".\DB\OpcServer.db"]
+2019-07-31 17:24:36.4123 [DEBUG]£ºOpcDateWrite
+2019-07-31 17:24:36.4123 [DEBUG]£º after buf[REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )]
+2019-07-31 17:24:36.4123 [DEBUG]£ºsql["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
+2019-07-31 17:24:36.4123 [DEBUG]£ºsql11["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
+2019-07-31 17:24:36.4553 [DEBUG]£ºc[3]
+2019-07-31 17:24:39.6879 [DEBUG]£ºform1_closed
+2019-07-31 17:25:55.8804 [DEBUG]£ºstruct Form1
+2019-07-31 17:25:55.9175 [DEBUG]£ºfile exist!!
+2019-07-31 17:25:55.9262 [DEBUG]£ºOpenConnection[".\DB\OpcServer.db"]
+2019-07-31 17:25:56.0160 [DEBUG]£ºOpcDateWrite
+2019-07-31 17:25:56.0160 [DEBUG]£º after buf[REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )]
+2019-07-31 17:25:56.0160 [DEBUG]£ºsql["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
+2019-07-31 17:25:56.0160 [DEBUG]£ºsql11["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
+2019-07-31 17:25:56.0629 [DEBUG]£ºc[3]
+2019-07-31 17:26:02.8884 [DEBUG]£ºform1_closed

@@ -7,3 +7,7 @@ C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.csp
 C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.exe
 C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.pdb
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\OpcServer.exe
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\OpcServer.pdb
+C:\Users\Administrator\Desktop\onesocketserver\OpcServer\obj\Debug\OpcServer.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\SQLite.Interop.dll

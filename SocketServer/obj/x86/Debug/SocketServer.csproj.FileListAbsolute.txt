@@ -1,0 +1,17 @@
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.Form1.resources
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.Properties.Resources.resources
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\SocketServer.exe
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\SocketServer.pdb
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\SkKit.dll
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\NLog.dll
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\System.Data.SQLite.dll
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\SkKit.pdb
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\NLog.xml
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\System.Data.SQLite.xml
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.exe
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.pdb

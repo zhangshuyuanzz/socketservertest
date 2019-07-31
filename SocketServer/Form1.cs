@@ -1,4 +1,5 @@
-﻿using Common.log;
+﻿using Base.kit;
+using Common.log;
 using SkKit;
 using System;
 using System.Collections.Generic;
@@ -19,18 +20,19 @@ namespace SocketServer
         private Dictionary<string, TagInfo> DevList = new Dictionary<string, TagInfo>();
 
         private Dictionary<string ,int > IpToBoxIndex = new Dictionary < string ,int >(); // ipid  boxid
+        private OpcDateUpdate ServerDB = null;
         public Form1()
         {
             InitializeComponent();
             logger.Debug("struct Form1");
             CreateBoxLIsts();
 
+            ServerDB = new OpcDateUpdate();
             SkServer ServerHandle = new SkServer(11220);
             ServerHandle.SkStartListen();
             ServerHandle.Server_get_handle += new SkServer.ServerDataEventHandler(UpdateDevInfo);
             ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(ConnedNotification);
             logger.Debug("struct Form1  end");
-            
         }
 
         public void CreateBoxLIsts()
@@ -77,25 +79,36 @@ namespace SocketServer
             if (DevList.ContainsKey(ip) == false || IpToBoxIndex.ContainsKey(ip+"1") == false) {
                 return;
             }
-            TagInfo onetag = DevList[ip];
+            TagInfo Tags= DevList[ip];
             string IDstr = "this";
+            List<DataItem> NewTagList = new List<DataItem>(); 
             foreach (DevTagIndo s in tagslist)
             {
-                if (onetag.TagList.ContainsKey(s.ID))
+                if (Tags.TagList.ContainsKey(s.ID))
                 {
-                    onetag.TagList[s.ID] = s.value;
+                    Tags.TagList[s.ID] = s.value;
+                    DataItem Atag = new DataItem();
+                    Atag.TagId = s.ID;
+                    Atag.Value = s.value;
+                    NewTagList.Add(Atag);
                 }
                 else
                 {
-                    onetag.TagList.Add(s.ID, s.value);
+                    Tags.TagList.Add(s.ID, s.value);
+                    DataItem Atag = new DataItem();
+                    Atag.TagId = s.ID;
+                    Atag.Value = s.value;
+                    NewTagList.Add(Atag);
                 }
                 IDstr += ":" + s.ID.ToString();
                 allboxs[IpToBoxIndex[ip + "4"]].Text = IDstr;
                 logger.Debug("TagStr[{ }]", s.TagStr);
             }
-            onetag.CuTime = DateTime.Now.ToString();
-            allboxs[IpToBoxIndex[ip + "2"]].Text = onetag.TagList.Count.ToString();
-            allboxs[IpToBoxIndex[ip + "3"]].Text = onetag.CuTime;
+            ServerDB.OpcDataUpdateTag(NewTagList);
+
+            Tags.CuTime = DateTime.Now.ToString();
+            allboxs[IpToBoxIndex[ip + "2"]].Text = Tags.TagList.Count.ToString();
+            allboxs[IpToBoxIndex[ip + "3"]].Text = Tags.CuTime;
 
         }
         public void ConnedNotification(object handle,string ip)
