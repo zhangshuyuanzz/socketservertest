@@ -347,23 +347,22 @@ namespace SQLite
             return buf.ToString();
         }
 
-        private static string BuildUpdate(string table)
+        private static string BuildReplace(string table)
         {
             StringBuilder buf = new StringBuilder();
-            buf.Append("REPLACE INTO ").Append(table).Append(" (tagid,name,type,value,time)values( ").Append(" @").Append("tagid").Append(",@").Append("name").Append(",@").Append("type").Append(",@").Append("value").Append(",@").Append("time )");
+            buf.Append("REPLACE INTO ").Append(table).Append(" ( tagid,name,type,value,time) values ( @tagid,@name,@type,@value,@time )");
             logger.Debug(" after buf[{}]", buf);
             return buf.ToString();
         }
-        public int Update(string table, List<DataItem> entity, string where)
+        public int Replace(string table, List<DataItem> entity)
         {
             if (table == null)
             {
                 throw new ArgumentNullException("table=null");
             }
-            string sql = BuildUpdate(table);
-            this.EnsureConnection();
+            string sql = BuildReplace(table);
+            this.EnsureConnection();  //no useless
             logger.Debug("sql[{}]", sql);
-            logger.Debug("sql11[{}]", sql);
 
             DbTransaction dbTrans = this.Connection.BeginTransaction();
             int count = 0;
@@ -373,14 +372,6 @@ namespace SQLite
             }
             dbTrans.Commit();
             return count;
-
-            /* if (where != null)
-             {
-                 sql += " where " + where;
-                     SQLiteParameter[] newArr = new SQLiteParameter[arr.Length ];
-                     Array.Copy(arr, newArr, arr.Length);
-                     arr = newArr;
-             }*/
         }
 
         /// <para>查询一行记录,无结果时返回null</para>  
@@ -410,16 +401,6 @@ namespace SQLite
                 return null;
             return (Dictionary<string, object>)list[0];
         }
-
-        /// <summary>  
-        /// 执行delete from table 语句  
-        /// where不必包含'where'关键字  
-        /// where=null时将忽略whereParams  
-        /// </summary>  
-        /// <param name="table"></param>  
-        /// <param name="where"></param>  
-        /// <param name="whereParams"></param>  
-        /// <returns></returns>  
         public int Delete(string table, string where, SQLiteParameter[] whereParams)
         {
             if (table == null)
@@ -434,6 +415,35 @@ namespace SQLite
             }
 
             return this.ExecuteNonQuery(sql, whereParams);
+        }
+        private static SQLiteParameter[] BuildUpdateParamArray(DataItem tagidata)
+        {
+            List<SQLiteParameter> Uplist = new List<SQLiteParameter>();
+            DataItem s = tagidata;
+            Uplist.Add(new SQLiteParameter("@value", s.Value));
+            Uplist.Add(new SQLiteParameter("@tagid", s.TagId));
+            Uplist.Add(new SQLiteParameter("@time", s.DataTime));
+
+            if (Uplist.Count == 0)
+                return null;
+            return Uplist.ToArray();
+
+        }
+        public int Update(string table, List<DataItem> entity)
+        {
+            int total = 0;
+            StringBuilder UpdateBuf = new StringBuilder();
+
+            DbTransaction dbTrans = this.Connection.BeginTransaction();
+
+            UpdateBuf.Append("UPDATE ").Append(table).Append(" SET value=@value,time=@time WHERE tagid=@tagid");
+            string updatesql = UpdateBuf.ToString();
+            foreach (DataItem s in entity)
+            {
+                total += ExecuteNonQuery(updatesql, BuildUpdateParamArray(s));
+            }
+            dbTrans.Commit();
+            return total;
         }
     }
 

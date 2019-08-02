@@ -20,8 +20,8 @@ namespace Base.kit
 
         public DataItem()
         {
-            this.TagName = "none";
-            this.DataType = 4;
+            this.TagName = "unKown name";
+            this.DataType = 1;
             this.Quality = 192;
             this.Active = true;
         }
@@ -36,18 +36,10 @@ namespace Base.kit
             this.Quality = 192;
             this.Active = true;
         }
-        /* public override bool Equals(object obj)
-         {
-             if (obj == null)
-             {
-                 return false;
-             }
-             if (this.GetType() != obj.GetType())
-             {
-                 return false;
-             }
-
-             return this.TagName == ((DataItem)obj).TagName;
-         }*/
+    }
+    public enum DATATYPE
+    { 
+        FLOAT = 1,
+        LONG  = 2
     }
 }

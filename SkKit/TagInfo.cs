@@ -5,14 +5,24 @@ using System.Text;
 
 namespace SkKit
 {
+    public class DevInfo
+    {
+        public Dictionary<int, TagInfo> TagList;
+        public string CuTime;
+        public DevInfo()
+        {
+            TagList = new Dictionary<int, TagInfo>();
+            CuTime = DateTime.Now.ToString();
+        }
+    }
     public class TagInfo
     {
-        public Dictionary<int, float> TagList;
-        public string CuTime;
+        public float myvalue;
+        public string myname;
         public TagInfo()
         {
-            TagList = new Dictionary<int, float>();
-            CuTime = DateTime.Now.ToString();
+            myvalue = 0;
+            myname = "no name!";
         }
     }
 }

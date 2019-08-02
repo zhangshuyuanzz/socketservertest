@@ -17,10 +17,13 @@ namespace SocketServer
         readonly NLOG logger = new NLOG("Form1");
         private Dictionary<int, System.Windows.Forms.TextBox> allboxs = new Dictionary<int, System.Windows.Forms.TextBox>();
         private string filepath = @".\config\";
-        private Dictionary<string, TagInfo> DevList = new Dictionary<string, TagInfo>();
+        private Dictionary<string, DevInfo> DevList = new Dictionary<string, DevInfo>();
 
         private Dictionary<string ,int > IpToBoxIndex = new Dictionary < string ,int >(); // ipid  boxid
         private OpcDateUpdate ServerDB = null;
+
+        /*  add 8/2  */
+        private Dictionary<int, string> Everytags = new Dictionary<int, string>();
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +37,6 @@ namespace SocketServer
             ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(ConnedNotification);
             logger.Debug("struct Form1  end");
         }
-
         public void CreateBoxLIsts()
         {
             allboxs.Add(11, this.ip1);
@@ -56,11 +58,7 @@ namespace SocketServer
         private void Label1_Click(object sender, EventArgs e)
         {
             logger.Debug("Label1_Click");
-            foreach (KeyValuePair<int , System.Windows.Forms.TextBox> s in allboxs)
-            {
-                logger.Debug("Key[{ }]",s.Key);
-                allboxs[s.Key].Text = s.Key.ToString();
-            }
+            //updatetestdb();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -79,37 +77,61 @@ namespace SocketServer
             if (DevList.ContainsKey(ip) == false || IpToBoxIndex.ContainsKey(ip+"1") == false) {
                 return;
             }
-            TagInfo Tags= DevList[ip];
+          try
+          {
+                DevInfo Tags = DevList[ip];                   //DevList:私有成员，记录所有采集机的所有的tag信息,用于显示显示信息，并且用于判断是初次得到的tag信息
+                Tags.CuTime = DateTime.Now.ToString();
+
             string IDstr = "this";
-            List<DataItem> NewTagList = new List<DataItem>(); 
+            List<DataItem> NewTagList = new List<DataItem>();
+            bool gotoflag = false;
             foreach (DevTagIndo s in tagslist)
             {
+                TagInfo one;
                 if (Tags.TagList.ContainsKey(s.ID))
                 {
-                    Tags.TagList[s.ID] = s.value;
-                    DataItem Atag = new DataItem();
-                    Atag.TagId = s.ID;
-                    Atag.Value = s.value;
-                    NewTagList.Add(Atag);
+                    one = Tags.TagList[s.ID];
+                    one.myvalue = s.value;
                 }
                 else
                 {
-                    Tags.TagList.Add(s.ID, s.value);
+                        gotoflag = true;
+                        one = new TagInfo
+                        {
+                            myvalue = s.value
+                        };
+                        if (Everytags.ContainsKey(s.ID) == true)
+                        {
+                            one.myname = Everytags[s.ID];
+                        }
+                        else
+                        {
+                            logger.Debug("no has this tag!!");
+                        }
+                        Tags.TagList.Add(s.ID, one);
+                }
+
                     DataItem Atag = new DataItem();
                     Atag.TagId = s.ID;
                     Atag.Value = s.value;
+                    Atag.TagName = one.myname;
+                    Atag.DataTime = Tags.CuTime;
                     NewTagList.Add(Atag);
-                }
+
                 IDstr += ":" + s.ID.ToString();
                 allboxs[IpToBoxIndex[ip + "4"]].Text = IDstr;
                 logger.Debug("TagStr[{ }]", s.TagStr);
             }
-            ServerDB.OpcDataUpdateTag(NewTagList);
+                ServerDB.OpcDataWriteTag(NewTagList, gotoflag);
 
-            Tags.CuTime = DateTime.Now.ToString();
             allboxs[IpToBoxIndex[ip + "2"]].Text = Tags.TagList.Count.ToString();
             allboxs[IpToBoxIndex[ip + "3"]].Text = Tags.CuTime;
 
+            }
+            catch (Exception ex)
+            {
+                logger.Error("error[{}]", ex.ToString());
+            }
         }
         public void ConnedNotification(object handle,string ip)
         {
@@ -118,25 +140,28 @@ namespace SocketServer
 
             if (DevList.ContainsKey(ip) == false)
             {
-                SkServer ServerHandle = (SkServer)handle;
-
-                if (System.IO.File.Exists(IsExistPath))
-                {
-                    logger.Debug("thie file is exist!!!");
-                    System.Threading.Thread.Sleep(1000);
-                    ServerHandle.CoSendFile(ip, IsExistPath);
-                }
-                else
-                {
-                    logger.Debug("thie file is not exist!!!");
-                }
-
-                TagInfo onedev = new TagInfo();
+                DevInfo onedev = new DevInfo();
                 DevList.Add(ip, onedev);
+                Serverconfig thisxmlfile = new Serverconfig(ip);
+                Everytags = thisxmlfile.ServerConfigParseXml();
             }
-            else {
+            else
+            {
                 logger.Debug("has this ip");
             }
+            SkServer ServerHandle = (SkServer)handle;
+
+            if (System.IO.File.Exists(IsExistPath))
+            {
+                logger.Debug("thie file is exist!!!");
+                System.Threading.Thread.Sleep(1000);
+                ServerHandle.CoSendFile(ip, IsExistPath);
+            }
+            else
+            {
+                logger.Debug("thie file is not exist!!!");
+            }
+
             foreach(KeyValuePair<string, int> s in IpToBoxIndex) {
                 logger.Debug("Key[{}]Value[{}]", s.Key,s.Value);
             }
@@ -155,6 +180,49 @@ namespace SocketServer
                 logger.Debug("IpToBoxIndex has this ip");
             }
             logger.Debug("ConnedNotification end");
+        }
+
+        /*test-----------------test---------------------test------------------test------------------test-------test------------test------*/
+        void testdb()
+        {
+            IpToBoxIndex.Add("192.168.0.881", 10 + 1);
+            IpToBoxIndex.Add("192.168.0.882", 10 + 2);
+            IpToBoxIndex.Add("192.168.0.883", 10 + 3);
+            IpToBoxIndex.Add("192.168.0.884", 10 + 4);
+            DevInfo onedev = new DevInfo();
+            DevList.Add("192.168.0.88", onedev);
+
+
+            List<DevTagIndo> tagslist = new List<DevTagIndo>();
+            DevTagIndo one = new DevTagIndo(1, (float)1.1);
+            DevTagIndo two = new DevTagIndo(2, (float)2.2);
+            DevTagIndo th = new DevTagIndo(3, (float)3.3);
+            DevTagIndo fo = new DevTagIndo(4, (float)4.4);
+            DevTagIndo fi = new DevTagIndo(5, (float)5.5);
+
+            tagslist.Add(one);
+            tagslist.Add(two);
+            tagslist.Add(th);
+            tagslist.Add(fo);
+            tagslist.Add(fi);
+            UpdateDevInfo(tagslist, "192.168.0.88");
+        }
+        void updatetestdb()
+        {
+
+            List<DevTagIndo> tagslist = new List<DevTagIndo>();
+            DevTagIndo one = new DevTagIndo(1, (float)3333);
+            DevTagIndo two = new DevTagIndo(2, (float)5555);
+            DevTagIndo th = new DevTagIndo(3, (float)888888);
+            DevTagIndo fo = new DevTagIndo(4, (float)9999999);
+            DevTagIndo fi = new DevTagIndo(5, (float)444444);
+
+            tagslist.Add(one);
+            tagslist.Add(two);
+            tagslist.Add(th);
+            tagslist.Add(fo);
+            tagslist.Add(fi);
+            UpdateDevInfo(tagslist, "192.168.0.88");
         }
 
         private void Label2_Click(object sender, EventArgs e)

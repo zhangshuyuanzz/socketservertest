@@ -10,18 +10,17 @@ namespace OpcSvr
     {
         private static readonly NLOG logger = new NLOG("OpcServerLib");
         BaseOpcServerConfig ServerConfig;
-        private readonly string XmlPath = "config\\ServerConfig.xml";
+
+        private readonly string XmlPath = @"config\opcserver.xml";
         public string VendorInfo = "ql.co.opc-server.v1.0.0";
-        public string Descr = " it in runing is ql opc server app";
-        private string GUID = "{534793BC-B818-42B4-9672-42A9F80FE708}";
-        public delegate void TextBoxEventHandler(int id, string str);
-        public TextBoxEventHandler RWTextBoxFunc;
+        public string Descr = "provide opc service ,please not forbidden it!!";
+        private string GUID = "{96B01D0F-D4E0-45A9-BFBD-B2E0A052964F}";
+
         public string AppName { get; set; }
-        public uint ServerRate { get; set; }
+        public int ServerRate { get; set; }
+        public string Auth { get; set; }
 
-        private Map<string, uint> TagList;
-        private Dictionary<int, uint> TagIDList;
-
+        private Dictionary<int, uint> TagIDList = new Dictionary<int, uint>();
 
         void printfbyte(byte[] data)
         {
@@ -29,25 +28,22 @@ namespace OpcSvr
         }
         public OpcServerLib(string auth)
         {
-            this.TagList = new Map<string, uint>();
-            this.TagIDList = new Dictionary<int, uint>();
-
-            bool flag = WtOPCsvr_DLL.Deactivate30MinTimer(auth);
-            logger.Debug("OpcServerLib is demo {}", flag);
-
+            Auth = auth;
             logger.Info("**********************************parse xml***************************sss*******************");
             string path1 = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             string xmlpath = path1 + XmlPath;
             logger.Info("-----Start-xmlpath[{}]-", xmlpath);
-            ServerConfig = new BaseOpcServerConfig();
+            ServerConfig = new BaseOpcServerConfig(xmlpath);
             this.AppName = ServerConfig.server_name;
-            this.ServerRate = (uint)ServerConfig.serverrate;
+            this.ServerRate = ServerConfig.serverrate;
             logger.Info("AppName[{}]ServerRate[{}]", this.AppName, this.ServerRate);
             logger.Info("**********************************parse xml***********************eee***********************");
-
         }
         public bool ServerRegister(string exepath)
         {
+            bool flag = WtOPCsvr_DLL.Deactivate30MinTimer(Auth);
+            logger.Debug("OpcServerLib is demo {}", flag);
+
             logger.Info("VendorInfo[{}]ServerRate[{}]GUID[{}]AppName[{}]", VendorInfo, ServerRate, GUID, AppName);
 
             bool ret = WtOPCsvr_DLL.UpdateRegistry(GUID,
@@ -63,8 +59,8 @@ namespace OpcSvr
         }
         public bool ServerInit()
         {
-            WtOPCsvr_DLL.SetVendorInfo("QILang.CO");
-            bool ret = WtOPCsvr_DLL.InitWTOPCsvr(GUID, 1000 * ServerRate);
+            WtOPCsvr_DLL.SetVendorInfo("DL,QILang,CO");
+            bool ret = WtOPCsvr_DLL.InitWTOPCsvr(GUID, 1000 * (uint)ServerRate);
             if (!ret)
             {
                 logger.Debug("InitWTOPCsvr is false!!!");
@@ -118,47 +114,39 @@ namespace OpcSvr
                     logger.Debug("opc add itme name{} TagId[{}] handle{}", s.TagName, s.TagId, TagHandle);
                     if (TagHandle > 0)
                     {
-                        TagList.Add(s.TagName, TagHandle);
                         TagIDList.Add(s.TagId, TagHandle);
-
                     }
                 }
             }
             logger.Info("NumbrClientConnections[{}]", WtOPCsvr_DLL.NumbrClientConnections());
 
         }
-        public void UpdateTagItem(string host, DataItem[] tags)    //提出来给数据提供这使用，用来更新数据
+        public void UpdateTagItem(string host, List<DataItem> tags)    //提出来给数据提供这使用，用来更新数据
         {
-            if (tags.Length == 0)
+            if (tags.Count == 0)
             {
                 return;
             }
             WtOPCsvr_DLL.StartUpdateTags();
 
-            for (int i = 0; i < tags.Length; i++)
+            foreach(DataItem tag in tags)
             {
-                DataItem tag = tags[i];
-                /*
-                if (!TagList.ContainsKey(tag.TagName))
+                if (!TagIDList.ContainsKey(tag.TagId))
                 {
                     uint TagHandle = WtOPCsvr_DLL.CreateTag(tag.TagName, tag.Value, tag.Quality, false);
-                    logger.Debug("opc add itme name{} handle{}", tag.TagName, TagHandle);
+                    logger.Debug("add new tag");
                     if (TagHandle > 0)
                     {
-                        TagList.Add(tag.TagName, TagHandle);
-                    }
-                    else
-                    {
-                        continue;
+                        TagIDList.Add(tag.TagId, TagHandle);
                     }
                 }
-                */
-                logger.Error("opc update data TagHandle{} value{} quality{}", tag.TagHandle, tag.Value, tag.Quality);
-                WtOPCsvr_DLL.UpdateTagToList(tag.TagHandle, tag.Value, tag.Quality);
+                else
+                {
+                    WtOPCsvr_DLL.UpdateTagToList(TagIDList[tag.TagId], tag.Value, tag.Quality);
+                }
+                logger.Error("opc update data TagHandle-[{}] value{} quality{}", TagIDList[tag.TagId], tag.Value, tag.Quality);
             }
             WtOPCsvr_DLL.EndUpdateTags();
-
-            tags = null;
         }
         public void ParseFrameDate(byte[] datas)
         {
@@ -206,13 +194,12 @@ namespace OpcSvr
                 InputItemDatas[(shaobing - 3) / 8].Quality = 192;
 
                 shaobing += 8;
-                UpdateTextBoxUI(Tagid, Value);
             }
-            UpdateTagItem("opcserver", InputItemDatas);
+           //pdateTagItem("opcserver", InputItemDatas);
         }
         public void testgettagvalue()
         {
-            foreach (KeyValuePair<string, uint> s in TagList)
+            foreach (KeyValuePair<int, uint> s in TagIDList)
             {
                 logger.Info("-testgettagvalue--key[{}]---Value[{}]------", s.Key, s.Value);
                 Object vv = new Object(); ;
@@ -231,27 +218,12 @@ namespace OpcSvr
                 InputItemDatas[i].Value = data[i];
                 InputItemDatas[i].TagHandle = TagIDList[test[i]];
             }
-            UpdateTagItem("opcserver", InputItemDatas);
+            //UpdateTagItem("opcserver", InputItemDatas);
         }
-
-        public int i = 1;
-        public void testUpdateTextBox()
+        public void OpcServerUpdateTag(List<DataItem> taglist)
         {
-            if (RWTextBoxFunc == null)
-                return;
-
-            RWTextBoxFunc(i, "zhang");
-            i++;
-
+            logger.Debug("OpcServerUpdateTag");
+            UpdateTagItem("opcserver", taglist);
         }
-        public void UpdateTextBoxUI(int boxid,float value)
-        {
-            if (RWTextBoxFunc == null)
-                return;
-
-            RWTextBoxFunc(boxid, value.ToString());
-            i++;
-        }
-
     }
 }

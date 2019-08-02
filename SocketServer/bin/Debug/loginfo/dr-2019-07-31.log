@@ -1,9 +1,0 @@
-2019-07-31 17:27:37.6533 [DEBUG]£ºstruct Form1
-2019-07-31 17:27:37.6903 [DEBUG]£ºfile exist!!
-2019-07-31 17:27:37.6903 [DEBUG]£ºOpenConnection[".\DB\OpcServer.db"]
-2019-07-31 17:27:37.7987 [DEBUG]£ºOpcDateWrite
-2019-07-31 17:27:37.7987 [DEBUG]£º after buf[REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )]
-2019-07-31 17:27:37.7987 [DEBUG]£ºsql["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
-2019-07-31 17:27:37.7987 [DEBUG]£ºsql11["REPLACE INTO opc_tag (tagid,name,type,value,time)values(  @tagid,@name,@type,@value,@time )"]
-2019-07-31 17:27:37.8436 [DEBUG]£ºc[4]
-2019-07-31 17:27:39.3121 [DEBUG]£ºform1_closed

@@ -18,6 +18,12 @@ namespace SkKit
             this.ID = 0;
             this.value = 0.0F;
         }
+        public DevTagIndo(int id,float val)
+        {
+            this.ID = id;
+            this.value = val;
+            this.TagStr = "unkown!!";
+        }
     }
     public class SkServer
     {
@@ -43,7 +49,6 @@ namespace SkKit
             logger.Debug("SkServer[{}]", port);
             this.ip = "0.0.0.0";
             this.port = port;
-
         }
 
         public bool SkStartListen()

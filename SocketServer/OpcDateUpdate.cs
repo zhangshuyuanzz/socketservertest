@@ -30,13 +30,23 @@ namespace SocketServer
                 return;
             }
         }
-        public bool OpcDataUpdateTag(List<DataItem> taglist)
+        public bool OpcDataWriteTag(List<DataItem> taglist,bool fff)
         {
             if (taglist == null) {
                 return false;
             }
             logger.Debug("OpcDateWrite");
-            int c = this.OpcServerDBHandle.Update("opc_tag", taglist, "username=@username");
+            int c;
+            if (fff == true)
+            {
+                logger.Debug("ReplaceReplaceReplaceReplaceReplace");
+                c = this.OpcServerDBHandle.Replace("opc_tag", taglist);
+            }
+            else
+            {
+                logger.Debug("UpdateUpdateUpdateUpdateUpdate");
+                c = this.OpcServerDBHandle.Update("opc_tag", taglist);
+            }
             logger.Debug("c[{}]",c);
             return true;
         }
