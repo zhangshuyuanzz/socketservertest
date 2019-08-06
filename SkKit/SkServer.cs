@@ -57,6 +57,8 @@ namespace SkKit
             bool ret = false;
 
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
             logger.Debug("IP[{}port[{}]", ip, port);
 
             try
@@ -231,5 +233,6 @@ namespace SkKit
             logger.Debug("CoSendFile end");
 
         }
+        //void CoPort
     }
 }

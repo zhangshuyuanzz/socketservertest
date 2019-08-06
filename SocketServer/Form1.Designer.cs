@@ -50,6 +50,15 @@ namespace SocketServer
             this.dev1IDT = new System.Windows.Forms.TextBox();
             this.dev1Id = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dev2IDT = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dev3IDT = new System.Windows.Forms.TextBox();
+            this.tag_name = new System.Windows.Forms.Label();
+            this.tagname3 = new System.Windows.Forms.TextBox();
+            this.tagname2 = new System.Windows.Forms.TextBox();
+            this.tagname1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +69,7 @@ namespace SocketServer
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lucida Handwriting", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(102, 0);
+            this.label1.Location = new System.Drawing.Point(92, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(594, 91);
             this.label1.TabIndex = 0;
@@ -71,7 +80,7 @@ namespace SocketServer
             // dateTimePicker1
             // 
             this.dateTimePicker1.CausesValidation = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(632, 413);
+            this.dateTimePicker1.Location = new System.Drawing.Point(642, 462);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(146, 25);
             this.dateTimePicker1.TabIndex = 1;
@@ -100,7 +109,7 @@ namespace SocketServer
             // 
             this.dev3.AutoSize = true;
             this.dev3.Font = new System.Drawing.Font("隶书", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dev3.Location = new System.Drawing.Point(36, 317);
+            this.dev3.Location = new System.Drawing.Point(36, 334);
             this.dev3.Name = "dev3";
             this.dev3.Size = new System.Drawing.Size(83, 20);
             this.dev3.TabIndex = 4;
@@ -114,6 +123,7 @@ namespace SocketServer
             this.ip1.Size = new System.Drawing.Size(122, 25);
             this.ip1.TabIndex = 5;
             this.ip1.Text = "0";
+            this.ip1.TextChanged += new System.EventHandler(this.Ip1_TextChanged);
             // 
             // ip2
             // 
@@ -125,7 +135,7 @@ namespace SocketServer
             // 
             // ip3
             // 
-            this.ip3.Location = new System.Drawing.Point(136, 312);
+            this.ip3.Location = new System.Drawing.Point(136, 329);
             this.ip3.Name = "ip3";
             this.ip3.Size = new System.Drawing.Size(122, 25);
             this.ip3.TabIndex = 7;
@@ -143,7 +153,7 @@ namespace SocketServer
             // tagtotal
             // 
             this.tagtotal.AutoSize = true;
-            this.tagtotal.Location = new System.Drawing.Point(346, 91);
+            this.tagtotal.Location = new System.Drawing.Point(281, 91);
             this.tagtotal.Name = "tagtotal";
             this.tagtotal.Size = new System.Drawing.Size(79, 15);
             this.tagtotal.TabIndex = 12;
@@ -151,24 +161,28 @@ namespace SocketServer
             // 
             // tag3
             // 
-            this.tag3.Location = new System.Drawing.Point(337, 315);
+            this.tag3.Location = new System.Drawing.Point(274, 329);
             this.tag3.Name = "tag3";
+            this.tag3.ReadOnly = true;
             this.tag3.Size = new System.Drawing.Size(100, 25);
             this.tag3.TabIndex = 11;
             this.tag3.Text = "0";
+            this.tag3.TextChanged += new System.EventHandler(this.Tag3_TextChanged);
             // 
             // tag2
             // 
-            this.tag2.Location = new System.Drawing.Point(337, 233);
+            this.tag2.Location = new System.Drawing.Point(274, 230);
             this.tag2.Name = "tag2";
+            this.tag2.ReadOnly = true;
             this.tag2.Size = new System.Drawing.Size(100, 25);
             this.tag2.TabIndex = 10;
             this.tag2.Text = "0";
             // 
             // tag1
             // 
-            this.tag1.Location = new System.Drawing.Point(337, 129);
+            this.tag1.Location = new System.Drawing.Point(274, 126);
             this.tag1.Name = "tag1";
+            this.tag1.ReadOnly = true;
             this.tag1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tag1.Size = new System.Drawing.Size(100, 25);
             this.tag1.TabIndex = 9;
@@ -182,29 +196,32 @@ namespace SocketServer
             this.utime.Name = "utime";
             this.utime.Size = new System.Drawing.Size(67, 15);
             this.utime.TabIndex = 16;
-            this.utime.Text = "当前时间";
+            this.utime.Text = "更新时间";
             // 
             // utime3
             // 
-            this.utime3.Location = new System.Drawing.Point(538, 312);
+            this.utime3.Location = new System.Drawing.Point(572, 329);
             this.utime3.Name = "utime3";
-            this.utime3.Size = new System.Drawing.Size(240, 25);
+            this.utime3.ReadOnly = true;
+            this.utime3.Size = new System.Drawing.Size(206, 25);
             this.utime3.TabIndex = 15;
             this.utime3.Text = "0";
             // 
             // utime2
             // 
-            this.utime2.Location = new System.Drawing.Point(538, 230);
+            this.utime2.Location = new System.Drawing.Point(572, 230);
             this.utime2.Name = "utime2";
-            this.utime2.Size = new System.Drawing.Size(240, 25);
+            this.utime2.ReadOnly = true;
+            this.utime2.Size = new System.Drawing.Size(206, 25);
             this.utime2.TabIndex = 14;
             this.utime2.Text = "0";
             // 
             // utime1
             // 
-            this.utime1.Location = new System.Drawing.Point(538, 126);
+            this.utime1.Location = new System.Drawing.Point(572, 124);
             this.utime1.Name = "utime1";
-            this.utime1.Size = new System.Drawing.Size(240, 25);
+            this.utime1.ReadOnly = true;
+            this.utime1.Size = new System.Drawing.Size(206, 25);
             this.utime1.TabIndex = 13;
             this.utime1.Text = "0";
             // 
@@ -212,6 +229,7 @@ namespace SocketServer
             // 
             this.dev1IDT.Location = new System.Drawing.Point(136, 165);
             this.dev1IDT.Name = "dev1IDT";
+            this.dev1IDT.ReadOnly = true;
             this.dev1IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dev1IDT.Size = new System.Drawing.Size(642, 25);
             this.dev1IDT.TabIndex = 17;
@@ -232,19 +250,116 @@ namespace SocketServer
             // textBox2
             // 
             this.textBox2.AllowDrop = true;
-            this.textBox2.BackColor = System.Drawing.SystemColors.InfoText;
+            this.textBox2.BackColor = System.Drawing.Color.Black;
             this.textBox2.Location = new System.Drawing.Point(1, 205);
-            this.textBox2.MinimumSize = new System.Drawing.Size(4, 2);
+            this.textBox2.MinimumSize = new System.Drawing.Size(4, 4);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(800, 2);
+            this.textBox2.Size = new System.Drawing.Size(800, 4);
             this.textBox2.TabIndex = 19;
+            // 
+            // textBox1
+            // 
+            this.textBox1.AllowDrop = true;
+            this.textBox1.BackColor = System.Drawing.SystemColors.InfoText;
+            this.textBox1.Location = new System.Drawing.Point(0, 316);
+            this.textBox1.MinimumSize = new System.Drawing.Size(4, 4);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(800, 4);
+            this.textBox1.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.Blue;
+            this.label2.Location = new System.Drawing.Point(35, 264);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 27);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "刷新ID：";
+            // 
+            // dev2IDT
+            // 
+            this.dev2IDT.Location = new System.Drawing.Point(136, 264);
+            this.dev2IDT.Name = "dev2IDT";
+            this.dev2IDT.ReadOnly = true;
+            this.dev2IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dev2IDT.Size = new System.Drawing.Size(642, 25);
+            this.dev2IDT.TabIndex = 21;
+            this.dev2IDT.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(35, 363);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 27);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "刷新ID：";
+            // 
+            // dev3IDT
+            // 
+            this.dev3IDT.Location = new System.Drawing.Point(136, 363);
+            this.dev3IDT.Name = "dev3IDT";
+            this.dev3IDT.ReadOnly = true;
+            this.dev3IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dev3IDT.Size = new System.Drawing.Size(642, 25);
+            this.dev3IDT.TabIndex = 23;
+            this.dev3IDT.Text = "0";
+            // 
+            // tag_name
+            // 
+            this.tag_name.AutoSize = true;
+            this.tag_name.Location = new System.Drawing.Point(443, 91);
+            this.tag_name.Name = "tag_name";
+            this.tag_name.Size = new System.Drawing.Size(37, 15);
+            this.tag_name.TabIndex = 28;
+            this.tag_name.Text = "位号";
+            // 
+            // tagname3
+            // 
+            this.tagname3.Location = new System.Drawing.Point(421, 329);
+            this.tagname3.Name = "tagname3";
+            this.tagname3.Size = new System.Drawing.Size(100, 25);
+            this.tagname3.TabIndex = 27;
+            this.tagname3.Text = "0";
+            // 
+            // tagname2
+            // 
+            this.tagname2.Location = new System.Drawing.Point(421, 230);
+            this.tagname2.Name = "tagname2";
+            this.tagname2.Size = new System.Drawing.Size(100, 25);
+            this.tagname2.TabIndex = 26;
+            this.tagname2.Text = "0";
+            // 
+            // tagname1
+            // 
+            this.tagname1.Location = new System.Drawing.Point(421, 126);
+            this.tagname1.Name = "tagname1";
+            this.tagname1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tagname1.Size = new System.Drawing.Size(100, 25);
+            this.tagname1.TabIndex = 25;
+            this.tagname1.Text = "0";
+            this.tagname1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 499);
+            this.Controls.Add(this.tag_name);
+            this.Controls.Add(this.tagname3);
+            this.Controls.Add(this.tagname2);
+            this.Controls.Add(this.tagname1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dev3IDT);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dev2IDT);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.dev1Id);
             this.Controls.Add(this.dev1IDT);
@@ -267,8 +382,9 @@ namespace SocketServer
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "大狗熊";
+            this.Text = "琪朗(dl)-科技";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1Closed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +412,15 @@ namespace SocketServer
         private System.Windows.Forms.TextBox dev1IDT;
         private System.Windows.Forms.Label dev1Id;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox dev2IDT;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox dev3IDT;
+        private System.Windows.Forms.Label tag_name;
+        private System.Windows.Forms.TextBox tagname3;
+        private System.Windows.Forms.TextBox tagname2;
+        private System.Windows.Forms.TextBox tagname1;
     }
 }
 

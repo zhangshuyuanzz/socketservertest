@@ -1,5 +1,6 @@
 ﻿using Base.kit;
 using Common.log;
+using OpcSvr;
 using SkKit;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SocketServer
 {
     public partial class Form1 : Form
     {
-        readonly NLOG logger = new NLOG("Form1");
+        static readonly NLOG logger = new NLOG("Form1");
         private Dictionary<int, System.Windows.Forms.TextBox> allboxs = new Dictionary<int, System.Windows.Forms.TextBox>();
         private string filepath = @".\config\";
         private Dictionary<string, DevInfo> DevList = new Dictionary<string, DevInfo>();
@@ -22,7 +24,7 @@ namespace SocketServer
         private Dictionary<string ,int > IpToBoxIndex = new Dictionary < string ,int >(); // ipid  boxid
         private OpcDateUpdate ServerDB = null;
 
-        /*  add 8/2  */
+        /*  add 8/2   用于获取tag name */
         private Dictionary<int, string> Everytags = new Dictionary<int, string>();
         public Form1()
         {
@@ -35,7 +37,7 @@ namespace SocketServer
             ServerHandle.SkStartListen();
             ServerHandle.Server_get_handle += new SkServer.ServerDataEventHandler(UpdateDevInfo);
             ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(ConnedNotification);
-            logger.Debug("struct Form1  end");
+            logger.Debug(" Form1 InitializeComponent end");
         }
         public void CreateBoxLIsts()
         {
@@ -43,13 +45,20 @@ namespace SocketServer
             allboxs.Add(12, this.tag1);
             allboxs.Add(13, this.utime1);
             allboxs.Add(14, this.dev1IDT);
+            allboxs.Add(15, this.tagname1);
 
             allboxs.Add(21, this.ip2);
             allboxs.Add(22, this.tag2);
             allboxs.Add(23, this.utime2);
+            allboxs.Add(24, this.dev2IDT);
+            allboxs.Add(25, this.tagname2);
+
             allboxs.Add(31, this.ip3);
             allboxs.Add(32, this.tag3);
             allboxs.Add(33, this.utime3);
+            allboxs.Add(34, this.dev3IDT);
+            allboxs.Add(35, this.tagname3);
+
         }
         private void TextBox6_TextChanged(object sender, EventArgs e)
         {
@@ -63,6 +72,8 @@ namespace SocketServer
         private void Form1_Load(object sender, EventArgs e)
         {
             logger.Debug("Form1_Load");
+            Thread thread = new Thread(new ThreadStart(OpcServerMain));
+            thread.Start();
         }
         private void Form1Closed(object sender, EventArgs e)
         {
@@ -181,6 +192,24 @@ namespace SocketServer
             }
             logger.Debug("ConnedNotification end");
         }
+        private static void OpcServerMain()
+        {
+            logger.Debug("OpcServerMain");
+            /*open local db*/
+            OpcDataSu OpcDBDatas = new OpcDataSu();
+
+            OpcServerLib kleopcserver = new OpcServerLib("JVRPS53R5V64226N62H4");
+            string exepath;
+            exepath = Application.StartupPath + @"\OpcServer.exe";
+            kleopcserver.ServerRegister(exepath);
+            kleopcserver.ServerInit();
+
+            /*register opc server handle*/
+            OpcDBDatas.Opc_tag_data_handle += new OpcDataSu.OpcServerEventHandler(kleopcserver.OpcServerUpdateTag);
+
+            /*set (get opc tag info) timer*/
+            _ = OpcDBDatas.OpcDateRegisterCB(kleopcserver.ServerRate);
+        }
 
         /*test-----------------test---------------------test------------------test------------------test-------test------------test------*/
         void testdb()
@@ -226,6 +255,16 @@ namespace SocketServer
         }
 
         private void Label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Tag3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Ip1_TextChanged(object sender, EventArgs e)
         {
 
         }

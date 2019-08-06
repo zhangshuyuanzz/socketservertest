@@ -144,7 +144,7 @@ namespace OpcSvr
                 {
                     WtOPCsvr_DLL.UpdateTagToList(TagIDList[tag.TagId], tag.Value, tag.Quality);
                 }
-                logger.Error("opc update data TagHandle-[{}] value{} quality{}", TagIDList[tag.TagId], tag.Value, tag.Quality);
+                logger.Error("opc update data TagId-[{}] value{} quality{}", tag.TagId, tag.Value, tag.Quality);
             }
             WtOPCsvr_DLL.EndUpdateTags();
         }

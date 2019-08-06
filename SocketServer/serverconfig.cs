@@ -37,7 +37,7 @@ namespace SocketServer
                 logger.Debug("this dic had this tag info ,so,bach check you config file!!");
             }
         }
-        public Dictionary<int, string> ServerConfigParseXml()
+        public Dictionary<int, string> ServerConfigParseXml(out Dictionary<int, string>)
         {
             Dictionary<int, string> allll = new Dictionary<int, string>();
             try
