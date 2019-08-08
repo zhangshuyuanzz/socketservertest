@@ -59,6 +59,8 @@ namespace SocketServer
             this.tagname3 = new System.Windows.Forms.TextBox();
             this.tagname2 = new System.Windows.Forms.TextBox();
             this.tagname1 = new System.Windows.Forms.TextBox();
+            this.conndevt = new System.Windows.Forms.TextBox();
+            this.conndev = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -80,9 +82,9 @@ namespace SocketServer
             // dateTimePicker1
             // 
             this.dateTimePicker1.CausesValidation = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(642, 462);
+            this.dateTimePicker1.Location = new System.Drawing.Point(632, 462);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(146, 25);
+            this.dateTimePicker1.Size = new System.Drawing.Size(156, 25);
             this.dateTimePicker1.TabIndex = 1;
             // 
             // dev1
@@ -132,6 +134,7 @@ namespace SocketServer
             this.ip2.Size = new System.Drawing.Size(122, 25);
             this.ip2.TabIndex = 6;
             this.ip2.Text = "0";
+            this.ip2.TextChanged += new System.EventHandler(this.Ip2_TextChanged);
             // 
             // ip3
             // 
@@ -140,6 +143,7 @@ namespace SocketServer
             this.ip3.Size = new System.Drawing.Size(122, 25);
             this.ip3.TabIndex = 7;
             this.ip3.Text = "0";
+            this.ip3.TextChanged += new System.EventHandler(this.Ip3_TextChanged);
             // 
             // ip
             // 
@@ -164,7 +168,7 @@ namespace SocketServer
             this.tag3.Location = new System.Drawing.Point(274, 329);
             this.tag3.Name = "tag3";
             this.tag3.ReadOnly = true;
-            this.tag3.Size = new System.Drawing.Size(100, 25);
+            this.tag3.Size = new System.Drawing.Size(67, 25);
             this.tag3.TabIndex = 11;
             this.tag3.Text = "0";
             this.tag3.TextChanged += new System.EventHandler(this.Tag3_TextChanged);
@@ -174,7 +178,7 @@ namespace SocketServer
             this.tag2.Location = new System.Drawing.Point(274, 230);
             this.tag2.Name = "tag2";
             this.tag2.ReadOnly = true;
-            this.tag2.Size = new System.Drawing.Size(100, 25);
+            this.tag2.Size = new System.Drawing.Size(67, 25);
             this.tag2.TabIndex = 10;
             this.tag2.Text = "0";
             // 
@@ -184,7 +188,7 @@ namespace SocketServer
             this.tag1.Name = "tag1";
             this.tag1.ReadOnly = true;
             this.tag1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tag1.Size = new System.Drawing.Size(100, 25);
+            this.tag1.Size = new System.Drawing.Size(67, 25);
             this.tag1.TabIndex = 9;
             this.tag1.Text = "0";
             this.tag1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -322,35 +326,61 @@ namespace SocketServer
             // 
             // tagname3
             // 
-            this.tagname3.Location = new System.Drawing.Point(421, 329);
+            this.tagname3.Location = new System.Drawing.Point(373, 329);
             this.tagname3.Name = "tagname3";
-            this.tagname3.Size = new System.Drawing.Size(100, 25);
+            this.tagname3.ReadOnly = true;
+            this.tagname3.Size = new System.Drawing.Size(169, 25);
             this.tagname3.TabIndex = 27;
             this.tagname3.Text = "0";
+            this.tagname3.TextChanged += new System.EventHandler(this.Tagname3_TextChanged);
             // 
             // tagname2
             // 
-            this.tagname2.Location = new System.Drawing.Point(421, 230);
+            this.tagname2.Location = new System.Drawing.Point(373, 230);
             this.tagname2.Name = "tagname2";
-            this.tagname2.Size = new System.Drawing.Size(100, 25);
+            this.tagname2.ReadOnly = true;
+            this.tagname2.Size = new System.Drawing.Size(169, 25);
             this.tagname2.TabIndex = 26;
             this.tagname2.Text = "0";
+            this.tagname2.TextChanged += new System.EventHandler(this.Tagname2_TextChanged);
             // 
             // tagname1
             // 
-            this.tagname1.Location = new System.Drawing.Point(421, 126);
+            this.tagname1.Location = new System.Drawing.Point(373, 126);
             this.tagname1.Name = "tagname1";
+            this.tagname1.ReadOnly = true;
             this.tagname1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tagname1.Size = new System.Drawing.Size(100, 25);
+            this.tagname1.Size = new System.Drawing.Size(169, 25);
             this.tagname1.TabIndex = 25;
             this.tagname1.Text = "0";
             this.tagname1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tagname1.TextChanged += new System.EventHandler(this.Tagname1_TextChanged);
+            // 
+            // conndevt
+            // 
+            this.conndevt.Location = new System.Drawing.Point(12, 431);
+            this.conndevt.Name = "conndevt";
+            this.conndevt.Size = new System.Drawing.Size(778, 25);
+            this.conndevt.TabIndex = 29;
+            // 
+            // conndev
+            // 
+            this.conndev.AutoSize = true;
+            this.conndev.Font = new System.Drawing.Font("幼圆", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.conndev.ForeColor = System.Drawing.Color.Green;
+            this.conndev.Location = new System.Drawing.Point(12, 407);
+            this.conndev.Name = "conndev";
+            this.conndev.Size = new System.Drawing.Size(139, 19);
+            this.conndev.TabIndex = 30;
+            this.conndev.Text = "已连接设备---";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 499);
+            this.Controls.Add(this.conndev);
+            this.Controls.Add(this.conndevt);
             this.Controls.Add(this.tag_name);
             this.Controls.Add(this.tagname3);
             this.Controls.Add(this.tagname2);
@@ -421,6 +451,8 @@ namespace SocketServer
         private System.Windows.Forms.TextBox tagname3;
         private System.Windows.Forms.TextBox tagname2;
         private System.Windows.Forms.TextBox tagname1;
+        private System.Windows.Forms.TextBox conndevt;
+        private System.Windows.Forms.Label conndev;
     }
 }
 

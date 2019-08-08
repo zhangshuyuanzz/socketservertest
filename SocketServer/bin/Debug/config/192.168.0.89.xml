@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- attempts_interval 定义值，不可随意设置（最少0.5s）：                
+    1S     = 1,
+    2S     = 2,    
+ -->
+<!-- device protocol：                
+    modbus  ,
+    dlt645-07     = 07协议,
+    dlt645-97     = 97协议,    
+ -->
+<collector>
+  <attr scada_frequency="2" attempts_num="3" attempts_interval="3" />
+  <!-- serial：                
+    modify:baude bits parity stop
+		yes	,可修改
+		no  ,不可修改
+ -->
+  <serial>
+    <para protocol="modbus" port="/dev/ttyS6" baude="1200" bits="8" parity="N" stop="1" resume_interval="10" detect_count="3" modify="yes" />
+    <para protocol="dlt645" port="/dev/ttyS8" baude="1200" bits="8" parity="E" stop="1" resume_interval="5" detect_count="3" modify="yes" />
+    <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
+    <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
+  </serial>
+  <!--
+	modbus：
+		type:float=1  long=2 
+        DIid： DI0 DI1  
+    -->
+  <device name="444444444444" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="10">
+    <tag name="6666666666666" startaddr="258" quantity="2" id="66" type="1" byteOrder="4321" />
+    <tag name="7777777777777" startaddr="4" quantity="2" id="76" type="1" byteOrder="4321" />
+</collector>

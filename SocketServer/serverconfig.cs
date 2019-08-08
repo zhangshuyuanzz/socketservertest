@@ -2,6 +2,7 @@
 using Common.log;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -24,7 +25,24 @@ namespace SocketServer
                 return;
             }
             xDoc = new XmlDocument();
-            xDoc.Load(XmlPath);
+        }
+        public bool isxml()
+        {
+            string xmlpath = XmlPath;
+            StreamReader sr = new StreamReader(xmlpath);
+            string strXml = sr.ReadToEnd();
+            sr.Close();
+            sr.Dispose();
+            try
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.LoadXml(strXml);//判断是否加载成功
+                return true;//是xml文件，返回
+            }
+            catch
+            {
+                return false;//不是xml文件，返回
+            }
         }
         private void addintotagall(Dictionary<int, string> wholet,int a,string b)
         {
@@ -37,9 +55,21 @@ namespace SocketServer
                 logger.Debug("this dic had this tag info ,so,bach check you config file!!");
             }
         }
-        public Dictionary<int, string> ServerConfigParseXml(out Dictionary<int, string>)
+        private void addintotagname(Dictionary<string, int> wholet, int a, string b)
         {
-            Dictionary<int, string> allll = new Dictionary<int, string>();
+            if (wholet.ContainsKey(b) == false)
+            {
+                wholet.Add(b, a);
+            }
+            else
+            {
+                logger.Debug("name--this dic had this tag info ,so,bach check you config file!!");
+            }
+        }
+        public Dictionary<int, string> ServerConfigParseXml(ref Dictionary<int, string> allll, ref Dictionary<string, int> allnames)
+        {
+            //Dictionary<int, string> allll = new Dictionary<int, string>();
+            xDoc.Load(XmlPath);
             try
             {
             logger.Info("ConfigParseXml  strart");
@@ -54,6 +84,7 @@ namespace SocketServer
                     tagid = int.Parse(XmlKit.GetByXml("id", n));
                     tagname = XmlKit.GetByXml("name", n);
                     addintotagall(allll, tagid, tagname);
+                    addintotagname(allnames, tagid, tagname);
                     logger.Info("--pp-------------tagid[{}]tagname[{}]", tagid, tagname);
                 }
                 foreach (XmlNode n in node.SelectNodes("command"))
@@ -63,6 +94,7 @@ namespace SocketServer
                     tagid = int.Parse(XmlKit.GetByXml("id", n));
                     tagname = XmlKit.GetByXml("name", n);
                     addintotagall(allll, tagid, tagname);
+                    addintotagname(allnames, tagid, tagname);
                     logger.Info("--pp-------------tagid[{}]tagname[{}]", tagid, tagname);
                 }
             }

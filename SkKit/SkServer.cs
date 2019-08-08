@@ -38,6 +38,9 @@ namespace SkKit
         public delegate void ServerConnEventHandler(object handle,string ip);
         public ServerConnEventHandler Server_conn_handle;
 
+        public delegate void ServerDisconnEventHandler(object handle, string ip);
+        public ServerDisconnEventHandler Server_disconn_handle;
+
         private NLOG logger = new NLOG("SkServer");
         public SkServer(string ip, int port)
         {
@@ -206,6 +209,9 @@ namespace SkKit
                 logger.Debug("socket连接已断开");
                 SocketClose(ClientFd);
                 ret = false;
+            }
+            if (ret == false) {
+                Server_disconn_handle?.Invoke(this, ip);
             }
             return ret;
         }
