@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,26 @@ namespace SkKit
 {
     public class DevInfo
     {
-        public Dictionary<int, TagInfo> TagList;
-        //public Dictionary<string, TagInfo> TagListWithName;
+        public ConcurrentDictionary<int, TagInfo> TagList;
+        public ConcurrentDictionary<string, int> TagListWithName;
+        public ConcurrentDictionary<int, string> TagListWithID;
+
         public string CuTime;
+        public object SkClientHandle;
         public DevInfo()
         {
             //TagListWithName = new Dictionary<string, TagInfo>();
-            TagList = new Dictionary<int, TagInfo>();
+            TagList = new ConcurrentDictionary<int, TagInfo>();
             CuTime = DateTime.Now.ToString();
+        }
+        public DevInfo(object inhandle)
+        {
+            TagListWithID = new ConcurrentDictionary<int, string>();
+            TagListWithName = new ConcurrentDictionary<string, int>();
+
+            this.TagList = new ConcurrentDictionary<int, TagInfo>();
+            this.CuTime = DateTime.Now.ToString();
+            this.SkClientHandle = inhandle;
         }
     }
     public class TagInfo
@@ -26,7 +39,7 @@ namespace SkKit
         public TagInfo()
         {
             myvalue = 0;
-            myname = "no name!";
+            myname = "invalid";
             mytime = DateTime.Now.ToString();
         }
     }

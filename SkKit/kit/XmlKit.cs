@@ -11,6 +11,28 @@ namespace Base.kit
     public class XmlKit
     {
         private static readonly NLOG Logger = new NLOG("Base.kit");
+        public bool isxml(string XmlPath)
+        {
+            if (System.IO.File.Exists(XmlPath) == false) {
+                return false;
+            }
+            string xmlpath = XmlPath;
+            StreamReader sr = new StreamReader(xmlpath);
+            string strXml = sr.ReadToEnd();
+            sr.Close();
+            sr.Dispose();
+            try
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.LoadXml(strXml);//判断是否加载成功
+                return true;//是xml文件，返回
+            }
+            catch
+            {
+                Logger.Debug("wrong xml file!!");
+                return false;//不是xml文件，返回
+            }
+        }
         public static string GetByXml(string name, XmlNode node, string def = null)
         {
             XmlAttribute typeAttr = node.Attributes[name];

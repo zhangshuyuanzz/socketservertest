@@ -50,5 +50,10 @@ namespace SocketServer
             logger.Debug("c[{}]",c);
             return true;
         }
+        public bool OpcDataDelTagWithIp(string delip)
+        {
+            this.OpcServerDBHandle.DeleteAll("opc_tag",delip);
+            return true;
+        }
     }
 }

@@ -21,13 +21,18 @@
     <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
     <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
   </serial>
-  <!--
-	modbus：
-		type:float=1  long=2 
-        DIid： DI0 DI1  
-    -->
-  <device name="modbus——dev1" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="10">
-    <tag name="modbus_quality_mass_flow" startaddr="258" quantity="2" id="10" type="1" byteOrder="4321" />
-    <tag name="modbus_heat_mass_flow" startaddr="4" quantity="2" id="11" type="1" byteOrder="4321" />
+  <device name="HS96_dev1" protocol="hs96" devmodel="hs96-panel1" address="20" serialport="4" actstate="0" interval="3">
+    <tag name="HS96_FLOW" id="5" type="1" />
+    <tag name="HS96_PRESSURE" id="6" type="1" />
+    <tag name="HS96_PRESSURE_DIFFER" id="7" type="1" />
+    <tag name="HS96_TEMPERA" id="8" type="1" />
+    <tag name="HS96_CUMULANT" id="9" type="1" />
+  </device>
+  <device name="zhang" protocol="hs96" devmodel="hs96-panel1" address="5" serialport="4" actstate="0" interval="3">
+    <tag name="2222222222222" id="5" type="1" />
+    <tag name="33333333333333" id="6" type="1" />
+    <tag name="666666666" id="7" type="1" />
+    <tag name="44444444444" id="8" type="1" />
+    <tag name="55555555555555" id="9" type="1" />
   </device>
 </collector>

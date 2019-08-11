@@ -10,6 +10,7 @@
  -->
 <collector>
   <attr scada_frequency="2" attempts_num="3" attempts_interval="3" />
+  
   <!-- serial：                
     modify:baude bits parity stop
 		yes	,可修改
@@ -21,12 +22,18 @@
     <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
     <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
   </serial>
-  <!--
-	modbus：
-		type:float=1  long=2 
-        DIid： DI0 DI1  
-    -->
-  <device name="444444444444" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="10">
-    <tag name="6666666666666" startaddr="258" quantity="2" id="66" type="1" byteOrder="4321" />
-    <tag name="7777777777777" startaddr="4" quantity="2" id="76" type="1" byteOrder="4321" />
+  <device name="HS96_dev1" protocol="hs96" devmodel="hs96-panel1" address="20" serialport="4" actstate="0" interval="3">
+    <tag name="HS96_FLOW" id="5" type="1" />
+    <tag name="HS96_PRESSURE" id="6" type="1" />
+    <tag name="HS96_PRESSURE_DIFFER" id="7" type="1" />
+    <tag name="HS96_TEMPERA" id="8" type="1" />
+    <tag name="HS96_CUMULANT" id="9" type="1" />
+  </device>
+  <device name="HS96_dev1" protocol="hs96" devmodel="hs96-panel1" address="20" serialport="4" actstate="0" interval="3">
+    <tag name="HS96_FLOW" id="5" type="1" />
+    <tag name="HS96_PRESSURE" id="6" type="1" />
+    <tag name="HS96_PRESSURE_DIFFER" id="7" type="1" />
+    <tag name="HS96_TEMPERA" id="8" type="1" />
+    <tag name="HS96_CUMULANT" id="9" type="1" />
+  </device>
 </collector>

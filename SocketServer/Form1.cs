@@ -2,7 +2,9 @@
 using Common.log;
 using OpcSvr;
 using SkKit;
+using SkKit.FileWatch;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,10 +26,7 @@ namespace SocketServer
         private Dictionary<int,string > IpToBoxIndex = new Dictionary <int, string>(); // <ip,boxid>用于得到的数据与界面box关联
         private OpcDateUpdate ServerDB = null;
 
-        /*  add 8/2   用于获取tag name */
-        private Dictionary<int, string> Everytags = new Dictionary<int, string>();
-        private Dictionary<string, int> Everytagname = new Dictionary<string, int>();
-
+        //private XmlFileWatch tt;
         public Form1()
         {
             InitializeComponent();
@@ -35,17 +34,27 @@ namespace SocketServer
             CreateBoxLIsts();
 
             ServerDB = new OpcDateUpdate();
+            ServerDB.OpcDataDelTagWithIp("192.168.0.88");
             SkServer ServerHandle = new SkServer(11220);
             ServerHandle.SkStartListen();
             ServerHandle.Server_get_handle += new SkServer.ServerDataEventHandler(UpdateDevInfo);
             ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(ConnedNotification);
+            ServerHandle.Server_disconn_handle += new SkServer.ServerDisconnEventHandler(DisconnedNotification);
+
             logger.Debug(" Form1 InitializeComponent end");
 
-            Serverconfig thisxmlfile = new Serverconfig("192.168.0.88");
-            logger.Debug("ret----------------------88------------[{}]---------------", thisxmlfile.isxml());
-            thisxmlfile = new Serverconfig("192.168.0.89");
-            logger.Debug("ret---------------------89-------------[{}]---------------", thisxmlfile.isxml());
+            // this.tt = new XmlFileWatch(this.filepath);
+            //this.tt.OnChanged += new XmlFileWatch.xmlFileSystemEventHandler(OpcServerTransferXmlfile);
 
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
+
+        }
+        static void MyHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Exception e = (Exception)args.ExceptionObject;
+            logger.Fatal("**************MyHandler caught : " , e.Message);
+            logger.Fatal("**************error caught : [{}]" , e.ToString());
         }
         public void CreateBoxLIsts()
         {
@@ -82,6 +91,7 @@ namespace SocketServer
             logger.Debug("Form1_Load");
             Thread thread = new Thread(new ThreadStart(OpcServerMain));
             thread.Start();
+
         }
         private void Form1Closed(object sender, EventArgs e)
         {
@@ -91,18 +101,17 @@ namespace SocketServer
             this.Close();
         }
 
-        public void UpdateDevInfo(List<DevTagIndo> tagslist,string ip)
+        public void UpdateDevInfo(List<DevTagIndo> tagslist,string UDip)
         {
-            logger.Debug("updateDevInfo---ip[{}]", ip);
-            if (DevList.ContainsKey(ip) == false) {
+            logger.Debug("updateDevInfo---ip[{}]", UDip);
+            if (DevList.ContainsKey(UDip) == false) {
                 return;
             }
           try
           {
-                DevInfo Tags = DevList[ip];                   //DevList:私有成员，记录所有采集机的所有的tag信息,用于显示显示信息，并且用于判断是初次得到的tag信息
+                DevInfo Tags = DevList[UDip];                   //DevList:私有成员，记录所有采集机的所有的tag信息,用于显示显示信息，并且用于判断是初次得到的tag信息
                 Tags.CuTime = DateTime.Now.ToString();
 
-            string IDstr = "this";
             List<DataItem> NewTagList = new List<DataItem>();
             bool gotoflag = false;
             foreach (DevTagIndo s in tagslist)
@@ -116,43 +125,34 @@ namespace SocketServer
                 }
                 else
                 {
+                        if (Tags.TagListWithID.ContainsKey(s.ID) == false)
+                        {
+                            logger.Debug("no has this tagid!!");
+                            continue;
+                        }
                         gotoflag = true;
                         one = new TagInfo
                         {
-                            myvalue = s.value
-                        };
-                        if (Everytags.ContainsKey(s.ID) == true)
-                        {
-                            one.myname = Everytags[s.ID];
-                        }
-                        else
-                        {
-                            logger.Debug("no has this tag!!");
-                        }
-                        Tags.TagList.Add(s.ID, one);
+                            myvalue = s.value,
+                            myname = Tags.TagListWithID[s.ID]
+                    };
+                        Tags.TagList.TryAdd(s.ID, one);
                 }
 
-                    DataItem Atag = new DataItem();
-                    Atag.TagId = s.ID;
-                    Atag.Value = s.value;
-                    Atag.TagName = one.myname;
-                    Atag.DataTime = Tags.CuTime;
+                    DataItem Atag = new DataItem(one.myname,s.ID,1, s.value, Tags.CuTime, UDip);
+
                     NewTagList.Add(Atag);
 
-                IDstr += ":" + s.ID.ToString();
-
-                SkUpdateTime(one.myname,ip);
-                logger.Debug("TagStr[{ }]", s.TagStr);
+                SkUpdateTime(one.myname, UDip);
             }
 
                 foreach (KeyValuePair<int, string> s in IpToBoxIndex)
                 {
-                    logger.Debug("ip,[{}]key[{}]value[{}]", ip, s.Key, s.Value);
-                    if (string.Compare(ip, s.Value) == 0)
+                    logger.Debug("ip,[{}]key[{}]value[{}]", UDip, s.Key, s.Value);
+                    if (string.Compare(UDip, s.Value) == 0)
                     {
                         int num = s.Key;
-                        allboxs[num + 4].Text = IDstr;
-                        allboxs[num + 2].Text = Tags.TagList.Count.ToString();
+                        allboxs[num + 2].Text = Tags.TagList.Count.ToString();  //更新总tag数
                     }
                 }
                 ServerDB.OpcDataWriteTag(NewTagList, gotoflag);
@@ -162,6 +162,8 @@ namespace SocketServer
             {
                 logger.Error("error[{}]", ex.ToString());
             }
+            logger.Debug("end !!UpdateDevInfo  UDip[{ }]", UDip);
+
         }
         List<string> IPs = new List<string>();
         private void changeIpdev()
@@ -179,27 +181,45 @@ namespace SocketServer
             logger.Debug("DisconnedNotification--ip[{}]", ip);
             IPs.Remove(ip);
             changeIpdev();
+
+            if (DevList.ContainsKey(ip) == true)
+            {
+                DevInfo buffer = DevList[ip];
+                buffer.TagList.Clear();
+                DevList.Remove(ip);
+                foreach ( string s  in DevList.Keys) {
+                    logger.Debug("sssss[{}]",s);
+                }
+            }
         }
         public void ConnedNotification(object handle,string ip)
-        {
-            string IsExistPath = filepath + ip + ".xml";
-            logger.Debug("ConnedNotification--ip[{}]IsExistPath[{}]", ip, IsExistPath);
-
+        { 
+            logger.Debug("ConnedNotification--ip[{}]", ip);
+            DevInfo onedev;
             if (DevList.ContainsKey(ip) == false)
             {
                 IPs.Add(ip);
-                DevInfo onedev = new DevInfo();
+                onedev = new DevInfo(handle);
                 DevList.Add(ip, onedev);
-                Serverconfig thisxmlfile = new Serverconfig(ip);
-                thisxmlfile.ServerConfigParseXml(ref Everytags,ref Everytagname);
                 changeIpdev();
             }
             else
             {
                 logger.Debug("has this ip");
+                onedev = DevList[ip];
             }
-            SkServer ServerHandle = (SkServer)handle;
+            /*更新tagtoid 和tagtoname，两个字典*/
+            Serverconfig thisxmlfile = new Serverconfig(ip);
+            thisxmlfile.ServerConfigParseXml(ref onedev.TagListWithID, ref onedev.TagListWithName);
 
+            OpcSendFile(handle,ip);
+            logger.Debug("ConnedNotification end");
+        }
+        private void OpcSendFile(object sender,string ip)
+        {
+            string IsExistPath = filepath + ip + ".xml";
+            logger.Debug("OpcSendFile---IsExistPath[{}]!!", IsExistPath);
+            SkServer ServerHandle = (SkServer)sender;
             if (System.IO.File.Exists(IsExistPath))
             {
                 logger.Debug("thie file is exist!!!");
@@ -210,8 +230,28 @@ namespace SocketServer
             {
                 logger.Debug("thie file is not exist!!!");
             }
-            logger.Debug("ConnedNotification end");
         }
+        private void OpcServerTransferXmlfile(XmlFileWatch inhandle)
+        {
+            XmlFileWatch bufferxml = inhandle;
+            logger.Debug("OpcServerTransferXmlfile!!Count[{}]", bufferxml.ChangFileList.Count);
+            foreach (string s in bufferxml.ChangFileList) {
+                logger.Debug("s===[{}]",s);
+            }
+            Queue<string> OpcChangFileList = bufferxml.ChangFileList;
+
+            while (OpcChangFileList.Count > 0)
+            {
+                string ip = bufferxml.GetandDeltQueue();
+                if (DevList.ContainsKey(ip) == true) {
+                    DevInfo onedev = DevList[ip];
+
+                    OpcSendFile(onedev.SkClientHandle,ip);
+                }
+            }
+
+        }
+
         private static void OpcServerMain()
         {
             logger.Debug("OpcServerMain");
@@ -292,24 +332,10 @@ namespace SocketServer
             if (IpToBoxIndex.ContainsKey(number*10) == true)
             {
                 IpToBoxIndex[number * 10] = ip;
-                /*
-                IpToBoxIndex[number * 10+1] = ip + "1";
-                IpToBoxIndex[number * 10+2] = ip + "2"; ;
-                IpToBoxIndex[number * 10+3] = ip + "3"; ;
-                IpToBoxIndex[number * 10+4] = ip + "4"; ;
-                IpToBoxIndex[number * 10+5] = ip + "5"; ;
-                */
             }
             else
             {
                 IpToBoxIndex.Add(number * 10,ip);
-                /*
-                IpToBoxIndex.Add(number * 10 + 1,ip + "1");
-                IpToBoxIndex.Add(number * 10 + 2,ip + "2");
-                IpToBoxIndex.Add(number * 10 + 3,ip + "3");
-                IpToBoxIndex.Add(number * 10 + 4,ip + "4");
-                IpToBoxIndex.Add(number * 10 + 5,ip + "5");
-                */
             }
 
             foreach (KeyValuePair<int,string> s in IpToBoxIndex)
@@ -331,23 +357,22 @@ namespace SocketServer
                 logger.Error("not need to update!!");
                 return;
             }
-            Dictionary<int, TagInfo> Alltag = DevList[ip].TagList;
-            if (Everytagname.ContainsKey(tagname) == true)
+            ConcurrentDictionary<int, TagInfo> Alltag = DevList[ip].TagList;
+            if (DevList[ip].TagListWithName.ContainsKey(tagname) == true)
             {
-                logger.Debug("id[{}]", Everytagname[tagname]);
-                if (Alltag.ContainsKey(Everytagname[tagname]) == true) {
+                int thetagid = DevList[ip].TagListWithName[tagname];
+                logger.Debug("id[{}]", thetagid);
+                if (Alltag.ContainsKey(thetagid) == true) {                  //当前以获取数据有值
                     foreach (KeyValuePair<int, string> s in IpToBoxIndex)
                     {
-                        foreach (KeyValuePair<int, System.Windows.Forms.TextBox> js in allboxs) {
-                        }
-                        logger.Debug("-------------------------------------");
-
                         string tagname_temp = allboxs[s.Key + 5].Text;
+                        logger.Debug("---------------tbox tagname[{}]----------------------", tagname_temp);
 
                         if (string.Compare(ip, s.Value) == 0 && string.Compare(tagname_temp, tagname) == 0) {
                             int num = s.Key;
-                            logger.Debug("this tag name,num[{}] time is [{}]", num,Alltag[Everytagname[tagname]].mytime);
-                            allboxs[num + 3].Text = Alltag[Everytagname[tagname]].mytime;
+                            logger.Debug("this tag name,num[{}] time is [{}]myvalue[{}]", num,Alltag[thetagid].mytime, Alltag[thetagid].myvalue);
+                            allboxs[num + 3].Text = Alltag[thetagid].mytime;
+                            allboxs[num + 4].Text = Alltag[thetagid].myvalue.ToString();
                         }
                     }
                 }
@@ -411,17 +436,19 @@ namespace SocketServer
 
         }
 
-        private void tagnameboxchange(string tagname, string ip,System.Windows.Forms.TextBox tagtimebox)
+        private void tagnameboxchange(string tagname, string ip,int num)
         {
-            Dictionary<int, TagInfo> Alltag = DevList[ip].TagList;
-            if (Everytagname.ContainsKey(tagname) == true)
+            ConcurrentDictionary<int, TagInfo> Alltag = DevList[ip].TagList;
+            if (DevList[ip].TagListWithName.ContainsKey(tagname) == true)
             {
-                logger.Debug("--id[{}]", Everytagname[tagname]);
-                if (Alltag.ContainsKey(Everytagname[tagname]) == true)
+                int ohtagid = DevList[ip].TagListWithName[tagname];
+                logger.Debug("-tagnameboxchange-id[{}]", ohtagid);
+                if (Alltag.ContainsKey(ohtagid) == true)
                 {
-                    logger.Debug("this,tagname[{}] time is [{}]", tagname, Alltag[Everytagname[tagname]].mytime);
-                    tagtimebox.Text = Alltag[Everytagname[tagname]].mytime;
-               }
+                    logger.Debug("tagnameboxchange,num[{}] time is [{}]myvalue[{}]", num, Alltag[ohtagid].mytime, Alltag[ohtagid].myvalue);
+                    allboxs[num + 3].Text = Alltag[ohtagid].mytime;
+                    allboxs[num + 4].Text = Alltag[ohtagid].myvalue.ToString();
+                }
 
             }
             else
@@ -433,18 +460,18 @@ namespace SocketServer
         private void Tagname1_TextChanged(object sender, EventArgs e)
         {
             logger.Debug("Tagname1_TextChanged--tagname[{}]ip[{}]",this.tagname1.Text, this.ip1.Text);
-            tagnameboxchange(this.tagname1.Text, this.ip1.Text, this.utime1);
+            tagnameboxchange(this.tagname1.Text, this.ip1.Text, 10);
 
         }
         private void Tagname2_TextChanged(object sender, EventArgs e)
         {
             logger.Debug("Tagname2_TextChanged--tagname[{}][{}]", this.tagname2.Text, this.ip2.Text);
-            tagnameboxchange(this.tagname2.Text, this.ip2.Text,this.utime2);
+            tagnameboxchange(this.tagname2.Text, this.ip2.Text,20);
         }
         private void Tagname3_TextChanged(object sender, EventArgs e)
         {
             logger.Debug("Tagname3_TextChanged--tagname[{}][{}]", this.tagname3.Text, this.ip3.Text);
-            tagnameboxchange(this.tagname3.Text, this.ip3.Text, this.utime3);
+            tagnameboxchange(this.tagname3.Text, this.ip3.Text, 30);
 
         }
     }

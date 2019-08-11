@@ -113,8 +113,8 @@ namespace SkKit
         {
             logger.Debug("ReceiveMessage");
             Socket clientSk = (Socket)SkHadle;
-            string ip = (clientSk.RemoteEndPoint as IPEndPoint).Address.ToString();
-            logger.Debug("ip[{}]",ip);
+            string reip = (clientSk.RemoteEndPoint as IPEndPoint).Address.ToString();
+            logger.Debug("ip[{}]", reip);
 
             try
             {
@@ -125,7 +125,7 @@ namespace SkKit
                     int lenth = clientSk.Receive(getbufer);
                     if (lenth == 0) {
                         logger.Debug("receive data is zero");
-                        if (SocketJudgeIsConn(clientSk) == false)
+                        if (SocketJudgeIsConn(clientSk, reip) == false)
                         {
                             break;
                         }
@@ -142,7 +142,7 @@ namespace SkKit
                     logger.Debug("set msg[{}]", BitConverter.ToString(GetData));
 
                     SkParseFrame(TagsL, GetData);
-                    Server_get_handle?.Invoke(TagsL,ip);
+                    Server_get_handle?.Invoke(TagsL, reip);
                 }
             }
             catch (Exception e)
@@ -186,7 +186,7 @@ namespace SkKit
             }
             return RetParse; 
         }
-        public bool SocketJudgeIsConn(Socket ClientFd)
+        public bool SocketJudgeIsConn(Socket ClientFd,string reip)
         {
             bool ret = true;
             byte[] buffer = new byte[100];
@@ -211,7 +211,7 @@ namespace SkKit
                 ret = false;
             }
             if (ret == false) {
-                Server_disconn_handle?.Invoke(this, ip);
+                Server_disconn_handle?.Invoke(this, reip);
             }
             return ret;
         }

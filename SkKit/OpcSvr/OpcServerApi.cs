@@ -3,6 +3,7 @@ using Common.log;
 using System.Collections.Generic;
 using System.Threading;
 using Base.kit;
+using System.Collections.Concurrent;
 
 namespace OpcSvr
 {
@@ -121,7 +122,38 @@ namespace OpcSvr
             logger.Info("NumbrClientConnections[{}]", WtOPCsvr_DLL.NumbrClientConnections());
 
         }
-        public void UpdateTagItem(string host, List<DataItem> tags)    //提出来给数据提供这使用，用来更新数据
+
+        public ConcurrentDictionary<string, uint> OpcServerItemList = new ConcurrentDictionary<string, uint>();
+        public void UpdateTagItem(List<DataItem> tags)    //提出来给数据提供这使用，用来更新数据
+        {
+            if (tags.Count == 0)
+            {
+                return;
+            }
+            WtOPCsvr_DLL.StartUpdateTags();
+
+            foreach (DataItem tag in tags)
+            {
+                if (!OpcServerItemList.ContainsKey(tag.TagName))
+                {
+                    uint TagHandle = WtOPCsvr_DLL.CreateTag(tag.TagName, tag.Value, tag.Quality, false);
+                    logger.Debug("add new tag,name[{}]", tag.TagName);
+                    if (TagHandle > 0)
+                    {
+                        OpcServerItemList.TryAdd(tag.TagName, TagHandle);
+                    }
+                }
+                else
+                {
+                    ;
+                    WtOPCsvr_DLL.UpdateTagToList(OpcServerItemList[tag.TagName], tag.Value, tag.Quality);
+                }
+                logger.Error("opc update data TagId-[{}] value{} quality{}", tag.TagId, tag.Value, tag.Quality);
+            }
+            WtOPCsvr_DLL.EndUpdateTags();
+        }
+
+        public void UpdateTagItem(string host, List<DataItem> tags)   
         {
             if (tags.Count == 0)
             {
@@ -223,7 +255,7 @@ namespace OpcSvr
         public void OpcServerUpdateTag(List<DataItem> taglist)
         {
             logger.Debug("OpcServerUpdateTag");
-            UpdateTagItem("opcserver", taglist);
+            UpdateTagItem( taglist);
         }
     }
 }

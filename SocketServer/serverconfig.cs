@@ -1,6 +1,7 @@
 ﻿using Base.kit;
 using Common.log;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,36 +45,48 @@ namespace SocketServer
                 return false;//不是xml文件，返回
             }
         }
-        private void addintotagall(Dictionary<int, string> wholet,int a,string b)
+        private void addintotagall(ConcurrentDictionary<int, string> wholet,int a,string b)
         {
             if (wholet.ContainsKey(a) == false)
             {
-                wholet.Add(a, b);
+                wholet.TryAdd(a, b);
             }
             else
             {
-                logger.Debug("this dic had this tag info ,so,bach check you config file!!");
+                wholet[a] = b;
+                logger.Debug("this dic had this tag info ,so,back check you config file!!");
             }
         }
-        private void addintotagname(Dictionary<string, int> wholet, int a, string b)
+        private void addintotagname(ConcurrentDictionary<string, int> wholet, int a, string b)
         {
             if (wholet.ContainsKey(b) == false)
             {
-                wholet.Add(b, a);
+                wholet.TryAdd(b, a);
             }
             else
             {
+                wholet[b] = a;
                 logger.Debug("name--this dic had this tag info ,so,bach check you config file!!");
             }
         }
-        public Dictionary<int, string> ServerConfigParseXml(ref Dictionary<int, string> allll, ref Dictionary<string, int> allnames)
+        public void ServerConfigParseXml(ref ConcurrentDictionary<int, string> allll, ref ConcurrentDictionary<string, int> allnames)
         {
-            //Dictionary<int, string> allll = new Dictionary<int, string>();
-            xDoc.Load(XmlPath);
             try
             {
+            xDoc.Load(XmlPath);
             logger.Info("ConfigParseXml  strart");
             XmlNode root = xDoc.SelectSingleNode("collector");
+
+            /*清空两个字典*/
+            if (allll.Count != 0) {
+                logger.Info("clear TagListWithID strart");
+                allll.Clear();
+            }
+            if (allnames.Count != 0)
+            {
+                logger.Info("clear TagListWithName strart");
+                allnames.Clear();
+            }
 
             foreach (XmlNode node in root.SelectNodes("device"))
             {
@@ -85,7 +98,7 @@ namespace SocketServer
                     tagname = XmlKit.GetByXml("name", n);
                     addintotagall(allll, tagid, tagname);
                     addintotagname(allnames, tagid, tagname);
-                    logger.Info("--pp-------------tagid[{}]tagname[{}]", tagid, tagname);
+                    logger.Info("tag--parse xml file-------------tagid[{}]tagname[{}]", tagid, tagname);
                 }
                 foreach (XmlNode n in node.SelectNodes("command"))
                 {
@@ -95,7 +108,7 @@ namespace SocketServer
                     tagname = XmlKit.GetByXml("name", n);
                     addintotagall(allll, tagid, tagname);
                     addintotagname(allnames, tagid, tagname);
-                    logger.Info("--pp-------------tagid[{}]tagname[{}]", tagid, tagname);
+                    logger.Info("cmd--parse xml file-------------tagid[{}]tagname[{}]", tagid, tagname);
                 }
             }
             }
@@ -104,7 +117,7 @@ namespace SocketServer
                 logger.Debug("error[{}]",e.ToString());
             }
             xDoc.Save(XmlPath);
-            return allll;
+            return ;
         }
     }
 }

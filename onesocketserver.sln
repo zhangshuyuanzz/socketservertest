@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fujidev", "Fujidev\Fujidev.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcServer", "OpcServer\OpcServer.csproj", "{854A359B-4023-476C-9C0C-C9D60EE2BA63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJtest", "KJtest\KJtest.csproj", "{0C2A062D-FC95-476B-B437-8B7D40BA5261}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{854A359B-4023-476C-9C0C-C9D60EE2BA63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{854A359B-4023-476C-9C0C-C9D60EE2BA63}.Release|x86.ActiveCfg = Release|x86
 		{854A359B-4023-476C-9C0C-C9D60EE2BA63}.Release|x86.Build.0 = Release|x86
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Debug|x86.Build.0 = Debug|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C2A062D-FC95-476B-B437-8B7D40BA5261}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

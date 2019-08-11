@@ -17,6 +17,7 @@ namespace Base.kit
         public bool Active { set; get; }
         public UInt32 TagHandle { set; get; }
         public string Tagstr { set; get; }
+        public string TagIP { set; get; }
 
         public DataItem()
         {
@@ -26,7 +27,7 @@ namespace Base.kit
             this.Active = true;
         }
 
-        public DataItem(string name,int id,byte type,object value,string time)
+        public DataItem(string name,int id,byte type,object value,string time,string inip)
         {
             this.TagName = name;
             this.TagId = id;
@@ -35,6 +36,7 @@ namespace Base.kit
             this.DataTime = time;// DateTime.Now.ToString();
             this.Quality = 192;
             this.Active = true;
+            this.TagIP = inip;
         }
     }
     public enum DATATYPE

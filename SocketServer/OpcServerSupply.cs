@@ -71,9 +71,9 @@ namespace SocketServer
                     }
                 }
                 alltag.Add(onetag);
-                Logger.Debug("-----------------------------------------------eeeeeeeeeee---------------------------------------");
             }
             Opc_tag_data_handle?.Invoke(alltag);
+            Logger.Debug("-----------------------------------------------eeeeeeeeeee---------------------------------------");
             return true;
         }
         public List<string> OpcDateIPList()

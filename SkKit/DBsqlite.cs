@@ -137,12 +137,6 @@ namespace SQLite
         {
             return this.DbFilePath;
         }
-
-        /// <summary>  
-        /// <para>判断表table是否存在</para>  
-        /// </summary>  
-        /// <param name="table"></param>  
-        /// <returns></returns>  
         public bool TableExists(string table)
         {
             if (table == null)
@@ -161,9 +155,6 @@ namespace SQLite
             return c == 1;
         }
 
-        /// <para>执行SQL,返回受影响的行数</para>  
-        /// <para>可用于执行表创建语句</para>  
-        /// <para>paramArr == null 表示无参数</para>  
         public int ExecuteNonQuery(string sql, SQLiteParameter[] paramArr)
         {
             if (sql == null || paramArr == null)
@@ -188,21 +179,10 @@ namespace SQLite
             return c;
         }
 
-        /// <para>执行SQL,返回SQLiteDataReader</para>  
-        /// <para>返回的Reader为原始状态,须自行调用Read()方法</para>  
-        /// <para>paramArr=null,则表示无参数</para>  
         public SQLiteDataReader ExecuteReader(string sql, SQLiteParameter[] paramArr)
         {
             return (SQLiteDataReader)ExecuteReader(sql, paramArr, (ReaderWrapper)null);
         }
-
-        /// <summary>  
-        /// <para>执行SQL,如果readerWrapper!=null,那么将调用readerWrapper对SQLiteDataReader进行包装,并返回结果</para>  
-        /// </summary>  
-        /// <param name="sql"></param>  
-        /// <param name="paramArr">null 表示无参数</param>  
-        /// <param name="readerWrapper">null 直接返回SQLiteDataReader</param>  
-        /// <returns></returns>  
         public object ExecuteReader(string sql, SQLiteParameter[] paramArr, ReaderWrapper readerWrapper)
         {
             if (sql == null)
@@ -291,12 +271,6 @@ namespace SQLite
             return row;
         }
 
-        /// <summary>  
-        /// <para>执行insert into语句</para>  
-        /// </summary>  
-        /// <param name="table"></param>  
-        /// <param name="entity"></param>  
-        /// <returns></returns>  
         public int Save(string table, List<DataItem> entity)
         {
             if (table == null)
@@ -319,6 +293,7 @@ namespace SQLite
             list.Add(new SQLiteParameter("@type", s.DataType));
             list.Add(new SQLiteParameter("@value", s.Value));
             list.Add(new SQLiteParameter("@time", s.DataTime));
+            list.Add(new SQLiteParameter("@devip", s.TagIP));
 
             if (list.Count == 0)
                 return null;
@@ -350,7 +325,7 @@ namespace SQLite
         private static string BuildReplace(string table)
         {
             StringBuilder buf = new StringBuilder();
-            buf.Append("REPLACE INTO ").Append(table).Append(" ( tagid,name,type,value,time) values ( @tagid,@name,@type,@value,@time )");
+            buf.Append("REPLACE INTO ").Append(table).Append(" ( tagid,name,type,value,time,devip) values ( @tagid,@name,@type,@value,@time ,@devip)");
             logger.Debug(" after buf[{}]", buf);
             return buf.ToString();
         }
@@ -401,28 +376,30 @@ namespace SQLite
                 return null;
             return (Dictionary<string, object>)list[0];
         }
-        public int Delete(string table, string where, SQLiteParameter[] whereParams)
+        public int DeleteAll(string table, string Delp)
         {
-            if (table == null)
+            if (table == null || Delp == null)
             {
                 throw new ArgumentNullException("table=null");
             }
             this.EnsureConnection();
-            string sql = "delete from " + table + " ";
-            if (where != null)
-            {
-                sql += "where " + where;
-            }
+            DbTransaction dbTrans = this.Connection.BeginTransaction();
 
-            return this.ExecuteNonQuery(sql, whereParams);
+            string sql = "delete from " + table + " where devip = @delip" ;
+            SQLiteParameter[] wpara = new SQLiteParameter[1];
+            wpara[0] = new SQLiteParameter("@delip", Delp);
+            logger.Debug("sql[{}]",sql);
+            int ret = this.ExecuteNonQuery(sql, wpara);
+            dbTrans.Commit();
+            return ret;
         }
         private static SQLiteParameter[] BuildUpdateParamArray(DataItem tagidata)
         {
             List<SQLiteParameter> Uplist = new List<SQLiteParameter>();
             DataItem s = tagidata;
             Uplist.Add(new SQLiteParameter("@value", s.Value));
-            Uplist.Add(new SQLiteParameter("@tagid", s.TagId));
             Uplist.Add(new SQLiteParameter("@time", s.DataTime));
+            Uplist.Add(new SQLiteParameter("@name", s.TagName));
 
             if (Uplist.Count == 0)
                 return null;
@@ -436,7 +413,7 @@ namespace SQLite
 
             DbTransaction dbTrans = this.Connection.BeginTransaction();
 
-            UpdateBuf.Append("UPDATE ").Append(table).Append(" SET value=@value,time=@time WHERE tagid=@tagid");
+            UpdateBuf.Append("UPDATE ").Append(table).Append(" SET value=@value,time=@time WHERE name=@name");
             string updatesql = UpdateBuf.ToString();
             foreach (DataItem s in entity)
             {
