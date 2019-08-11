@@ -1,0 +1,1136 @@
+2019-08-09 17:30:18.4226 [DEBUG]：struct Form1
+2019-08-09 17:30:18.4675 [DEBUG]：file exist!!
+2019-08-09 17:30:18.4879 [DEBUG]：OpenConnection[".\DB\OpcServer.db"]
+2019-08-09 17:30:18.6466 [DEBUG]：sql["delete from opc_tag where devip = @delip"]
+2019-08-09 17:30:18.6632 [DEBUG]：SkServer[11220]
+2019-08-09 17:30:18.6710 [DEBUG]：SkStartListen
+2019-08-09 17:30:18.6905 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-08-09 17:30:18.7266 [DEBUG]：222
+2019-08-09 17:30:18.7266 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-08-09 17:30:18.7393 [DEBUG]：开始监听
+2019-08-09 17:30:18.7393 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-08-09 17:30:18.7608 [DEBUG]： Form1 InitializeComponent end
+2019-08-09 17:30:18.7608 [DEBUG]：now listen!!
+2019-08-09 17:30:18.8984 [DEBUG]：Form1_Load
+2019-08-09 17:30:18.9511 [DEBUG]：OpcServerMain
+2019-08-09 17:30:18.9784 [DEBUG]：DbPath[".\DB\OpcServer.db"]
+2019-08-09 17:30:18.9979 [DEBUG]：file exist!!
+2019-08-09 17:30:19.0135 [DEBUG]：OpenConnection[".\DB\OpcServer.db"]
+2019-08-09 17:30:19.0507 [DEBUG]：Open end!!
+2019-08-09 17:30:19.0750 [INFO]：**********************************parse xml***************************sss*******************
+2019-08-09 17:30:19.0892 [INFO]：-----Start-xmlpath["C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\config\opcserver.xml"]-
+2019-08-09 17:30:19.1005 [INFO]：ConfigParseXml  strart
+2019-08-09 17:30:19.1088 [INFO]：  server_name["Co.Opc.Server.dl.ql_01"]
+2019-08-09 17:30:19.1088 [INFO]：   server_rate[7]name["group1"]
+2019-08-09 17:30:19.1088 [INFO]：---------------tagid[1]tagname["test"]
+2019-08-09 17:30:19.1357 [INFO]：AppName["Co.Opc.Server.dl.ql_01"]ServerRate[7]
+2019-08-09 17:30:19.1415 [INFO]：**********************************parse xml***********************eee***********************
+2019-08-09 17:30:19.1415 [DEBUG]：OpcServerLib is demo true
+2019-08-09 17:30:19.1601 [INFO]：VendorInfo["ql.co.opc-server.v1.0.0"]ServerRate[7]GUID["{96B01D0F-D4E0-45A9-BFBD-B2E0A052964F}"]AppName["Co.Opc.Server.dl.ql_01"]
+2019-08-09 17:30:19.1601 [INFO]：exepath["C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\OpcServer.exe"]ret[false]
+2019-08-09 17:30:19.1747 [DEBUG]：UpdateRegistry is false!!!
+2019-08-09 17:30:19.1864 [INFO]：startTimer---DataUpdateRate[7]
+2019-08-09 17:30:20.1975 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:30:20.2141 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:30:20.2313 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:30:20.2478 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:30:24.7445 [DEBUG]：conn ip ["192.168.0.88"]
+2019-08-09 17:30:24.7522 [DEBUG]：there is a client!!
+2019-08-09 17:30:24.7522 [DEBUG]：ConnedNotification--ip["192.168.0.88"]
+2019-08-09 17:30:24.7786 [DEBUG]：changeIpdev--ipstr["IP:--192.168.0.88"]
+2019-08-09 17:30:24.7913 [DEBUG]：xmlpath["C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\config\192.168.0.88.xml"]
+2019-08-09 17:30:24.8020 [INFO]：ConfigParseXml  strart
+2019-08-09 17:30:24.8020 [INFO]：tag--parse xml file-------------tagid[5]tagname["HS96_FLOW"]
+2019-08-09 17:30:24.8186 [INFO]：tag--parse xml file-------------tagid[6]tagname["HS96_PRESSURE"]
+2019-08-09 17:30:24.8298 [INFO]：tag--parse xml file-------------tagid[7]tagname["HS96_PRESSURE_DIFFER"]
+2019-08-09 17:30:24.8298 [INFO]：tag--parse xml file-------------tagid[8]tagname["HS96_TEMPERA"]
+2019-08-09 17:30:24.8474 [INFO]：tag--parse xml file-------------tagid[9]tagname["HS96_CUMULANT"]
+2019-08-09 17:30:24.8474 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:24.8620 [INFO]：tag--parse xml file-------------tagid[5]tagname["2222222222222"]
+2019-08-09 17:30:24.8620 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:24.8747 [INFO]：tag--parse xml file-------------tagid[6]tagname["33333333333333"]
+2019-08-09 17:30:24.8747 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:24.8747 [INFO]：tag--parse xml file-------------tagid[7]tagname["666666666"]
+2019-08-09 17:30:24.8952 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:24.8952 [INFO]：tag--parse xml file-------------tagid[8]tagname["44444444444"]
+2019-08-09 17:30:24.9089 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:24.9089 [INFO]：tag--parse xml file-------------tagid[9]tagname["55555555555555"]
+2019-08-09 17:30:24.9279 [DEBUG]：OpcSendFile---IsExistPath[".\config\192.168.0.88.xml"]!!
+2019-08-09 17:30:24.9357 [DEBUG]：thie file is exist!!!
+2019-08-09 17:30:25.9420 [DEBUG]：CoSendFile--ip["192.168.0.88"]path[".\config\192.168.0.88.xml"]
+2019-08-09 17:30:25.9420 [DEBUG]：CoSendFile end
+2019-08-09 17:30:25.9547 [DEBUG]：ConnedNotification end
+2019-08-09 17:30:25.9547 [DEBUG]：now listen!!
+2019-08-09 17:30:25.9547 [DEBUG]：ReceiveMessage
+2019-08-09 17:30:25.9752 [DEBUG]：ip["192.168.0.88"]
+2019-08-09 17:30:27.2012 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:30:27.2090 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:30:27.2090 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:30:27.2207 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:30:34.2003 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:30:34.2168 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:30:34.2314 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:30:34.2373 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:30:34.2822 [DEBUG]：receive data is zero
+2019-08-09 17:30:34.2822 [DEBUG]：socket连接已断开
+2019-08-09 17:30:34.3017 [DEBUG]：DisconnedNotification--ip["192.168.0.88"]
+2019-08-09 17:30:34.3134 [DEBUG]：changeIpdev--ipstr["IP:"]
+2019-08-09 17:30:34.3134 [DEBUG]：socket conn disconned
+2019-08-09 17:30:36.1197 [DEBUG]：conn ip ["192.168.0.88"]
+2019-08-09 17:30:36.1266 [DEBUG]：there is a client!!
+2019-08-09 17:30:36.1266 [DEBUG]：ConnedNotification--ip["192.168.0.88"]
+2019-08-09 17:30:36.1402 [DEBUG]：changeIpdev--ipstr["IP:--192.168.0.88"]
+2019-08-09 17:30:36.1402 [DEBUG]：xmlpath["C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\config\192.168.0.88.xml"]
+2019-08-09 17:30:36.1558 [INFO]：ConfigParseXml  strart
+2019-08-09 17:30:36.1558 [INFO]：tag--parse xml file-------------tagid[5]tagname["HS96_FLOW"]
+2019-08-09 17:30:36.1558 [INFO]：tag--parse xml file-------------tagid[6]tagname["HS96_PRESSURE"]
+2019-08-09 17:30:36.1744 [INFO]：tag--parse xml file-------------tagid[7]tagname["HS96_PRESSURE_DIFFER"]
+2019-08-09 17:30:36.1744 [INFO]：tag--parse xml file-------------tagid[8]tagname["HS96_TEMPERA"]
+2019-08-09 17:30:36.1910 [INFO]：tag--parse xml file-------------tagid[9]tagname["HS96_CUMULANT"]
+2019-08-09 17:30:36.1910 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:36.2056 [INFO]：tag--parse xml file-------------tagid[5]tagname["2222222222222"]
+2019-08-09 17:30:36.2056 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:36.2183 [INFO]：tag--parse xml file-------------tagid[6]tagname["33333333333333"]
+2019-08-09 17:30:36.2183 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:36.2183 [INFO]：tag--parse xml file-------------tagid[7]tagname["666666666"]
+2019-08-09 17:30:36.2369 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:36.2369 [INFO]：tag--parse xml file-------------tagid[8]tagname["44444444444"]
+2019-08-09 17:30:36.2525 [DEBUG]：this dic had this tag info ,so,back check you config file!!
+2019-08-09 17:30:36.2525 [INFO]：tag--parse xml file-------------tagid[9]tagname["55555555555555"]
+2019-08-09 17:30:36.2671 [DEBUG]：OpcSendFile---IsExistPath[".\config\192.168.0.88.xml"]!!
+2019-08-09 17:30:36.2671 [DEBUG]：thie file is exist!!!
+2019-08-09 17:30:37.2804 [DEBUG]：CoSendFile--ip["192.168.0.88"]path[".\config\192.168.0.88.xml"]
+2019-08-09 17:30:37.2804 [DEBUG]：CoSendFile end
+2019-08-09 17:30:37.2980 [DEBUG]：ConnedNotification end
+2019-08-09 17:30:37.2980 [DEBUG]：now listen!!
+2019-08-09 17:30:37.2980 [DEBUG]：ReceiveMessage
+2019-08-09 17:30:37.3283 [DEBUG]：ip["192.168.0.88"]
+2019-08-09 17:30:41.2006 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:30:41.2093 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:30:41.2171 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:30:41.2171 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:30:48.2014 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:30:48.2014 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:30:48.2014 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:30:48.2208 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:30:55.2021 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:30:55.2021 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:30:55.2021 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:30:55.2217 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:02.2028 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:02.2028 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:02.2028 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:02.2243 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:09.2037 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:09.2037 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:09.2037 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:09.2203 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:16.2049 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:16.2049 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:16.2049 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:16.2233 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:23.2052 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:23.2052 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:23.2178 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:23.2178 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:30.2061 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:30.2061 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:30.2188 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:30.2188 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:37.2066 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:37.2066 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:37.2202 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:37.2202 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:44.2070 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:44.2070 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:44.2324 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:44.2470 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:51.2083 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:51.2181 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:51.2181 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:51.2396 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:31:58.2086 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:31:58.2232 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:31:58.2232 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:31:58.2554 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:05.2092 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:05.2170 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:05.2170 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:05.2170 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:12.2109 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:12.2109 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:12.2235 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:12.2235 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:19.2119 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:19.2373 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:19.2490 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:19.2490 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:26.2139 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:26.2265 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:26.2392 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:26.2587 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:33.2142 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:33.2210 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:33.2210 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:33.2415 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:40.2149 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:40.2208 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:40.2334 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:40.2334 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:47.2154 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:47.2283 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:47.2380 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:47.2380 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:32:54.2165 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:32:54.2242 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:32:54.2242 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:32:54.2408 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:01.2168 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:01.2304 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:01.2529 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:01.2666 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:08.2173 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:08.2173 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:08.2333 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:08.2333 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:15.2178 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:15.2178 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:15.2331 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:15.2331 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:22.2182 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:22.2182 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:22.2377 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:22.2377 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:29.2193 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:29.2193 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:29.2338 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:29.2524 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:36.2201 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:36.2201 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:36.2347 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:36.2347 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:43.2206 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:43.2206 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:43.2352 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:43.2352 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:50.2210 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:50.2210 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:50.2385 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:50.2385 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:33:57.2213 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:33:57.2369 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:33:57.2544 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:33:57.2544 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:04.2240 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:04.2240 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:04.2376 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:04.2376 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:11.2249 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:11.2249 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:11.2375 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:11.2375 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:18.2259 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:18.2259 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:18.2404 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:18.2404 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:25.2270 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:25.2367 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:25.2367 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:25.2504 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:32.2282 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:32.2340 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:32.2340 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:32.2535 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:39.2288 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:39.2366 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:39.2493 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:39.2679 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:46.2300 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:46.2368 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:46.2368 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:46.2544 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:34:53.2307 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:34:53.2366 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:34:53.2366 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:34:53.2493 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:00.2315 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:00.2384 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:00.2384 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:00.2569 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:07.2326 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:07.2394 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:07.2394 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:07.2579 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:14.2330 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:14.2330 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:14.2604 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:14.2711 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:21.2336 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:21.2336 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:21.2336 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:21.2541 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:28.2345 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:28.2345 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:28.2551 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:28.2687 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:35.2351 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:35.2351 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:35.2351 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:35.2564 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:42.2355 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:42.2355 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:42.2355 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:42.2578 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:49.2361 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:49.2488 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:49.2488 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:49.2801 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:35:56.2364 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:35:56.2364 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:35:56.2549 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:35:56.2656 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:03.2374 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:03.2374 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:03.2500 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:03.2500 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:10.2380 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:10.2380 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:10.2507 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:10.2507 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:17.2385 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:17.2385 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:17.2580 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:17.2658 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:24.2396 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:24.2396 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:24.2522 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:24.2522 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:31.2403 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:31.2608 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:31.2686 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:31.2686 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:38.2411 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:38.2586 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:38.2742 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:38.2889 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:45.2429 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:45.2496 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:45.2496 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:45.2496 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:52.2435 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:52.2533 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:52.2640 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:52.2640 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:36:59.2442 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:36:59.2501 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:36:59.2501 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:36:59.2657 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:06.2445 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:06.2512 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:06.2512 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:06.2639 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:13.2453 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:13.2540 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:13.2540 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:13.2686 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:20.2457 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:20.2613 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:20.2837 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:20.2837 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:27.2468 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:27.2604 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:27.2740 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:27.2809 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:34.2475 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:34.2573 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:34.2661 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:34.2661 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:41.2480 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:41.2557 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:41.2557 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:41.2665 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:48.2485 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:48.2485 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:48.2485 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:48.2689 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:37:55.2494 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:37:55.2494 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:37:55.2650 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:37:55.2807 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:02.2500 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:02.2500 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:02.2686 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:02.2686 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:09.2510 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:09.2510 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:09.2724 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:09.2724 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:16.2519 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:16.2519 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:16.2695 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:16.2821 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:23.2526 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:23.2663 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:23.2819 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:23.2819 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:30.2537 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:30.2537 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:30.2693 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:30.2693 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:37.2540 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:37.2696 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:37.2901 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:37.3028 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:44.2549 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:44.2549 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:44.2675 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:44.2675 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:51.2560 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:51.2560 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:51.2696 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:51.2803 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:38:58.2566 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:38:58.2712 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:38:58.2869 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:38:58.3005 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:05.2575 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:05.2575 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:05.2702 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:05.2702 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:12.2585 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:12.2672 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:12.2672 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:12.2868 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:19.2591 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:19.2668 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:19.2668 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:19.2825 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:26.2601 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:26.2757 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:26.2884 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:26.2981 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:33.2607 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:33.2676 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:33.2676 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:33.2861 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:40.2612 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:40.2680 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:40.2680 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:40.2846 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:47.2623 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:47.2700 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:47.2700 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:47.2875 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:39:54.2629 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:39:54.2688 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:39:54.2688 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:39:54.2824 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:01.2632 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:01.2690 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:01.2856 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:01.3003 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:08.2640 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:08.2640 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:08.2640 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:08.2863 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:15.2647 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:15.2647 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:15.2647 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:15.2881 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:22.2651 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:22.2651 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:22.2827 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:22.3002 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:29.2659 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:29.2659 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:29.2659 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:29.2883 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:36.2667 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:36.2667 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:36.2851 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:36.2959 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:43.2675 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:43.2675 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:43.2821 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:43.2821 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:50.2691 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:50.2691 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:50.2825 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:50.2825 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:40:57.2699 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:40:57.2699 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:40:57.2826 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:40:57.2826 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:04.2708 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:04.2708 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:04.2854 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:04.2854 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:11.2727 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:11.2883 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:11.2990 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:11.3137 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:18.2736 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:18.2736 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:18.2881 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:18.2881 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:25.2742 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:25.2859 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:25.2995 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:25.3181 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:32.2750 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:32.2877 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:32.3034 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:32.3160 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:39.2758 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:39.2825 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:39.2825 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:39.2972 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:46.2764 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:46.2832 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:46.2832 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:46.2832 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:41:53.2770 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:41:53.2848 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:41:53.2848 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:41:53.3053 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:00.2773 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:00.2861 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:00.2988 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:00.3173 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:07.2795 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:07.2795 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:07.2999 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:07.2999 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:14.2804 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:14.2804 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:14.3009 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:14.3126 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:21.2821 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:21.2821 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:21.2997 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:21.2997 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:28.2831 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:28.2831 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:28.2958 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:28.2958 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:35.2837 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:35.2837 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:35.2983 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:35.2983 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:42.2848 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:42.2966 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:42.3122 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:42.3297 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:49.2856 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:49.2856 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:49.3012 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:49.3012 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:42:56.2879 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:42:56.2956 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:42:56.2956 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:42:56.3122 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:03.2890 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:03.2958 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:03.2958 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:03.3134 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:10.2902 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:10.2969 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:10.2969 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:10.2969 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:17.2913 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:17.2981 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:17.2981 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:17.3118 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:24.2923 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:24.2992 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:24.3148 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:24.3353 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:31.2927 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:31.3005 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:31.3005 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:31.3132 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:38.2929 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:38.3036 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:38.3153 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:38.3153 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:45.2936 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:45.3003 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:45.3003 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:45.3120 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:52.2962 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:52.2962 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:52.3187 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:52.3382 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:43:59.2978 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:43:59.2978 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:43:59.3193 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:43:59.3295 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:06.2986 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:06.3220 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:06.3391 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:06.3440 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:13.2996 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:13.2996 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:13.3123 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:13.3123 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:20.3008 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:20.3008 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:20.3232 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:20.3340 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:27.3040 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:27.3040 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:27.3166 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:27.3166 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:34.3051 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:34.3109 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:34.3109 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:34.3109 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:41.3056 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:41.3115 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:41.3115 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:41.3291 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:48.3062 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:48.3130 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:48.3130 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:48.3267 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:44:55.3069 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:44:55.3333 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:44:55.3421 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:44:55.3421 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:02.3077 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:02.3135 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:02.3135 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:02.3135 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:09.3088 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:09.3175 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:09.3175 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:09.3331 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:16.3091 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:16.3158 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:16.3158 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:16.3295 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:23.3095 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:23.3162 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:23.3162 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:23.3289 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:30.3097 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:30.3164 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:30.3164 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:30.3311 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:37.3100 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:37.3237 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:37.3383 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:37.3549 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:44.3111 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:44.3111 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:44.3111 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:44.3325 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:51.3115 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:51.3115 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:51.3115 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:51.3310 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:45:58.3119 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:45:58.3119 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:45:58.3119 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:45:58.3295 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:05.3125 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:05.3125 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:05.3291 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:05.3438 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:12.3177 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:12.3548 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:12.3685 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:12.3811 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:19.3192 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:19.3192 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:19.3338 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:19.3338 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:26.3200 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:26.3200 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:26.3327 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:26.3327 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:33.3208 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:33.3286 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:33.3286 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:33.3436 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:40.3226 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:40.3333 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:40.3480 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:40.3763 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:47.3229 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:47.3317 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:47.3443 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:47.3590 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:46:54.3233 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:46:54.3311 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:46:54.3311 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:46:54.3438 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:01.3244 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:01.3303 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:01.3303 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:01.3478 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:08.3248 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:08.3326 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:08.3463 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:08.3609 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:15.3260 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:15.3337 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:15.3337 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:15.3503 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:22.3265 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:22.3265 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:22.3450 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:22.3450 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:29.3269 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:29.3269 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:29.3455 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:29.3630 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:36.3282 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:36.3282 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:36.3458 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:36.3458 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:43.3290 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:43.3290 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:43.3427 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:43.3427 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:50.3297 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:50.3297 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:50.3532 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:50.3688 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:47:57.3306 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:47:57.3423 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:47:57.4165 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:47:57.5317 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:04.3322 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:04.3322 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:04.3449 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:04.3449 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:11.3325 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:11.3325 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:11.3481 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:11.3481 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:18.3336 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:18.3336 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:18.3483 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:18.3580 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:25.3342 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:25.3458 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:25.3458 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:25.3634 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:32.3345 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:32.3433 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:32.3433 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:32.3667 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:39.3351 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:39.3351 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:39.3478 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:39.3478 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:46.3358 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:46.3420 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:46.3420 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:46.3420 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:48:53.3364 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:48:53.3510 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:48:53.3676 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:48:53.3773 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:00.3373 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:00.3440 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:00.3440 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:00.3440 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:07.3384 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:07.3442 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:07.3442 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:07.3442 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:14.3395 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:14.3483 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:14.3483 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:14.3668 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:21.3409 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:21.3467 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:21.3467 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:21.3614 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:28.3419 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:28.3419 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:28.3819 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:28.4966 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:35.3435 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:35.3435 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:35.3635 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:35.3762 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:42.3443 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:42.3443 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:42.3598 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:42.3598 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:49.3451 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:49.3451 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:49.3656 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:49.3763 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:49:56.3483 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:49:56.3483 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:49:56.3634 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:49:56.3634 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:03.3489 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:03.3489 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:03.3664 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:03.3752 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:10.3508 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:10.3508 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:10.3635 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:10.3635 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:17.3511 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:17.3511 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:17.3647 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:17.3647 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:24.3520 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:24.3578 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:24.3578 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:24.3744 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:31.3526 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:31.3584 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:31.3584 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:31.3740 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:38.3533 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:38.3600 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:38.3600 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:38.3766 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:45.3538 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:45.3596 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:45.3596 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:45.3596 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:52.3548 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:52.3606 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:52.3606 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:52.3732 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:50:59.3551 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:50:59.3717 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:50:59.3814 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:50:59.3912 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:06.3562 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:06.3620 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:06.3620 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:06.3746 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:13.3569 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:13.3626 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:13.3626 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:13.3812 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:20.3576 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:20.3576 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:20.3576 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:20.3761 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:27.3586 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:27.3586 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:27.3586 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:27.3770 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:34.3605 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:34.3605 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:34.3751 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:34.3751 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:41.3615 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:41.3615 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:41.3741 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:41.3741 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:48.3629 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:48.3629 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:48.3815 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:48.3815 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:51:55.3637 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:51:55.3637 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:51:55.3763 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:51:55.3763 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:02.3643 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:02.3643 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:02.3808 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:02.3926 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:09.3652 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:09.3769 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:09.3769 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:09.3944 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:16.3658 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:16.3735 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:16.3735 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:16.3960 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:23.3661 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:23.3661 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:23.3797 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:23.3797 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:30.3672 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:30.3740 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:30.3740 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:30.3896 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:37.3688 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:37.3795 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:37.3932 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:37.4127 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:44.3705 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:44.3841 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:44.3978 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:44.4271 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:51.3739 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:51.3739 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:51.3934 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:51.3934 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:52:58.3748 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:52:58.3748 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:52:58.3934 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:52:58.3934 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:05.3757 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:05.3922 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:05.4059 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:05.4059 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:12.3766 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:12.3766 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:12.4000 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:12.4176 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:19.3802 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:19.3959 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:19.4056 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:19.4242 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:26.3813 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:26.3921 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:26.3921 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:26.4106 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:33.3822 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:33.3900 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:33.3900 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:33.4105 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:40.3833 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:40.3901 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:40.3901 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:40.4174 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:47.3836 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:47.3913 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:47.3913 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:47.4108 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:53:54.3843 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:53:54.3950 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:53:54.4057 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:53:54.4057 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:01.3854 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:01.4010 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:01.4137 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:01.4293 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:08.3892 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:08.3892 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:08.3892 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:08.4088 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:15.3900 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:15.3900 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:15.4076 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:15.4076 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:22.3922 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:22.3922 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:22.4254 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:22.4410 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:29.3956 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:29.4053 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:29.4053 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:29.4258 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:36.3960 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:36.3960 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:36.4135 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:36.4232 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:43.3967 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:43.3967 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:43.4104 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:43.4104 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:50.3977 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:50.3977 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:50.4113 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:50.4113 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:54:57.3988 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:54:57.4075 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:54:57.4075 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:54:57.4270 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:04.3998 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:04.4076 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:04.4076 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:04.4271 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:11.4007 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:11.4066 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:11.4066 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:11.4222 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:18.4017 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:18.4104 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:18.4104 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:18.4231 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:25.4028 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:25.4096 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:25.4096 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:25.4213 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:32.4036 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:32.4114 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:32.4202 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:32.4202 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:39.4047 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:39.4047 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:39.4047 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:39.4270 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:46.4057 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:46.4057 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:46.4057 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:46.4282 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:55:53.4065 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:55:53.4065 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:55:53.4202 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:55:53.4202 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:00.4071 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:00.4227 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:00.4373 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:00.4519 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:07.4077 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:07.4077 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:07.4204 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:07.4204 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:14.4080 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:14.4080 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:14.5007 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:14.5427 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:21.4088 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:21.4088 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:21.4225 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:21.4225 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:28.4100 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:28.4223 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:28.4223 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:28.4418 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:35.4105 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:35.4222 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:35.4222 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:35.4427 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:42.4108 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:42.4206 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:42.4470 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:42.4665 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:49.4117 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:49.4117 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:49.4244 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:49.4244 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:56:56.4468 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:56:56.4610 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:56:56.4824 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:56:56.4990 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:03.4481 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:03.4646 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:03.4822 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:03.4880 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:10.4485 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:10.4543 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:10.4543 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:10.4670 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:17.4506 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:17.4662 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:17.4769 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:17.4877 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:24.4511 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:24.4588 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:24.4676 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:24.4676 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:31.4813 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:31.5155 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:31.5331 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:31.5819 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:38.4823 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:38.4891 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:38.4891 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:38.5037 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:45.4832 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:45.4832 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:45.4832 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:45.5094 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:52.4840 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:52.4840 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:52.5113 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:52.5308 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:57:59.4843 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:57:59.4843 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:57:59.4998 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:57:59.4998 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:06.4851 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:06.4851 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:06.5055 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:06.5055 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:13.4856 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:13.4856 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:13.4856 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:13.5070 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:20.4866 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:20.4866 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:20.5011 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:20.5011 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:27.4871 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:27.4871 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:27.5011 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:27.5011 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:34.4881 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:34.4881 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:34.5046 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:34.5046 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:41.4885 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:41.4885 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:41.5041 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:41.5041 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:48.4888 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:48.5015 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:48.5230 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:48.5406 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:58:55.4914 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:58:55.4914 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:58:55.5049 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:58:55.5049 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:02.4926 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:02.5024 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:02.5024 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:02.5229 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:09.4936 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:09.5043 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:09.5268 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:09.5775 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:16.4942 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:16.5000 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:16.5000 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:16.5000 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:23.4954 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:23.5031 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:23.5031 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:23.5168 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:30.4959 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:30.5037 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:30.5037 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:30.5232 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:37.4961 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:37.5029 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:37.5029 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:37.5185 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:44.4964 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:44.5061 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:44.5169 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:44.5169 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:51.4968 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:51.5026 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:51.5026 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:51.5143 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 17:59:58.4972 [INFO]：startTimer--get db tag data!!
+2019-08-09 17:59:58.5049 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 17:59:58.5049 [DEBUG]：OpcServerUpdateTag
+2019-08-09 17:59:58.5205 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 18:00:05.4976 [INFO]：startTimer--get db tag data!!
+2019-08-09 18:00:05.5054 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 18:00:05.5054 [DEBUG]：OpcServerUpdateTag
+2019-08-09 18:00:05.5211 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 18:00:12.4999 [INFO]：startTimer--get db tag data!!
+2019-08-09 18:00:12.4999 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 18:00:12.5174 [DEBUG]：OpcServerUpdateTag
+2019-08-09 18:00:12.5340 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 18:00:19.5010 [INFO]：startTimer--get db tag data!!
+2019-08-09 18:00:19.5010 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 18:00:19.5215 [DEBUG]：OpcServerUpdateTag
+2019-08-09 18:00:19.5351 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 18:00:26.5023 [INFO]：startTimer--get db tag data!!
+2019-08-09 18:00:26.5023 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 18:00:26.5243 [DEBUG]：OpcServerUpdateTag
+2019-08-09 18:00:26.5336 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 18:00:33.5031 [INFO]：startTimer--get db tag data!!
+2019-08-09 18:00:33.5031 [DEBUG]：OpcDataGet--Count[0]
+2019-08-09 18:00:33.5148 [DEBUG]：OpcServerUpdateTag
+2019-08-09 18:00:33.5148 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-09 18:00:35.9293 [DEBUG]：form1_closed
