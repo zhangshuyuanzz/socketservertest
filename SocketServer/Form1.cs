@@ -27,6 +27,7 @@ namespace SocketServer
         private OpcDateUpdate ServerDB = null;
 
         //private XmlFileWatch tt;
+        BindingList<string> BindIplist = new BindingList<string>();
         public Form1()
         {
             InitializeComponent();
@@ -34,12 +35,15 @@ namespace SocketServer
             CreateBoxLIsts();
 
             ServerDB = new OpcDateUpdate();
-            ServerDB.OpcDataDelTagWithIp("192.168.0.88");
             SkServer ServerHandle = new SkServer(11220);
             ServerHandle.SkStartListen();
             ServerHandle.Server_get_handle += new SkServer.ServerDataEventHandler(UpdateDevInfo);
             ServerHandle.Server_conn_handle += new SkServer.ServerConnEventHandler(ConnedNotification);
             ServerHandle.Server_disconn_handle += new SkServer.ServerDisconnEventHandler(DisconnedNotification);
+
+            this.colist1.DataSource = BindIplist;
+            this.colist2.DataSource = BindIplist;
+            this.colist3.DataSource = BindIplist;
 
             logger.Debug(" Form1 InitializeComponent end");
 
@@ -91,6 +95,19 @@ namespace SocketServer
             logger.Debug("Form1_Load");
             Thread thread = new Thread(new ThreadStart(OpcServerMain));
             thread.Start();
+
+        }
+        private void Form1_click(object sender, EventArgs e)
+        {
+            logger.Debug("Form1_click");
+            Ip1visiblefalg = false;
+            this.colist1.Visible = Ip1visiblefalg;
+
+            Ip2visiblefalg = false;
+            this.colist2.Visible = Ip2visiblefalg;
+
+            Ip3visiblefalg =false;
+            this.colist3.Visible = Ip3visiblefalg;
 
         }
         private void Form1Closed(object sender, EventArgs e)
@@ -187,6 +204,7 @@ namespace SocketServer
                 DevInfo buffer = DevList[ip];
                 buffer.TagList.Clear();
                 DevList.Remove(ip);
+                BindIplist.Remove(ip);
                 foreach ( string s  in DevList.Keys) {
                     logger.Debug("sssss[{}]",s);
                 }
@@ -196,12 +214,15 @@ namespace SocketServer
         { 
             logger.Debug("ConnedNotification--ip[{}]", ip);
             DevInfo onedev;
+            ServerDB.OpcDataDelTagWithIp(ip);
+
             if (DevList.ContainsKey(ip) == false)
             {
                 IPs.Add(ip);
                 onedev = new DevInfo(handle);
                 DevList.Add(ip, onedev);
                 changeIpdev();
+                BindIplist.Add(ip);
             }
             else
             {
@@ -269,44 +290,6 @@ namespace SocketServer
 
             /*set (get opc tag info) timer*/
             _ = OpcDBDatas.OpcDateRegisterCB(kleopcserver.ServerRate);
-        }
-        private void Ip1_TextChanged(object sender, EventArgs e)
-        {
-            logger.Debug("Ip1_TextChanged-----{}", this.ip1.Text);
-            string tt = this.ip1.Text;
-            if (SkJudgeIsIpv4(tt, this.tagname1) == true)
-            {
-                SkUpdateIpToBox(tt, 1);
-            }
-            else
-            {
-                logger.Debug("this is invalid ip !!");
-            }
-        }
-        private void Ip2_TextChanged(object sender, EventArgs e)
-        {
-            logger.Debug("Ip2_TextChanged-----{}", this.ip2.Text);
-            string tt = this.ip2.Text;
-            if (SkJudgeIsIpv4(tt, this.tagname2) == true)
-            {
-                SkUpdateIpToBox(tt, 2);
-            }
-            else
-            {
-                logger.Debug("this is invalid ip !!");
-            }
-        }
-        private void Ip3_TextChanged(object sender, EventArgs e)
-        {
-            logger.Debug("Ip3_TextChanged----{}",this.ip3.Text);
-            string tt = this.ip3.Text;
-            if (SkJudgeIsIpv4(tt, this.tagname3) == true)
-            {
-                SkUpdateIpToBox(tt, 3);
-            }
-            else {
-                logger.Debug("this is invalid ip !!");
-            }
         }
         private bool SkJudgeIsIpv4(string IPstr,in System.Windows.Forms.TextBox tb)
         {
@@ -425,17 +408,27 @@ namespace SocketServer
             tagslist.Add(fi);
             UpdateDevInfo(tagslist, "192.168.0.88");
         }
-
+        void testlist()
+        {
+            string a1 = "zhasng";
+            string a2 = "yong";
+            string a3 = "qiang";
+            string a4 = "shu";
+            string a5 = "yuan";
+            BindIplist.Add(a1);
+            BindIplist.Add(a2);
+            BindIplist.Add(a3);
+            BindIplist.Add(a4);
+            BindIplist.Add(a5);
+        }
         private void Label2_Click(object sender, EventArgs e)
         {
 
         }
-
         private void Tag3_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void tagnameboxchange(string tagname, string ip,int num)
         {
             ConcurrentDictionary<int, TagInfo> Alltag = DevList[ip].TagList;
@@ -473,6 +466,101 @@ namespace SocketServer
             logger.Debug("Tagname3_TextChanged--tagname[{}][{}]", this.tagname3.Text, this.ip3.Text);
             tagnameboxchange(this.tagname3.Text, this.ip3.Text, 30);
 
+        }
+        private void Ip1_TextChanged(object sender, EventArgs e)
+        {
+            logger.Debug("Ip1_TextChanged-----{}", this.ip1.Text);
+            string tt = this.ip1.Text;
+            if (SkJudgeIsIpv4(tt, this.tagname1) == true)
+            {
+                SkUpdateIpToBox(tt, 1);
+            }
+            else
+            {
+                logger.Debug("this is invalid ip !!");
+            }
+        }
+        private void Ip2_TextChanged(object sender, EventArgs e)
+        {
+            logger.Debug("Ip2_TextChanged-----{}", this.ip2.Text);
+            string tt = this.ip2.Text;
+            if (SkJudgeIsIpv4(tt, this.tagname2) == true)
+            {
+                SkUpdateIpToBox(tt, 2);
+            }
+            else
+            {
+                logger.Debug("this is invalid ip !!");
+            }
+        }
+        private void Ip3_TextChanged(object sender, EventArgs e)
+        {
+            logger.Debug("Ip3_TextChanged----{}", this.ip3.Text);
+            string tt = this.ip3.Text;
+            if (SkJudgeIsIpv4(tt, this.tagname3) == true)
+            {
+                SkUpdateIpToBox(tt, 3);
+            }
+            else
+            {
+                logger.Debug("this is invalid ip !!");
+            }
+        }
+
+
+        bool Ip1visiblefalg = false;
+        private void Ip1_TextClicked(object sender, EventArgs e)
+        {
+           // testlist();
+            logger.Debug("Ip1_TextClicked--");
+            Ip1visiblefalg = !Ip1visiblefalg;
+            this.colist1.Visible = Ip1visiblefalg;
+        }
+
+        bool Ip2visiblefalg = false;
+        private void Ip2_TextClicked(object sender, EventArgs e)
+        {
+            logger.Debug("Ip2_TextClicked--");
+            Ip2visiblefalg = !Ip2visiblefalg;
+            this.colist2.Visible = Ip2visiblefalg;
+        }
+
+        bool Ip3visiblefalg = false;
+        private void Ip3_TextClicked(object sender, EventArgs e)
+        {
+            logger.Debug("Ip3_TextClicked--");
+            Ip3visiblefalg = !Ip3visiblefalg;
+            this.colist3.Visible = Ip3visiblefalg;
+        }
+        private void Ip1_mouse_double_Clicked(object sender, MouseEventArgs e)
+        {
+            logger.Debug("Ip1_mouse_double_Clicked--");
+            logger.Debug("Ip1_mouse_double_Clicked  [{}]", this.colist1.SelectedIndex);
+            logger.Debug("Ip1_mouse_double_Clicked  [{}]", this.colist1.Text);
+            logger.Debug("Ip1_mouse_double_Clicked  SelectedItem[{}]", this.colist1.SelectedItem.ToString());
+            logger.Debug("Ip1_mouse_double_Clicked[{}]", e.Button.ToString());
+            this.ip1.Text = this.colist1.SelectedItem.ToString();
+
+            Ip1visiblefalg = !Ip1visiblefalg;
+            this.colist1.Visible = Ip1visiblefalg;
+        }
+
+        private void Ip2_mouse_double_Clicked(object sender, EventArgs e)
+        {
+            logger.Debug("Ip2_mouse_double_Clicked-[{}]-", this.colist2.SelectedItem.ToString());
+            this.ip2.Text = this.colist2.SelectedItem.ToString();
+
+            Ip2visiblefalg = !Ip2visiblefalg;
+            this.colist2.Visible = Ip2visiblefalg;
+        }
+
+        private void Ip3_mouse_double_Clicked(object sender, EventArgs e)
+        {
+            logger.Debug("Ip3_mouse_double_Clicked-[{}]-", this.colist3.SelectedItem.ToString());
+            this.ip3.Text = this.colist3.SelectedItem.ToString();
+
+            Ip3visiblefalg = !Ip3visiblefalg;
+            this.colist3.Visible = Ip3visiblefalg;
         }
     }
 }

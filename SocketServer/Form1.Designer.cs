@@ -61,6 +61,9 @@ namespace SocketServer
             this.label2 = new System.Windows.Forms.Label();
             this.dev1Id = new System.Windows.Forms.Label();
             this.dev1IDT = new System.Windows.Forms.TextBox();
+            this.colist1 = new System.Windows.Forms.ListBox();
+            this.colist2 = new System.Windows.Forms.ListBox();
+            this.colist3 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -126,6 +129,7 @@ namespace SocketServer
             this.ip1.Size = new System.Drawing.Size(122, 25);
             this.ip1.TabIndex = 5;
             this.ip1.Text = "0";
+            this.ip1.Click += new System.EventHandler(this.Ip1_TextClicked);
             this.ip1.TextChanged += new System.EventHandler(this.Ip1_TextChanged);
             // 
             // ip2
@@ -136,6 +140,7 @@ namespace SocketServer
             this.ip2.Size = new System.Drawing.Size(122, 25);
             this.ip2.TabIndex = 6;
             this.ip2.Text = "0";
+            this.ip2.Click += new System.EventHandler(this.Ip2_TextClicked);
             this.ip2.TextChanged += new System.EventHandler(this.Ip2_TextChanged);
             // 
             // ip3
@@ -146,6 +151,7 @@ namespace SocketServer
             this.ip3.Size = new System.Drawing.Size(122, 25);
             this.ip3.TabIndex = 7;
             this.ip3.Text = "0";
+            this.ip3.Click += new System.EventHandler(this.Ip3_TextClicked);
             this.ip3.TextChanged += new System.EventHandler(this.Ip3_TextChanged);
             // 
             // ip
@@ -325,7 +331,7 @@ namespace SocketServer
             // 
             // dev3IDT
             // 
-            this.dev3IDT.Location = new System.Drawing.Point(373, 378);
+            this.dev3IDT.Location = new System.Drawing.Point(609, 381);
             this.dev3IDT.Name = "dev3IDT";
             this.dev3IDT.ReadOnly = true;
             this.dev3IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -338,7 +344,7 @@ namespace SocketServer
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Blue;
-            this.label3.Location = new System.Drawing.Point(250, 378);
+            this.label3.Location = new System.Drawing.Point(486, 381);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 27);
             this.label3.TabIndex = 24;
@@ -346,7 +352,7 @@ namespace SocketServer
             // 
             // dev2IDT
             // 
-            this.dev2IDT.Location = new System.Drawing.Point(373, 272);
+            this.dev2IDT.Location = new System.Drawing.Point(609, 272);
             this.dev2IDT.Name = "dev2IDT";
             this.dev2IDT.ReadOnly = true;
             this.dev2IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -359,7 +365,7 @@ namespace SocketServer
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(250, 272);
+            this.label2.Location = new System.Drawing.Point(486, 272);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 27);
             this.label2.TabIndex = 22;
@@ -370,7 +376,7 @@ namespace SocketServer
             this.dev1Id.AutoSize = true;
             this.dev1Id.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dev1Id.ForeColor = System.Drawing.Color.Blue;
-            this.dev1Id.Location = new System.Drawing.Point(250, 165);
+            this.dev1Id.Location = new System.Drawing.Point(486, 174);
             this.dev1Id.Name = "dev1Id";
             this.dev1Id.Size = new System.Drawing.Size(112, 27);
             this.dev1Id.TabIndex = 18;
@@ -379,7 +385,7 @@ namespace SocketServer
             // 
             // dev1IDT
             // 
-            this.dev1IDT.Location = new System.Drawing.Point(373, 165);
+            this.dev1IDT.Location = new System.Drawing.Point(609, 174);
             this.dev1IDT.Name = "dev1IDT";
             this.dev1IDT.ReadOnly = true;
             this.dev1IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -387,11 +393,53 @@ namespace SocketServer
             this.dev1IDT.TabIndex = 17;
             this.dev1IDT.Text = "0";
             // 
+            // colist1
+            // 
+            this.colist1.FormattingEnabled = true;
+            this.colist1.ItemHeight = 15;
+            this.colist1.Location = new System.Drawing.Point(136, 157);
+            this.colist1.Name = "colist1";
+            this.colist1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.colist1.ScrollAlwaysVisible = true;
+            this.colist1.Size = new System.Drawing.Size(120, 109);
+            this.colist1.TabIndex = 31;
+            this.colist1.Visible = false;
+            this.colist1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Ip1_mouse_double_Clicked);
+            // 
+            // colist2
+            // 
+            this.colist2.FormattingEnabled = true;
+            this.colist2.ItemHeight = 15;
+            this.colist2.Location = new System.Drawing.Point(136, 261);
+            this.colist2.Name = "colist2";
+            this.colist2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.colist2.ScrollAlwaysVisible = true;
+            this.colist2.Size = new System.Drawing.Size(120, 109);
+            this.colist2.TabIndex = 32;
+            this.colist2.Visible = false;
+            this.colist2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Ip2_mouse_double_Clicked);
+            // 
+            // colist3
+            // 
+            this.colist3.FormattingEnabled = true;
+            this.colist3.ItemHeight = 15;
+            this.colist3.Location = new System.Drawing.Point(136, 360);
+            this.colist3.Name = "colist3";
+            this.colist3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.colist3.ScrollAlwaysVisible = true;
+            this.colist3.Size = new System.Drawing.Size(120, 109);
+            this.colist3.TabIndex = 33;
+            this.colist3.Visible = false;
+            this.colist3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Ip3_mouse_double_Clicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 499);
+            this.Controls.Add(this.colist3);
+            this.Controls.Add(this.colist2);
+            this.Controls.Add(this.colist1);
             this.Controls.Add(this.conndev);
             this.Controls.Add(this.conndevt);
             this.Controls.Add(this.tag_name);
@@ -429,6 +477,7 @@ namespace SocketServer
             this.Text = "琪朗(dl)-科技";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1Closed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.Form1_click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,6 +516,9 @@ namespace SocketServer
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label dev1Id;
         private System.Windows.Forms.TextBox dev1IDT;
+        private System.Windows.Forms.ListBox colist1;
+        private System.Windows.Forms.ListBox colist2;
+        private System.Windows.Forms.ListBox colist3;
     }
 }
 
