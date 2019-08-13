@@ -64,6 +64,7 @@ namespace SocketServer
             this.colist1 = new System.Windows.Forms.ListBox();
             this.colist2 = new System.Windows.Forms.ListBox();
             this.colist3 = new System.Windows.Forms.ListBox();
+            this.rebootbtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -85,7 +86,7 @@ namespace SocketServer
             // dateTimePicker1
             // 
             this.dateTimePicker1.CausesValidation = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(632, 462);
+            this.dateTimePicker1.Location = new System.Drawing.Point(632, 513);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(156, 25);
             this.dateTimePicker1.TabIndex = 1;
@@ -404,7 +405,7 @@ namespace SocketServer
             this.colist1.Size = new System.Drawing.Size(120, 109);
             this.colist1.TabIndex = 31;
             this.colist1.Visible = false;
-            this.colist1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Ip1_mouse_double_Clicked);
+            this.colist1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ip1_mouse_double_Clicked);
             // 
             // colist2
             // 
@@ -417,7 +418,7 @@ namespace SocketServer
             this.colist2.Size = new System.Drawing.Size(120, 109);
             this.colist2.TabIndex = 32;
             this.colist2.Visible = false;
-            this.colist2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Ip2_mouse_double_Clicked);
+            this.colist2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ip2_mouse_double_Clicked);
             // 
             // colist3
             // 
@@ -430,13 +431,26 @@ namespace SocketServer
             this.colist3.Size = new System.Drawing.Size(120, 109);
             this.colist3.TabIndex = 33;
             this.colist3.Visible = false;
-            this.colist3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(Ip3_mouse_double_Clicked);
+            this.colist3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ip3_mouse_double_Clicked);
+            // 
+            // rebootbtn
+            // 
+            this.rebootbtn.Font = new System.Drawing.Font("微软雅黑", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rebootbtn.ForeColor = System.Drawing.Color.Red;
+            this.rebootbtn.Location = new System.Drawing.Point(297, 476);
+            this.rebootbtn.Name = "rebootbtn";
+            this.rebootbtn.Size = new System.Drawing.Size(268, 53);
+            this.rebootbtn.TabIndex = 34;
+            this.rebootbtn.Text = "重启（选择）";
+            this.rebootbtn.UseVisualStyleBackColor = true;
+            this.rebootbtn.Click += new System.EventHandler(reboot_TextClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 499);
+            this.ClientSize = new System.Drawing.Size(800, 550);
+            this.Controls.Add(this.rebootbtn);
             this.Controls.Add(this.colist3);
             this.Controls.Add(this.colist2);
             this.Controls.Add(this.colist1);
@@ -519,6 +533,7 @@ namespace SocketServer
         private System.Windows.Forms.ListBox colist1;
         private System.Windows.Forms.ListBox colist2;
         private System.Windows.Forms.ListBox colist3;
+        private System.Windows.Forms.Button rebootbtn;
     }
 }
 

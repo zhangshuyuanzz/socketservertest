@@ -103,6 +103,12 @@
     <Compile Include="OpcServerSupply.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reboot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reboot.Designer.cs">
+      <DependentUpon>reboot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Serverconfig.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -117,6 +123,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reboot.resx">
+      <DependentUpon>reboot.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

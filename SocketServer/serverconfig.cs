@@ -1,5 +1,6 @@
 ﻿using Base.kit;
 using Common.log;
+using SkKit;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -69,8 +70,9 @@ namespace SocketServer
                 logger.Debug("name--this dic had this tag info ,so,bach check you config file!!");
             }
         }
-        public void ServerConfigParseXml(ref ConcurrentDictionary<int, string> allll, ref ConcurrentDictionary<string, int> allnames)
+        public void ServerConfigParseXml(ref DevInfo outdevinfo)
         {
+            DevInfo devbuffer = outdevinfo;
             try
             {
             xDoc.Load(XmlPath);
@@ -78,14 +80,14 @@ namespace SocketServer
             XmlNode root = xDoc.SelectSingleNode("collector");
 
             /*清空两个字典*/
-            if (allll.Count != 0) {
+            if (devbuffer.TagListWithID.Count != 0) {
                 logger.Info("clear TagListWithID strart");
-                allll.Clear();
+                    devbuffer.TagListWithID.Clear();
             }
-            if (allnames.Count != 0)
+            if (devbuffer.TagListWithName.Count != 0)
             {
                 logger.Info("clear TagListWithName strart");
-                allnames.Clear();
+                    devbuffer.TagListWithName.Clear();
             }
 
             foreach (XmlNode node in root.SelectNodes("device"))
@@ -96,8 +98,21 @@ namespace SocketServer
                     string tagname;
                     tagid = int.Parse(XmlKit.GetByXml("id", n));
                     tagname = XmlKit.GetByXml("name", n);
-                    addintotagall(allll, tagid, tagname);
-                    addintotagname(allnames, tagid, tagname);
+                    string datatypestr = XmlKit.GetByXml("type", n);
+                    if (datatypestr != null)
+                    {
+                        if (int.Parse(datatypestr) == 2)
+                        {
+                            logger.Info("this tag type is long--[{}]", tagname);
+                            devbuffer.TagList_LongType.Add(tagid);
+                        }
+                    }
+                    else
+                    {
+                        logger.Info("this tag type is float--[{}]", tagname);
+                    }
+                    addintotagall(devbuffer.TagListWithID, tagid, tagname);
+                    addintotagname(devbuffer.TagListWithName, tagid, tagname);
                     logger.Info("tag--parse xml file-------------tagid[{}]tagname[{}]", tagid, tagname);
                 }
                 foreach (XmlNode n in node.SelectNodes("command"))
@@ -106,8 +121,8 @@ namespace SocketServer
                     string tagname;
                     tagid = int.Parse(XmlKit.GetByXml("id", n));
                     tagname = XmlKit.GetByXml("name", n);
-                    addintotagall(allll, tagid, tagname);
-                    addintotagname(allnames, tagid, tagname);
+                    addintotagall(devbuffer.TagListWithID, tagid, tagname);
+                    addintotagname(devbuffer.TagListWithName, tagid, tagname);
                     logger.Info("cmd--parse xml file-------------tagid[{}]tagname[{}]", tagid, tagname);
                 }
             }

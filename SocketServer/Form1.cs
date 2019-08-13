@@ -100,14 +100,11 @@ namespace SocketServer
         private void Form1_click(object sender, EventArgs e)
         {
             logger.Debug("Form1_click");
-            Ip1visiblefalg = false;
-            this.colist1.Visible = Ip1visiblefalg;
+            this.colist1.Visible = false;
 
-            Ip2visiblefalg = false;
-            this.colist2.Visible = Ip2visiblefalg;
+            this.colist2.Visible = false;
 
-            Ip3visiblefalg =false;
-            this.colist3.Visible = Ip3visiblefalg;
+            this.colist3.Visible = false;
 
         }
         private void Form1Closed(object sender, EventArgs e)
@@ -117,7 +114,18 @@ namespace SocketServer
             this.Dispose();
             this.Close();
         }
-
+        private object GetTrueValue(int datatype,byte[]mdta)
+        {
+            object retdata = 0;
+            if (datatype == 2) {
+                retdata = BitConverter.ToInt32(mdta, 0);
+            }
+            else {
+                retdata = BitConverter.ToSingle(mdta, 0);
+            }
+            logger.Debug("GetTrueValue---retdata[{}]type[{}]", retdata,retdata.GetType());
+            return retdata;
+        }
         public void UpdateDevInfo(List<DevTagIndo> tagslist,string UDip)
         {
             logger.Debug("updateDevInfo---ip[{}]", UDip);
@@ -137,11 +145,16 @@ namespace SocketServer
                 if (Tags.TagList.ContainsKey(s.ID))
                 {
                     one = Tags.TagList[s.ID];
-                    one.myvalue = s.value;
+                    
+                    one.myvalue = GetTrueValue(one.myvalueType, s.TagMetadata);
                     one.mytime = Tags.CuTime;
                 }
                 else
                 {
+                        byte datatype = 1;
+                        if (Tags.TagList_LongType.Contains(s.ID)){
+                            datatype = 2;
+                        }
                         if (Tags.TagListWithID.ContainsKey(s.ID) == false)
                         {
                             logger.Debug("no has this tagid!!");
@@ -150,13 +163,14 @@ namespace SocketServer
                         gotoflag = true;
                         one = new TagInfo
                         {
-                            myvalue = s.value,
-                            myname = Tags.TagListWithID[s.ID]
-                    };
+                            myvalue = GetTrueValue(datatype,s.TagMetadata),
+                            myname = Tags.TagListWithID[s.ID],
+                            myvalueType = datatype
+                        };
                         Tags.TagList.TryAdd(s.ID, one);
                 }
 
-                    DataItem Atag = new DataItem(one.myname,s.ID,1, s.value, Tags.CuTime, UDip);
+                    DataItem Atag = new DataItem(one.myname,s.ID, one.myvalueType, one.myvalue, Tags.CuTime, UDip);
 
                     NewTagList.Add(Atag);
 
@@ -231,7 +245,7 @@ namespace SocketServer
             }
             /*更新tagtoid 和tagtoname，两个字典*/
             Serverconfig thisxmlfile = new Serverconfig(ip);
-            thisxmlfile.ServerConfigParseXml(ref onedev.TagListWithID, ref onedev.TagListWithName);
+            thisxmlfile.ServerConfigParseXml(ref onedev);
 
             OpcSendFile(handle,ip);
             logger.Debug("ConnedNotification end");
@@ -508,29 +522,23 @@ namespace SocketServer
         }
 
 
-        bool Ip1visiblefalg = false;
         private void Ip1_TextClicked(object sender, EventArgs e)
         {
            // testlist();
             logger.Debug("Ip1_TextClicked--");
-            Ip1visiblefalg = !Ip1visiblefalg;
-            this.colist1.Visible = Ip1visiblefalg;
+            this.colist1.Visible = !this.colist1.Visible;
         }
 
-        bool Ip2visiblefalg = false;
         private void Ip2_TextClicked(object sender, EventArgs e)
         {
             logger.Debug("Ip2_TextClicked--");
-            Ip2visiblefalg = !Ip2visiblefalg;
-            this.colist2.Visible = Ip2visiblefalg;
+            this.colist2.Visible = !this.colist2.Visible;
         }
 
-        bool Ip3visiblefalg = false;
         private void Ip3_TextClicked(object sender, EventArgs e)
         {
             logger.Debug("Ip3_TextClicked--");
-            Ip3visiblefalg = !Ip3visiblefalg;
-            this.colist3.Visible = Ip3visiblefalg;
+            this.colist3.Visible = !this.colist3.Visible;
         }
         private void Ip1_mouse_double_Clicked(object sender, MouseEventArgs e)
         {
@@ -541,8 +549,7 @@ namespace SocketServer
             logger.Debug("Ip1_mouse_double_Clicked[{}]", e.Button.ToString());
             this.ip1.Text = this.colist1.SelectedItem.ToString();
 
-            Ip1visiblefalg = !Ip1visiblefalg;
-            this.colist1.Visible = Ip1visiblefalg;
+            this.colist1.Visible = !this.colist1.Visible;
         }
 
         private void Ip2_mouse_double_Clicked(object sender, EventArgs e)
@@ -550,8 +557,7 @@ namespace SocketServer
             logger.Debug("Ip2_mouse_double_Clicked-[{}]-", this.colist2.SelectedItem.ToString());
             this.ip2.Text = this.colist2.SelectedItem.ToString();
 
-            Ip2visiblefalg = !Ip2visiblefalg;
-            this.colist2.Visible = Ip2visiblefalg;
+            this.colist2.Visible = !this.colist2.Visible;
         }
 
         private void Ip3_mouse_double_Clicked(object sender, EventArgs e)
@@ -559,8 +565,13 @@ namespace SocketServer
             logger.Debug("Ip3_mouse_double_Clicked-[{}]-", this.colist3.SelectedItem.ToString());
             this.ip3.Text = this.colist3.SelectedItem.ToString();
 
-            Ip3visiblefalg = !Ip3visiblefalg;
-            this.colist3.Visible = Ip3visiblefalg;
+            this.colist3.Visible = !this.colist3.Visible;
+        }
+        private void reboot_TextClicked(object sender, EventArgs e)
+        {
+            logger.Debug("reboot_TextClicked--");
+            reboot testDialog = new reboot();
+            testDialog.ShowDialog();
         }
     }
 }

@@ -16,3 +16,4 @@ C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\Socket
 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.pdb
 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\SocketServer.exe.config
 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.reboot.resources

@@ -11,6 +11,7 @@ namespace SkKit
         public ConcurrentDictionary<int, TagInfo> TagList;
         public ConcurrentDictionary<string, int> TagListWithName;
         public ConcurrentDictionary<int, string> TagListWithID;
+        public List<int> TagList_LongType;
 
         public string CuTime;
         public object SkClientHandle;
@@ -24,6 +25,7 @@ namespace SkKit
         {
             TagListWithID = new ConcurrentDictionary<int, string>();
             TagListWithName = new ConcurrentDictionary<string, int>();
+            TagList_LongType = new List<int>();
 
             this.TagList = new ConcurrentDictionary<int, TagInfo>();
             this.CuTime = DateTime.Now.ToString();
@@ -32,15 +34,22 @@ namespace SkKit
     }
     public class TagInfo
     {
-        public float myvalue;
+        public object myvalue;
         public string myname;
         public string mytime;
+        public byte myvalueType;
 
         public TagInfo()
         {
             myvalue = 0;
             myname = "invalid";
             mytime = DateTime.Now.ToString();
+            myvalueType = 1;  // deflault float
         }
+    }
+    public class ParseType
+    {
+        private byte myvalue_float = 1;
+        private byte myvalue_long = 2;
     }
 }

@@ -11,18 +11,22 @@ namespace SkKit
     public class DevTagIndo
     {
         public int ID;
-        public float value;
+        public object value;   //no use
         public string TagStr;
+        public byte[] TagMetadata ;
         public DevTagIndo()
         {
             this.ID = 0;
             this.value = 0.0F;
+            this.TagStr = "unkown!!";
+            TagMetadata = new byte[4];
         }
         public DevTagIndo(int id,float val)
         {
             this.ID = id;
             this.value = val;
             this.TagStr = "unkown!!";
+            TagMetadata = new byte[4];
         }
     }
     public class SkServer
@@ -111,7 +115,7 @@ namespace SkKit
         }
         private void ReceiveMessage(object SkHadle)
         {
-            logger.Debug("ReceiveMessage");
+            logger.Debug("Receive socket Message");
             Socket clientSk = (Socket)SkHadle;
             string reip = (clientSk.RemoteEndPoint as IPEndPoint).Address.ToString();
             logger.Debug("ip[{}]", reip);
@@ -139,7 +143,7 @@ namespace SkKit
                     Array.Copy(getbufer, GetData, lenth);
                     logger.Debug("get buffer client[{}]", clientSk.RemoteEndPoint.ToString());
 
-                    logger.Debug("set msg[{}]", BitConverter.ToString(GetData));
+                    logger.Debug("get socket msg[{}]", BitConverter.ToString(GetData));
 
                     SkParseFrame(TagsL, GetData);
                     Server_get_handle?.Invoke(TagsL, reip);
@@ -163,7 +167,7 @@ namespace SkKit
                 logger.Error("error get frame [{}] [{}]", InData[0], InData[1]);
                 return false;
             }
-            logger.Debug("DevCount [{}] ", InData[2]);
+            logger.Debug("get sk msg！ Dev tag Count [{}] ", InData[2]);
             byte DevCount = InData[2];
             if ((DevCount * 6 + 4) > InData.Length) {
                 logger.Error("error src data lenth [{}] ", InData.Length);
@@ -174,14 +178,14 @@ namespace SkKit
             for (num = 0; num < DevCount; num++) {
                 DevTagIndo OneIDInfo = new DevTagIndo(); 
                 Array.Copy(InData,3+num*6, OneTagdata,0,6);
-                logger.Debug("OneTagdata[{}]", BitConverter.ToString(OneTagdata));
+                logger.Debug("-----------sk msg !!OneTagdata[{}]", BitConverter.ToString(OneTagdata));
 
                 int TagID = (int)BitConverter.ToUInt16(OneTagdata,0);
-                OneIDInfo.value = BitConverter.ToSingle(OneTagdata,2);
+
+                Array.Copy(OneTagdata,2, OneIDInfo.TagMetadata,0,4);
+               // OneIDInfo.value = BitConverter.ToSingle(OneTagdata,2);
                 OneIDInfo.ID = TagID;
-                OneIDInfo.TagStr = TagID.ToString() + ":" + OneIDInfo.value.ToString();
-                logger.Debug("tag info ID[{}]value[{}]", OneIDInfo.ID, OneIDInfo.value);
-                logger.Debug("TagStr[{}]", OneIDInfo.TagStr);
+                logger.Debug("parse !!!---tag info ID[{}]-", OneIDInfo.ID);
                 TagsL.Add(OneIDInfo);
             }
             return RetParse; 

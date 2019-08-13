@@ -16,22 +16,20 @@
 		no  ,不可修改
  -->
   <serial>
+    <para protocol="modbus" port="/dev/ttyS6" baude="1200" bits="8" parity="N" stop="1" resume_interval="10" detect_count="3" modify="yes" />
     <para protocol="dlt645" port="/dev/ttyS8" baude="1200" bits="8" parity="E" stop="1" resume_interval="5" detect_count="3" modify="yes" />
-    <para protocol="dlt645" port="/dev/ttyS8" baude="1200" bits="8" parity="E" stop="1" resume_interval="5" detect_count="3" modify="yes" />
+    <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
+    <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
   </serial>
   <!--
 	modbus：
 		type:float=1  long=2 
         DIid： DI0 DI1  
     -->
-  <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="041008309980" serialport="8" actstate="0" interval="3">
-    <tag name="M_CYC_D_JJZI_E" DIid="B650" id="1" type="1" />
-    <tag name="M_CYC_D_JJZI_EF_PM" DIid="9010" id="2" type="1" />
-    <tag name="M_CYC_D_JJZI_ER_PM" DIid="9020" id="3" type="1" />
-  </device>
-  <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="041008309980" serialport="8" actstate="0" interval="3">
-    <tag name="M_CYC_D_JJZII_E" DIid="B650" id="4" />
-    <tag name="M_CYC_D_JJZII_EF_PM" DIid="9010" id="5" />
-    <tag name="M_CYC_D_JJZII_ER_PM" DIid="9020" id="6" />
+  <device name="modbus——dev2" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="10">
+    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="2143" />
+    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="3412" />
+    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="1234" />
+    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="4321" />
   </device>
 </collector>
