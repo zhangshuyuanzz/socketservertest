@@ -1,0 +1,48 @@
+2019-08-13 16:45:23.7965 [DEBUG]：struct Form1
+2019-08-13 16:45:23.8334 [DEBUG]：file exist!!
+2019-08-13 16:45:23.8494 [DEBUG]：OpenConnection[".\DB\OpcServer.db"]
+2019-08-13 16:45:23.9670 [DEBUG]：SkServer[11220]
+2019-08-13 16:45:23.9670 [DEBUG]：SkStartListen
+2019-08-13 16:45:23.9940 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-08-13 16:45:24.0179 [DEBUG]：222
+2019-08-13 16:45:24.0179 [DEBUG]：IP["0.0.0.0"port[11220]
+2019-08-13 16:45:24.0179 [DEBUG]：开始监听
+2019-08-13 16:45:24.0329 [DEBUG]：监听0.0.0.0:11220消息成功
+2019-08-13 16:45:24.0329 [DEBUG]： Form1 InitializeComponent end
+2019-08-13 16:45:24.0329 [DEBUG]：now listen!!
+2019-08-13 16:45:24.1047 [DEBUG]：Form1_Load
+2019-08-13 16:45:24.1097 [DEBUG]：OpcServerMain
+2019-08-13 16:45:24.1456 [DEBUG]：DbPath[".\DB\OpcServer.db"]
+2019-08-13 16:45:24.1735 [DEBUG]：file exist!!
+2019-08-13 16:45:24.2174 [DEBUG]：OpenConnection[".\DB\OpcServer.db"]
+2019-08-13 16:45:24.2413 [DEBUG]：Open end!!
+2019-08-13 16:45:24.2513 [INFO]：**********************************parse xml***************************sss*******************
+2019-08-13 16:45:24.2513 [INFO]：-----Start-xmlpath["C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\config\opcserver.xml"]-
+2019-08-13 16:45:24.2672 [INFO]：ConfigParseXml  strart
+2019-08-13 16:45:24.2672 [INFO]：  server_name["Co.Opc.Server.dl.ql_01"]
+2019-08-13 16:45:24.2812 [INFO]：   server_rate[7]name["group1"]
+2019-08-13 16:45:24.2962 [INFO]：---------------tagid[1]tagname["test"]
+2019-08-13 16:45:24.2962 [INFO]：AppName["Co.Opc.Server.dl.ql_01"]ServerRate[7]
+2019-08-13 16:45:24.2962 [INFO]：**********************************parse xml***********************eee***********************
+2019-08-13 16:45:24.3201 [DEBUG]：OpcServerLib is demo true
+2019-08-13 16:45:24.3201 [INFO]：VendorInfo["ql.co.opc-server.v1.0.0"]ServerRate[7]GUID["{96B01D0F-D4E0-45A9-BFBD-B2E0A052964F}"]AppName["Co.Opc.Server.dl.ql_01"]
+2019-08-13 16:45:24.3351 [INFO]：exepath["C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\OpcServer.exe"]ret[false]
+2019-08-13 16:45:24.3351 [DEBUG]：UpdateRegistry is false!!!
+2019-08-13 16:45:24.3500 [INFO]：startTimer---DataUpdateRate[7]
+2019-08-13 16:45:25.1788 [DEBUG]：reboot_TextClicked--
+2019-08-13 16:45:25.3574 [INFO]：startTimer--get db tag data!!
+2019-08-13 16:45:25.3872 [DEBUG]：OpcDataGet--Count[1]
+2019-08-13 16:45:25.3942 [DEBUG]：-----------------------------------------------sssssssssssss---------------------------------------
+2019-08-13 16:45:25.3942 [DEBUG]：key["id"]Value[4]
+2019-08-13 16:45:25.4062 [DEBUG]：key["tagid"]Value[21]
+2019-08-13 16:45:25.4062 [DEBUG]：key["name"]Value["modbus_temperature2"]
+2019-08-13 16:45:25.4062 [DEBUG]：key["type"]Value[1]
+2019-08-13 16:45:25.4251 [DEBUG]：key["value"]Value[0]
+2019-08-13 16:45:25.4251 [DEBUG]：key["time"]Value["2019/8/13 16:03:54"]
+2019-08-13 16:45:25.4381 [DEBUG]：key["devip"]Value["192.168.0.88"]
+2019-08-13 16:45:25.4381 [DEBUG]：OpcServerUpdateTag
+2019-08-13 16:45:25.4531 [DEBUG]：add new tag,name["modbus_temperature2"]
+2019-08-13 16:45:25.4531 [ERROR]：opc update data TagId-[21] value0 quality192
+2019-08-13 16:45:25.4680 [DEBUG]：-----------------------------------------------eeeeeeeeeee---------------------------------------
+2019-08-13 16:45:30.7051 [DEBUG]：FormClosingEventHandler
+2019-08-13 16:45:30.7051 [DEBUG]：form1_closed
