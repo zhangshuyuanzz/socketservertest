@@ -444,6 +444,7 @@ namespace SocketServer
             this.rebootbtn.Text = "重启（选择）";
             this.rebootbtn.UseVisualStyleBackColor = true;
             this.rebootbtn.Click += new System.EventHandler(reboot_TextClicked);
+           // this.rebootbtn.Visible = false;
             // 
             // Form1
             // 

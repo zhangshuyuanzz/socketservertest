@@ -21,13 +21,15 @@ namespace SocketServer
         static readonly NLOG logger = new NLOG("Form1");
         private Dictionary<int, System.Windows.Forms.TextBox> allboxs = new Dictionary<int, System.Windows.Forms.TextBox>();
         private string filepath = @".\config\";
-        private Dictionary<string, DevInfo> DevList = new Dictionary<string, DevInfo>();
+        private Dictionary<string, DevInfo> DevList = new Dictionary<string, DevInfo>();   //保存有当前可更新的所有的设备数据
 
         private Dictionary<int,string > IpToBoxIndex = new Dictionary <int, string>(); // <ip,boxid>用于得到的数据与界面box关联
         private OpcDateUpdate ServerDB = null;
 
         //private XmlFileWatch tt;
-        BindingList<string> BindIplist = new BindingList<string>();
+        private BindingList<string> BindIplist = new BindingList<string>();    //动态绑定界面的list控件
+        private reboot RebootDialog = new reboot();
+
         public Form1()
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace SocketServer
 
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
-
+            RebootDialog.OnIpChange += new reboot.IpEventHandler(GetRebootIp);
         }
         static void MyHandler(object sender, UnhandledExceptionEventArgs args)
         {
@@ -89,12 +91,14 @@ namespace SocketServer
         {
             logger.Debug("Label1_Click");
             //updatetestdb();
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             logger.Debug("Form1_Load");
             Thread thread = new Thread(new ThreadStart(OpcServerMain));
             thread.Start();
+
 
         }
         private void Form1_click(object sender, EventArgs e)
@@ -210,6 +214,7 @@ namespace SocketServer
         public void DisconnedNotification(object handle, string ip)
         {
             logger.Debug("DisconnedNotification--ip[{}]", ip);
+            ServerDB.OpcDataDelTagWithIp(ip);
             IPs.Remove(ip);
             changeIpdev();
 
@@ -228,7 +233,6 @@ namespace SocketServer
         { 
             logger.Debug("ConnedNotification--ip[{}]", ip);
             DevInfo onedev;
-            ServerDB.OpcDataDelTagWithIp(ip);
 
             if (DevList.ContainsKey(ip) == false)
             {
@@ -237,6 +241,7 @@ namespace SocketServer
                 DevList.Add(ip, onedev);
                 changeIpdev();
                 BindIplist.Add(ip);
+
             }
             else
             {
@@ -456,7 +461,6 @@ namespace SocketServer
                     allboxs[num + 3].Text = Alltag[ohtagid].mytime;
                     allboxs[num + 4].Text = Alltag[ohtagid].myvalue.ToString();
                 }
-
             }
             else
             {
@@ -570,8 +574,19 @@ namespace SocketServer
         private void reboot_TextClicked(object sender, EventArgs e)
         {
             logger.Debug("reboot_TextClicked--");
-            reboot testDialog = new reboot();
-            testDialog.ShowDialog();
+            RebootDialog.ShowDialog();
+        }
+        public void GetRebootIp(object sender, string RebIp)
+        {
+            logger.Debug("GetRebootIp--RebIp[{}]", RebIp);
+            if (DevList.ContainsKey(RebIp) == false)
+            {
+                MessageBox.Show(this, "没有此设备，请在检查一遍IP!!", "warning!!");
+            }
+            else
+            {
+
+            }
         }
     }
 }

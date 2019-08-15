@@ -15,7 +15,7 @@ namespace SocketServer
 
         public delegate void OpcServerEventHandler(List<DataItem> taglist);
         public OpcServerEventHandler Opc_tag_data_handle;
-        static Timer timer;
+        static Timer OpcServerTimer;
         public OpcDataSu()
         {
             this._mgr = new SQLiteHelper(DbPath);
@@ -35,10 +35,11 @@ namespace SocketServer
         {
             Logger.Debug("表test是否存在: " + this._mgr.TableExists("test"));
         }
-        public bool OpcDataGet()
+
+        public bool OpcDataGet(List<string> ips)
         {
-            List<object> list = this._mgr.ExecuteRow("select * from opc_tag", null, null);
-            Logger.Debug("OpcDataGet--Count[{}]", list.Count);
+            List<object> list = this._mgr.ExecuteRow("select * from opc_tag where devip in ( @devip )", ips);
+            Logger.Debug("OpcServer Get--Count[{}]", list.Count);
 
             List<DataItem> alltag = new List<DataItem>() ;
             foreach (object o in list)
@@ -94,16 +95,35 @@ namespace SocketServer
 
             return iplist;
         }
+
+        private List<string> OpcIPs;
+        private int UpdateInterval;
         public bool OpcDateRegisterCB(int interval)
         {
+            UpdateInterval = interval;
             Logger.Info("startTimer---DataUpdateRate[{}]", interval);
-            timer = new Timer(new TimerCallback(readItemSync), this, 1000, interval * 1000);
+            OpcServerTimer = new Timer(new TimerCallback(readItemSync), this, System.Threading.Timeout.Infinite, interval * 1000);
+
+
+            List<string> OpcIPs = new List<string>();
+            OpcIPs.Add("192.168.0.88");
+            OpcDataGet(OpcIPs);
+
             return true;
         }
         public void readItemSync(object state)
         {
-            Logger.Info("startTimer--get db tag data!!");
-            OpcDataGet();
+            Logger.Info("readItemSync--get db tag data!!for opc server!!");
+            foreach (string s in OpcIPs)
+            {
+                Logger.Debug("OpcServerStartUpdate--[{}]", s);
+            }
+            OpcDataGet(OpcIPs);
+        }
+        public void OpcServerStartUpdate(List<string> IPlists)
+        {
+            OpcIPs = IPlists;
+            OpcServerTimer.Change(1000, UpdateInterval * 1000);
         }
     }
 }

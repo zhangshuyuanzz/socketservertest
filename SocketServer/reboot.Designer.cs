@@ -48,10 +48,12 @@
             this.rebootbtn1.Text = "确认";
             this.rebootbtn1.UseVisualStyleBackColor = false;
             this.rebootbtn1.Click += new System.EventHandler(this.RebootConfirmHandler);
-            // 
-            // warning
-            // 
-            this.warning.AutoSize = true;
+            this.rebootbtn1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RebootMouseDownHandler);
+            this.rebootbtn1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RebootMouseUpHandler);
+           // 
+           // warning
+           // 
+           this.warning.AutoSize = true;
             this.warning.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.warning.ForeColor = System.Drawing.Color.Blue;
             this.warning.Location = new System.Drawing.Point(122, 18);

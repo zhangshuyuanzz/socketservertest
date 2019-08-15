@@ -9,7 +9,7 @@
     dlt645-97     = 97协议,    
  -->
 <collector>
-  <attr scada_frequency="2" attempts_num="3" attempts_interval="3" />
+  <attr scada_frequency="2" attempts_num="15" attempts_interval="3" />
   <!-- serial：                
     modify:baude bits parity stop
 		yes	,可修改
@@ -21,15 +21,10 @@
     <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
     <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
   </serial>
-  <!--
-	modbus：
-		type:float=1  long=2 
-        DIid： DI0 DI1  
-    -->
-  <device name="modbus——dev2" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="10">
-    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="2143" />
-    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="3412" />
-    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="1234" />
-    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="4321" />
+  <device name="modbus——dev1" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="10">
+    <tag name="modbus_quality_mass_flow" startaddr="2" quantity="2" id="10" type="1" byteOrder="4321" />
+    <tag name="modbus_heat_mass_flow" startaddr="4" quantity="2" id="11" type="1" byteOrder="4321" />
+    <tag name="modbus_quality_instant_flow" startaddr="6" quantity="2" id="12" type="1" byteOrder="4321" />
+    <tag name="modbus_vapor_density" startaddr="16" quantity="2" id="16" type="1" byteOrder="4321" />
   </device>
 </collector>

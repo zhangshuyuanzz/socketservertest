@@ -215,26 +215,35 @@ namespace SQLite
             return result;
         }
 
-        /// <para>执行SQL,返回结果集,使用RowWrapper对每一行进行包装</para>  
-        /// <para>如果结果集为空,那么返回空List (List.Count=0)</para>  
-        /// <para>rowWrapper = null时,使用WrapRowToDictionary</para>  
-        public List<object> ExecuteRow(string sql, SQLiteParameter[] paramArr, RowWrapper rowWrapper)
+        public List<object> ExecuteRow(string sql, List<string> paramArr, RowWrapper rowWrapper=null)
         {
             if (sql == null)
             {
                 throw new ArgumentNullException("sql=null");
             }
             this.EnsureConnection();
+            logger.Debug("ExecuteRow---sql[{}]", sql);
 
             SQLiteCommand cmd = new SQLiteCommand(sql, this.Connection);
-            if (paramArr != null)
+            if (paramArr != null && paramArr.Count != 0)
             {
-                foreach (SQLiteParameter p in paramArr)
+                string ippara = "\"0\"";
+                foreach (string p in paramArr)
                 {
-                    cmd.Parameters.Add(p);
+                    ippara = ippara + ", \"" + p  + "\"" ; 
                 }
-            }
+                logger.Debug("ippara[{}]", ippara);
+                ippara = "192.168.0.88";
+                SQLiteParameter one = new SQLiteParameter("@devip", ippara);
+                SQLiteParameter two = new SQLiteParameter("@devip", "192.168.0.89");
 
+                cmd.Parameters.Add(one);
+                cmd.Parameters.Add(two);
+
+            }
+            else {
+                return null;
+            }
             if (rowWrapper == null)
             {
                 rowWrapper = new RowWrapper(SQLiteHelper.WrapRowToDictionary);
@@ -349,33 +358,6 @@ namespace SQLite
             return count;
         }
 
-        /// <para>查询一行记录,无结果时返回null</para>  
-        /// <para>conditionCol = null时将忽略条件,直接执行select * from table </para>  
-        public Dictionary<string, object> QueryOne(string table, string conditionCol, object conditionVal)
-        {
-            if (table == null)
-            {
-                throw new ArgumentNullException("table=null");
-            }
-            this.EnsureConnection();
-
-            string sql = "select * from " + table;
-            if (conditionCol != null)
-            {
-                sql += " where " + conditionCol + "=@" + conditionCol;
-            }
-            if (this.ShowSql)
-            {
-                Console.WriteLine("SQL: " + sql);
-            }
-
-            List<object> list = this.ExecuteRow(sql, new SQLiteParameter[] {
-                new SQLiteParameter(conditionCol,conditionVal)
-            }, null);
-            if (list.Count == 0)
-                return null;
-            return (Dictionary<string, object>)list[0];
-        }
         public int DeleteAll(string table, string Delp)
         {
             if (table == null || Delp == null)

@@ -15,6 +15,8 @@ namespace SocketServer
     {
         static readonly NLOG logger = new NLOG("reboot");
         private LittleTools reboottl = new LittleTools();
+        public delegate void IpEventHandler(object sender, string ip);
+        public event IpEventHandler OnIpChange;
         public reboot()
         {
             InitializeComponent();
@@ -35,6 +37,18 @@ namespace SocketServer
             if (reboottl.LTJudgeIsIpv4(this.rebootip.Text) == false) {
                 MessageBox.Show(this,"this is invalid ip!!,please back to check again!!");
             }
+            OnIpChange?.Invoke(sender, this.rebootip.Text);
+        }
+        public void RebootMouseDownHandler(object sender, MouseEventArgs e)
+        {
+            logger.Debug("RebootMouseDownHandler--ip[{}]", this.rebootip.Text);
+            this.rebootbtn1.BackColor = System.Drawing.Color.Green;
+        }
+        public void RebootMouseUpHandler(object sender, MouseEventArgs e)
+        {
+            logger.Debug("RebootMouseUpHandler--ip[{}]", this.rebootip.Text);
+            this.rebootbtn1.BackColor = System.Drawing.Color.Red;
+
         }
     }
 }
