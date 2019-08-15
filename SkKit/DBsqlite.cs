@@ -224,7 +224,6 @@ namespace SQLite
             this.EnsureConnection();
             logger.Debug("ExecuteRow---sql[{}]", sql);
 
-            SQLiteCommand cmd = new SQLiteCommand(sql, this.Connection);
             if (paramArr != null && paramArr.Count != 0)
             {
                 string ippara = "\"0\"";
@@ -233,17 +232,16 @@ namespace SQLite
                     ippara = ippara + ", \"" + p  + "\"" ; 
                 }
                 logger.Debug("ippara[{}]", ippara);
-                ippara = "192.168.0.88";
-                SQLiteParameter one = new SQLiteParameter("@devip", ippara);
-                SQLiteParameter two = new SQLiteParameter("@devip", "192.168.0.89");
-
-                cmd.Parameters.Add(one);
-                cmd.Parameters.Add(two);
-
+               // sql = sql + ippara;
+                sql = string.Format(sql, ippara);
             }
             else {
                 return null;
             }
+            logger.Debug("--end-sql[{}]", sql);
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, this.Connection);
+
             if (rowWrapper == null)
             {
                 rowWrapper = new RowWrapper(SQLiteHelper.WrapRowToDictionary);

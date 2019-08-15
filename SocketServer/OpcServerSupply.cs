@@ -38,7 +38,8 @@ namespace SocketServer
 
         public bool OpcDataGet(List<string> ips)
         {
-            List<object> list = this._mgr.ExecuteRow("select * from opc_tag where devip in ( @devip )", ips);
+            string insql = "select * from opc_tag where devip in ( {0} )";
+            List<object> list = this._mgr.ExecuteRow(insql, ips);
             Logger.Debug("OpcServer Get--Count[{}]", list.Count);
 
             List<DataItem> alltag = new List<DataItem>() ;
@@ -107,6 +108,7 @@ namespace SocketServer
 
             List<string> OpcIPs = new List<string>();
             OpcIPs.Add("192.168.0.88");
+
             OpcDataGet(OpcIPs);
 
             return true;
