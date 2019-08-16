@@ -35,16 +35,16 @@ namespace SocketServer
             if (taglist == null) {
                 return false;
             }
-            logger.Debug("OpcDateWrite");
+            logger.Debug("Local Dbsqlite DateWrite");
             int c;
             if (fff == true)
             {
-                logger.Debug("ReplaceReplaceReplaceReplaceReplace");
+                logger.Debug("DB  ReplaceReplaceReplaceReplaceReplace");
                 c = this.OpcServerDBHandle.Replace("opc_tag", taglist);
             }
             else
             {
-                logger.Debug("UpdateUpdateUpdateUpdateUpdate");
+                logger.Debug("DB  UpdateUpdateUpdateUpdateUpdate");
                 c = this.OpcServerDBHandle.Update("opc_tag", taglist);
             }
             logger.Debug("c[{}]",c);

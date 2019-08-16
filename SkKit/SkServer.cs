@@ -137,7 +137,7 @@ namespace SkKit
                             continue;
                         }
                     }
-                    logger.Debug("Connected[{}]get data lenth[{}]", clientSk.Connected, lenth);
+                    logger.Debug("ReceiveMessage  get data lenth[{}]", lenth);
                     byte[] GetData = new byte[lenth];
 
                     Array.Copy(getbufer, GetData, lenth);

@@ -222,7 +222,6 @@ namespace SQLite
                 throw new ArgumentNullException("sql=null");
             }
             this.EnsureConnection();
-            logger.Debug("ExecuteRow---sql[{}]", sql);
 
             if (paramArr != null && paramArr.Count != 0)
             {
@@ -232,7 +231,6 @@ namespace SQLite
                     ippara = ippara + ", \"" + p  + "\"" ; 
                 }
                 logger.Debug("ippara[{}]", ippara);
-               // sql = sql + ippara;
                 sql = string.Format(sql, ippara);
             }
             else {

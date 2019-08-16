@@ -1,5 +1,5 @@
 <root name="opcserver" servername="Co.Opc.Server.dl.ql_01">
-  <group name="group1" active="1" rate="23" deadband="0" locale="0">
+  <group name="group1" active="1" rate="21" deadband="0" locale="0">
     <tag tagid="1" tagname="test" type="float" />
   </group>
 </root>

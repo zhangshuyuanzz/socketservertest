@@ -99,23 +99,26 @@ namespace SocketServer
 
         private List<string> OpcIPs;
         private int UpdateInterval;
-        public bool OpcDateRegisterCB(int interval)
+        public bool OpcDateRegisterCB(int interval, List<string> OpcIPs)
         {
+            this.OpcIPs = OpcIPs;
             UpdateInterval = interval;
             Logger.Info("startTimer---DataUpdateRate[{}]", interval);
-            OpcServerTimer = new Timer(new TimerCallback(readItemSync), this, System.Threading.Timeout.Infinite, interval * 1000);
-
-
-            List<string> OpcIPs = new List<string>();
-            OpcIPs.Add("192.168.0.88");
-
-            OpcDataGet(OpcIPs);
-
+            OpcServerTimer = new Timer(new TimerCallback(readItemSync), this, 1000, interval * 1000);//System.Threading.Timeout.Infinite
             return true;
         }
         public void readItemSync(object state)
         {
             Logger.Info("readItemSync--get db tag data!!for opc server!!");
+            if (OpcIPs == null) {
+                Logger.Info("OpcIPs == null!!");
+                return;
+            }
+            if (OpcIPs.Count == 0)
+            {
+                Logger.Info("OpcIPs.Count == 0!!");
+                return;
+            }
             foreach (string s in OpcIPs)
             {
                 Logger.Debug("OpcServerStartUpdate--[{}]", s);
@@ -125,6 +128,13 @@ namespace SocketServer
         public void OpcServerStartUpdate(List<string> IPlists)
         {
             OpcIPs = IPlists;
+            OpcServerTimer.Change(1000, UpdateInterval * 1000);
+        }
+        public void OpcServerRestartUpdate(List<string> IPlists)
+        {
+            OpcIPs = IPlists;
+            OpcServerTimer.Change(System.Threading.Timeout.Infinite, UpdateInterval * 1000);
+
             OpcServerTimer.Change(1000, UpdateInterval * 1000);
         }
     }

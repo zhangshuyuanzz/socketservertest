@@ -200,7 +200,7 @@ namespace SocketServer
             logger.Debug("end !!UpdateDevInfo  UDip[{ }]", UDip);
 
         }
-        List<string> IPs = new List<string>();
+        private List<string> IPs = new List<string>();
         private void changeIpdev()
         {
             string ipstr = "IP:";
@@ -292,7 +292,7 @@ namespace SocketServer
 
         }
 
-        private static void OpcServerMain()
+        private  void OpcServerMain()
         {
             logger.Debug("OpcServerMain");
             /*open local db*/
@@ -308,7 +308,7 @@ namespace SocketServer
             OpcDBDatas.Opc_tag_data_handle += new OpcDataSu.OpcServerEventHandler(kleopcserver.OpcServerUpdateTag);
 
             /*set (get opc tag info) timer*/
-            _ = OpcDBDatas.OpcDateRegisterCB(kleopcserver.ServerRate);
+            _ = OpcDBDatas.OpcDateRegisterCB(kleopcserver.ServerRate,this.IPs);
         }
         private bool SkJudgeIsIpv4(string IPstr,in System.Windows.Forms.TextBox tb)
         {

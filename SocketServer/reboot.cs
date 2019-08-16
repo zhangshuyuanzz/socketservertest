@@ -34,10 +34,14 @@ namespace SocketServer
         public void RebootConfirmHandler(object sender, EventArgs e)
         {
             logger.Debug("RebootConfirmHandler--ip[{}]", this.rebootip.Text);
-            if (reboottl.LTJudgeIsIpv4(this.rebootip.Text) == false) {
-                MessageBox.Show(this,"this is invalid ip!!,please back to check again!!");
+            if (reboottl.LTJudgeIsIpv4(this.rebootip.Text) == false)
+            {
+                MessageBox.Show(this, "this is invalid ip!!,please back to check again!!");
             }
-            OnIpChange?.Invoke(sender, this.rebootip.Text);
+            else
+            {
+                OnIpChange?.Invoke(sender, this.rebootip.Text);
+            }
         }
         public void RebootMouseDownHandler(object sender, MouseEventArgs e)
         {
