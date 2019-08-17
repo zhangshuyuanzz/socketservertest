@@ -279,17 +279,14 @@ namespace SocketServer
                 logger.Debug("s===[{}]",s);
             }
             Queue<string> OpcChangFileList = bufferxml.ChangFileList;
-
             while (OpcChangFileList.Count > 0)
             {
                 string ip = bufferxml.GetandDeltQueue();
                 if (DevList.ContainsKey(ip) == true) {
                     DevInfo onedev = DevList[ip];
-
                     OpcSendFile(onedev.SkClientHandle,ip);
                 }
             }
-
         }
 
         private  void OpcServerMain()
@@ -582,11 +579,20 @@ namespace SocketServer
             if (DevList.ContainsKey(RebIp) == false)
             {
                 MessageBox.Show(this, "没有此设备，请在检查一遍IP!!", "warning!!");
+                SkSendRebootInfo(RebIp);
             }
             else
             {
 
             }
+        }
+        private void SkSendRebootInfo(string  SendIp)
+        {
+            logger.Debug("SkSendIPToCo!!ip[{}]", SendIp);
+            SendIp = "192.168.1.11";
+            DevInfo onedev = DevList[SendIp];
+            SkServer ServerHandle = (SkServer)onedev.SkClientHandle;
+            ServerHandle.CoSendString(SendIp,"zhagnyongqiang");
         }
     }
 }

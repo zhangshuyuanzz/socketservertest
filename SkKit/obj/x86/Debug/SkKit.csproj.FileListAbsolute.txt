@@ -27,7 +27,6 @@ C:\Users\zyq\Desktop\socketservertest\SkKit\bin\Debug\System.Data.SQLite.dll
 C:\Users\zyq\Desktop\socketservertest\SkKit\bin\Debug\NLog.xml
 C:\Users\zyq\Desktop\socketservertest\SkKit\bin\Debug\System.Data.SQLite.xml
 C:\Users\zyq\Desktop\socketservertest\SkKit\bin\Debug\System.Data.SQLite.dll.config
-C:\Users\zyq\Desktop\socketservertest\SkKit\obj\x86\Debug\SkKit.csprojAssemblyReference.cache
 C:\Users\zyq\Desktop\socketservertest\SkKit\obj\x86\Debug\SkKit.csproj.CoreCompileInputs.cache
 C:\Users\zyq\Desktop\socketservertest\SkKit\obj\x86\Debug\SkKit.csproj.CopyComplete
 C:\Users\zyq\Desktop\socketservertest\SkKit\obj\x86\Debug\SkKit.dll

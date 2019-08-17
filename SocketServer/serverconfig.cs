@@ -14,7 +14,7 @@ namespace SocketServer
     class Serverconfig
     {
         readonly NLOG logger = new NLOG("serverconfig");
-        XmlDocument xDoc;
+        XmlDocument xDoc = null;
         string XmlPath;
         public Serverconfig(string ip)
         {
@@ -73,6 +73,9 @@ namespace SocketServer
         public void ServerConfigParseXml(ref DevInfo outdevinfo)
         {
             DevInfo devbuffer = outdevinfo;
+            if (xDoc == null) {
+                return;
+            }
             try
             {
             xDoc.Load(XmlPath);

@@ -243,20 +243,21 @@ namespace SkKit
             logger.Debug("CoSendFile end");
 
         }
-        public void CoSendString(string ip, byte[] data)
+        public void CoSendString(string ip, string data)
         {
             logger.Debug("CoSendFile--ip[{}]data[{}]", ip, string.Join(",", data));
+            byte[] SendData = System.Text.Encoding.ASCII.GetBytes(data);
+            logger.Debug("SendData----SendData[{}]", string.Join(",", SendData));
+
             if (DevSkList.ContainsKey(ip))
             {
-                DevSkList[ip].Send(data);
+                DevSkList[ip].Send(SendData);
             }
             else
             {
                 logger.Debug("no this device");
             }
             logger.Debug("CoSendFile end");
-
         }
-        //void CoPort
     }
 }
