@@ -579,20 +579,18 @@ namespace SocketServer
             if (DevList.ContainsKey(RebIp) == false)
             {
                 MessageBox.Show(this, "没有此设备，请在检查一遍IP!!", "warning!!");
-                SkSendRebootInfo(RebIp);
             }
             else
             {
-
+                SkSendRebootInfo(RebIp);
             }
         }
         private void SkSendRebootInfo(string  SendIp)
         {
             logger.Debug("SkSendIPToCo!!ip[{}]", SendIp);
-            SendIp = "192.168.1.11";
             DevInfo onedev = DevList[SendIp];
             SkServer ServerHandle = (SkServer)onedev.SkClientHandle;
-            ServerHandle.CoSendString(SendIp,"zhagnyongqiang");
+            ServerHandle.CoSendString(SendIp,"reboot!!");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Timers;
 
 namespace SkKit
 {
@@ -34,12 +35,13 @@ namespace SkKit
         private string ip;
         private int port;
         private Socket _socket = null;
-        
-        private Dictionary<string , Socket> DevSkList = new Dictionary<string , Socket>();
-        public delegate void ServerDataEventHandler(List<DevTagIndo> tags,string ip);
+        private System.Timers.Timer SkServerDisCTimer = new System.Timers.Timer(2*1000);
+
+        private Dictionary<string, Socket> DevSkList = new Dictionary<string, Socket>();
+        public delegate void ServerDataEventHandler(List<DevTagIndo> tags, string ip);
         public ServerDataEventHandler Server_get_handle;
 
-        public delegate void ServerConnEventHandler(object handle,string ip);
+        public delegate void ServerConnEventHandler(object handle, string ip);
         public ServerConnEventHandler Server_conn_handle;
 
         public delegate void ServerDisconnEventHandler(object handle, string ip);
@@ -77,7 +79,7 @@ namespace SkKit
             }
             catch (Exception e)
             {
-                logger.Debug("error:[{}]",e.ToString());
+                logger.Debug("error:[{}]", e.ToString());
             }
 
             logger.Debug("IP[{}port[{}]", ip, port);
@@ -95,10 +97,10 @@ namespace SkKit
             while (true) {
                 logger.Debug("now listen!!");
                 Socket clientsocket = _socket.Accept();
-//                clientsocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 500);
+                //                clientsocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 500);
 
                 string ip = (clientsocket.RemoteEndPoint as IPEndPoint).Address.ToString();
-                logger.Debug("conn ip [{}]",ip);
+                logger.Debug("conn ip [{}]", ip);
                 if (DevSkList.ContainsKey(ip))
                 {
                     DevSkList[ip] = clientsocket;
@@ -108,7 +110,7 @@ namespace SkKit
                     DevSkList.Add(ip, clientsocket);
                 }
                 logger.Debug("there is a client!!");
-                Server_conn_handle?.Invoke(this,ip);
+                Server_conn_handle?.Invoke(this, ip);
                 Thread subfunc = new Thread(ReceiveMessage);
                 subfunc.Start(clientsocket);
             }
@@ -126,10 +128,15 @@ namespace SkKit
                 while (true)
                 {
                     List<DevTagIndo> TagsL = new List<DevTagIndo>();
+                    if (clientSk == null) {
+                        logger.Debug("clientSk == null--reip[{}]", reip);
+                        return;
+                    }
+
                     int lenth = clientSk.Receive(getbufer);
                     if (lenth == 0) {
                         logger.Debug("receive data is zero");
-                        if (SocketJudgeIsConn(clientSk, reip) == false)
+                        if (SocketJudgeIsConn(ref clientSk, reip) == false)
                         {
                             break;
                         }
@@ -142,19 +149,26 @@ namespace SkKit
 
                     Array.Copy(getbufer, GetData, lenth);
                     logger.Debug("get buffer client[{}]", clientSk.RemoteEndPoint.ToString());
-
                     logger.Debug("get socket msg[{}]", BitConverter.ToString(GetData));
 
-                    SkParseFrame(TagsL, GetData);
-                    Server_get_handle?.Invoke(TagsL, reip);
+                    if (GetData[2] == 0xff && GetData[3] == 0xff && lenth == 4)
+                    {
+                        logger.Error("get reboot back data---reip[{}]", reip);
+                        SocketJudgeIsConn(ref clientSk, reip,false);
+                        return;
+                    }
+                    else {
+                        SkParseFrame(TagsL, GetData);
+                        Server_get_handle?.Invoke(TagsL, reip);
+                    }
                 }
             }
             catch (Exception e)
             {
+                SocketJudgeIsConn(ref clientSk, reip);
                 logger.Error("error [{}]", e.ToString());
-                SocketClose(clientSk);
             }
-            logger.Debug("socket conn disconned");
+            logger.Debug("ReceiveMessage--end");
         }
         public bool SkParseFrame(List<DevTagIndo> TagsL, byte[] InData)
         {
@@ -174,62 +188,76 @@ namespace SkKit
                 return false;
             }
             byte num;
-            byte []OneTagdata = new byte[6];
+            byte[] OneTagdata = new byte[6];
             for (num = 0; num < DevCount; num++) {
-                DevTagIndo OneIDInfo = new DevTagIndo(); 
-                Array.Copy(InData,3+num*6, OneTagdata,0,6);
+                DevTagIndo OneIDInfo = new DevTagIndo();
+                Array.Copy(InData, 3 + num * 6, OneTagdata, 0, 6);
                 logger.Debug("-----------sk msg !!OneTagdata[{}]", BitConverter.ToString(OneTagdata));
 
-                int TagID = (int)BitConverter.ToUInt16(OneTagdata,0);
+                int TagID = (int)BitConverter.ToUInt16(OneTagdata, 0);
 
-                Array.Copy(OneTagdata,2, OneIDInfo.TagMetadata,0,4);
-               // OneIDInfo.value = BitConverter.ToSingle(OneTagdata,2);
+                Array.Copy(OneTagdata, 2, OneIDInfo.TagMetadata, 0, 4);
+                // OneIDInfo.value = BitConverter.ToSingle(OneTagdata,2);
                 OneIDInfo.ID = TagID;
                 logger.Debug("parse !!!---tag info ID[{}]-", OneIDInfo.ID);
                 TagsL.Add(OneIDInfo);
             }
-            return RetParse; 
+            return RetParse;
         }
-        public bool SocketJudgeIsConn(Socket ClientFd,string reip)
+        public bool SocketJudgeIsConn(ref Socket ClientFd, string reip,bool inret = true)
         {
-            bool ret = true;
+            logger.Debug("SocketJudgeIsConn");
+            if (ClientFd == null) {
+                return true;
+            }
+            bool ret = inret;
             byte[] buffer = new byte[100];
             try
             {
-                if (ClientFd.Poll(0, SelectMode.SelectRead))
+                lock (this)
                 {
-                    int nRead = ClientFd.Receive(buffer);
-                    if (nRead == 0)
+                    //string teststr = "test-alive";
+                    //byte[] SendData = System.Text.Encoding.ASCII.GetBytes(teststr);
+                    //ClientFd.Send(SendData);
+                    if (ClientFd.Poll(0, SelectMode.SelectRead))
                     {
-                        logger.Debug("socket连接已断开");
-                        SocketClose(ClientFd);
-                        ret = false;
+                        int nRead = ClientFd.Receive(buffer);
+                        if (nRead == 0)
+                        {
+                            logger.Debug("socket连接已断开");
+                            ret = false;
+                        }
                     }
                 }
             }
             catch (SocketException ex)
             {
-                logger.Debug("error[{}]",ex.ToString());
+                logger.Debug("error[{}]", ex.ToString());
                 logger.Debug("socket连接已断开");
-                SocketClose(ClientFd);
                 ret = false;
             }
             if (ret == false) {
                 Server_disconn_handle?.Invoke(this, reip);
+                if (DevSkList.ContainsKey(reip) == true)
+                {
+                    DevSkList.Remove(reip);
+                }
+                SocketClose(ref ClientFd);
             }
             return ret;
         }
 
-        public bool SocketClose(Socket ClientFd)
+        public bool SocketClose(ref Socket ClientFd)
         {
             bool CloseRet = true;
             if (ClientFd != null) {
                 ClientFd.Shutdown(SocketShutdown.Both);
                 ClientFd.Close();
+                ClientFd = null;
             }
             return CloseRet;
         }
-        public void CoSendFile(string ip ,string path) 
+        public void CoSendFile(string ip, string path)
         {
             logger.Debug("CoSendFile--ip[{}]path[{}]", ip, path);
             if (DevSkList.ContainsKey(ip))
@@ -245,9 +273,9 @@ namespace SkKit
         }
         public void CoSendString(string ip, string data)
         {
-            logger.Debug("CoSendFile--ip[{}]data[{}]", ip, string.Join(",", data));
+            logger.Debug("CoSendString--ip[{}]data[{}]", ip, string.Join(",", data));
             byte[] SendData = System.Text.Encoding.ASCII.GetBytes(data);
-            logger.Debug("SendData----SendData[{}]", string.Join(",", SendData));
+            logger.Debug("SendData----SendData[{}]", BitConverter.ToString(SendData));
 
             if (DevSkList.ContainsKey(ip))
             {
@@ -257,7 +285,21 @@ namespace SkKit
             {
                 logger.Debug("no this device");
             }
-            logger.Debug("CoSendFile end");
+            logger.Debug("CoSendString end");
+        }
+        private void init_timer()
+        {
+            SkServerDisCTimer.AutoReset = true;
+            SkServerDisCTimer.Enabled = true;
+            SkServerDisCTimer.Elapsed += new ElapsedEventHandler(SkServerTimerEvent);
+        }
+        public  void SkServerTimerEvent(object sender, ElapsedEventArgs e)
+        {
+            logger.Debug("SkServerTimerEvent!!");
+            foreach (KeyValuePair<string, Socket> s in DevSkList) {
+                logger.Debug("key[{}]value[{}]",s.Key,s.Value);
+                //SocketJudgeIsConn(ref s.Value, s.Key);
+            }
         }
     }
 }
