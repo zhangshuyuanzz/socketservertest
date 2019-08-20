@@ -69,18 +69,18 @@ dlt645：
 -->
   <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="809930081004" serialport="8" actstate="0" interval="3">
     <tag name="FEATURE_POWER_FACTOR"                DIid="50B6" id="30" type="1" />
-    <tag name="FEATURE_VOLTAGE_A"                   DIid="11B6" id="30" type="1" />
-    <tag name="FEATURE_VOLTAGE_B"                   DIid="12B6" id="31" type="1" />
-    <tag name="FEATURE_VOLTAGE_C"                   DIid="13B6" id="32" type="1" />
-    <tag name="FEATURE_CURRENT_A"                   DIid="21B6" id="33" type="1" />
-    <tag name="FEATURE_CURRENT_B"                   DIid="22B6" id="34" type="1" />
-    <tag name="FEATURE_CURRENT_C"                   DIid="23B6" id="35" type="1" />
-    <tag name="FEATURE_POSITIVE_ACTIVE_POWER"       DIid="30B6" id="36" type="1" />
-    <tag name="FEATURE_REVERSE_ACTIVE_POWER"        DIid="30B6" id="37" type="1" />
-    <tag name="FEATURE_POSITIVE_REACTIVE_POWER"     DIid="40B6" id="38" type="1" />
-    <tag name="FEATURE_REVERSE_REACTIVE_POWER"      DIid="40B6" id="39" type="1" />
-    <tag name="FEATURE_POSITIVE_ENERGY"             DIid="1090" id="40" type="1" />
-    <tag name="FEATURE_REVERSE_ENERGY"              DIid="2090" id="41" type="1" />
+    <tag name="FEATURE_VOLTAGE_A"                   DIid="B611" id="30" type="1" />
+    <tag name="FEATURE_VOLTAGE_B"                   DIid="B612" id="31" type="1" />
+    <tag name="FEATURE_VOLTAGE_C"                   DIid="B613" id="32" type="1" />
+    <tag name="FEATURE_CURRENT_A"                   DIid="B621" id="33" type="1" />
+    <tag name="FEATURE_CURRENT_B"                   DIid="B622" id="34" type="1" />
+    <tag name="FEATURE_CURRENT_C"                   DIid="B623" id="35" type="1" />
+    <tag name="FEATURE_POSITIVE_ACTIVE_POWER"       DIid="B630" id="36" type="1" />
+    <tag name="FEATURE_REVERSE_ACTIVE_POWER"        DIid="B630" id="37" type="1" />
+    <tag name="FEATURE_POSITIVE_REACTIVE_POWER"     DIid="B640" id="38" type="1" />
+    <tag name="FEATURE_REVERSE_REACTIVE_POWER"      DIid="B640" id="39" type="1" />
+    <tag name="FEATURE_POSITIVE_ENERGY"             DIid="9010" id="40" type="1" />
+    <tag name="FEATURE_REVERSE_ENERGY"              DIid="9020" id="41" type="1" />
   </device>
   
   <!--===hs96 设备===

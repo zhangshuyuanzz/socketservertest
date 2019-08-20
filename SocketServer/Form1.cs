@@ -178,7 +178,7 @@ namespace SocketServer
 
                     NewTagList.Add(Atag);
 
-                SkUpdateTime(one.myname, UDip);
+                SkUpdateTime(one.myname, UDip);   //更新时间戳
             }
 
                 foreach (KeyValuePair<int, string> s in IpToBoxIndex)
@@ -190,8 +190,9 @@ namespace SocketServer
                         allboxs[num + 2].Text = Tags.TagList.Count.ToString();  //更新总tag数
                     }
                 }
-                ServerDB.OpcDataWriteTag(NewTagList, gotoflag);
 
+                ServerDB.OpcDataWriteTag(NewTagList, gotoflag);       //插入数据库
+                //updateInvalidIPInfo();   //更新无效ip的信息
             }
             catch (Exception ex)
             {
@@ -349,6 +350,32 @@ namespace SocketServer
             DevInfo OneDev = DevList[ip];
             allboxs[number * 10 + 2].Text = OneDev.TagList.Count.ToString();
         }
+
+        private void updateInvalidIPInfo()
+        {
+            if (this.ip1.Text == null || this.ip1.Text.Length == 0)
+            {
+                allboxs[12].Text = null;
+                allboxs[13].Text = null;
+                allboxs[14].Text = null;
+                allboxs[15].Text = null;
+            }
+            if (this.ip2.Text == null || this.ip2.Text.Length == 0)
+            {
+                allboxs[22].Text = null;
+                allboxs[23].Text = null;
+                allboxs[24].Text = null;
+                allboxs[25].Text = null;
+            }
+            if (this.ip3.Text == null || this.ip3.Text.Length == 0)
+            {
+                allboxs[32].Text = null;
+                allboxs[33].Text = null;
+                allboxs[34].Text = null;
+                allboxs[35].Text = null;
+            }
+        }
+        /*如有IP，和tagname，更新tag值和时间戳*/
         private void SkUpdateTime(string tagname,string ip)
         {
             logger.Debug("SkUpdateTime  name[{}]ip[{}]", tagname, ip);

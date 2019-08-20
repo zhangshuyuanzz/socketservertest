@@ -21,8 +21,24 @@
     <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
     <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
   </serial>
-  <device name="modbus——dev1" protocol="modbus" devmodel="fc6000" endian="1" address="10" serialport="6" actstate="0" interval="10">
-    <tag name="modbus_quality_mass_flow" startaddr="2" quantity="2" id="10" type="1" byteOrder="4321" />
-    <tag name="modbus_heat_mass_flow" startaddr="4" quantity="2" id="11" type="1" byteOrder="4321" />
+  <device name="FUJI-name01" protocol="fuji" devmodel="haifeng" address="5" serialport="10" actstate="0" interval="10">
+    <command name="FUJI_INSTANCE_FLOWRATE" command="DQD" id="50" />
+    <command name="FUJI_CUMULANT" command="DI+" id="51" />
+  </device>
+  <device name="HS96_dev1" protocol="hs96" devmodel="hs96-panel1" address="20" serialport="4" actstate="0" interval="3">
+    <tag name="HS96_FLOW" id="5" type="1" />
+    <tag name="HS96_PRESSURE" id="6" type="1" />
+    <tag name="HS96_PRESSURE_DIFFER" id="7" type="1" />
+    <tag name="HS96_TEMPERA" id="8" type="1" />
+    <tag name="HS96_CUMULANT" id="9" type="1" />
+  </device>
+  <device name="modbus——dev2" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="0">
+    <tag name="modbus_quality_mass_flow2" startaddr="2" quantity="2" id="17" type="1" byteOrder="4321" />
+    <tag name="modbus_heat_mass_flow2" startaddr="4" quantity="2" id="18" type="1" byteOrder="4321" />
+    <tag name="modbus_quality_instant_flow2" startaddr="6" quantity="2" id="19" type="1" byteOrder="4321" />
+    <tag name="modbus_heat_instant_flow2" startaddr="8" quantity="2" id="20" type="1" byteOrder="4321" />
+    <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="4321" />
+    <tag name="modbus_pressure2" startaddr="14" quantity="2" id="22" type="1" byteOrder="4321" />
+    <tag name="modbus_vapor_density2" startaddr="16" quantity="2" id="23" type="1" byteOrder="4321" />
   </device>
 </collector>
