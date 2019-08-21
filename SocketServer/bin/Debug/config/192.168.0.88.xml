@@ -9,7 +9,7 @@
     dlt645-97     = 97协议,    
  -->
 <collector>
-  <attr scada_frequency="2" attempts_num="15" attempts_interval="3" />
+  <attr scada_frequency="5" attempts_num="15" attempts_interval="3" />
   <!-- serial：                
     modify:baude bits parity stop
 		yes	,可修改

@@ -23,7 +23,7 @@ namespace SocketServer
         private string filepath = @".\config\";
         private Dictionary<string, DevInfo> DevList = new Dictionary<string, DevInfo>();   //保存有当前可更新的所有的设备数据
 
-        private Dictionary<int,string > IpToBoxIndex = new Dictionary <int, string>(); // <ip,boxid>用于得到的数据与界面box关联
+        private Dictionary<int,string > IpToBoxIndex = new Dictionary <int, string>(); // <ip,boxid>用于得到的数据与界面box关联,ip可重复
         private OpcDateUpdate ServerDB = null;
 
         //private XmlFileWatch tt;
@@ -242,7 +242,6 @@ namespace SocketServer
                 DevList.Add(ip, onedev);
                 changeIpdev();
                 BindIplist.Add(ip);
-
             }
             else
             {
@@ -266,6 +265,7 @@ namespace SocketServer
                 logger.Debug("thie file is exist!!!");
                 System.Threading.Thread.Sleep(1000);
                 ServerHandle.CoSendFile(ip, IsExistPath);
+                ServerHandle.CoSendString(ip, "send-file-end");
             }
             else
             {
@@ -351,28 +351,26 @@ namespace SocketServer
             allboxs[number * 10 + 2].Text = OneDev.TagList.Count.ToString();
         }
 
-        private void updateInvalidIPInfo()
+        private void updateInvalidIPInfo(string cuIp,int num)
         {
-            if (this.ip1.Text == null || this.ip1.Text.Length == 0)
+            try
             {
-                allboxs[12].Text = null;
-                allboxs[13].Text = null;
-                allboxs[14].Text = null;
-                allboxs[15].Text = null;
+                if (cuIp == null || cuIp.Length == 0)
+                {
+                    if (IpToBoxIndex.ContainsKey(num) == true)
+                    {
+                        logger.Debug("updateInvalidIPInfo-----------[{}]--", num);
+                        IpToBoxIndex.Remove(num);
+                        allboxs[num + 2].Text = null;
+                        allboxs[num + 3].Text = null;
+                        allboxs[num + 4].Text = null;
+                        allboxs[num + 5].Text = null;
+                    }
+                }
             }
-            if (this.ip2.Text == null || this.ip2.Text.Length == 0)
+            catch (Exception ex)
             {
-                allboxs[22].Text = null;
-                allboxs[23].Text = null;
-                allboxs[24].Text = null;
-                allboxs[25].Text = null;
-            }
-            if (this.ip3.Text == null || this.ip3.Text.Length == 0)
-            {
-                allboxs[32].Text = null;
-                allboxs[33].Text = null;
-                allboxs[34].Text = null;
-                allboxs[35].Text = null;
+                logger.Debug("----[{}]-", ex.ToString());
             }
         }
         /*如有IP，和tagname，更新tag值和时间戳*/
@@ -474,6 +472,9 @@ namespace SocketServer
         }
         private void tagnameboxchange(string tagname, string ip,int num)
         {
+            if (DevList.ContainsKey(ip) == false) {
+                return;
+            }
             ConcurrentDictionary<int, TagInfo> Alltag = DevList[ip].TagList;
             if (DevList[ip].TagListWithName.ContainsKey(tagname) == true)
             {
@@ -519,6 +520,7 @@ namespace SocketServer
             }
             else
             {
+                updateInvalidIPInfo(tt, 10);
                 logger.Debug("this is invalid ip !!");
             }
         }
@@ -533,6 +535,7 @@ namespace SocketServer
             else
             {
                 logger.Debug("this is invalid ip !!");
+                updateInvalidIPInfo(tt,20);
             }
         }
         private void Ip3_TextChanged(object sender, EventArgs e)
@@ -546,6 +549,7 @@ namespace SocketServer
             else
             {
                 logger.Debug("this is invalid ip !!");
+                updateInvalidIPInfo(tt, 30);
             }
         }
 
@@ -570,13 +574,9 @@ namespace SocketServer
         }
         private void Ip1_mouse_double_Clicked(object sender, MouseEventArgs e)
         {
-            logger.Debug("Ip1_mouse_double_Clicked--");
             logger.Debug("Ip1_mouse_double_Clicked  [{}]", this.colist1.SelectedIndex);
             logger.Debug("Ip1_mouse_double_Clicked  [{}]", this.colist1.Text);
-            logger.Debug("Ip1_mouse_double_Clicked  SelectedItem[{}]", this.colist1.SelectedItem.ToString());
-            logger.Debug("Ip1_mouse_double_Clicked[{}]", e.Button.ToString());
             this.ip1.Text = this.colist1.SelectedItem.ToString();
-
             this.colist1.Visible = !this.colist1.Visible;
         }
 

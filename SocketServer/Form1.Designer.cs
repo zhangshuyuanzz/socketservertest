@@ -335,10 +335,11 @@ namespace SocketServer
             this.dev3IDT.Location = new System.Drawing.Point(609, 381);
             this.dev3IDT.Name = "dev3IDT";
             this.dev3IDT.ReadOnly = true;
-            this.dev3IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dev3IDT.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dev3IDT.Size = new System.Drawing.Size(169, 25);
             this.dev3IDT.TabIndex = 23;
             this.dev3IDT.Text = "0";
+            this.dev3IDT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -356,10 +357,11 @@ namespace SocketServer
             this.dev2IDT.Location = new System.Drawing.Point(609, 272);
             this.dev2IDT.Name = "dev2IDT";
             this.dev2IDT.ReadOnly = true;
-            this.dev2IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dev2IDT.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dev2IDT.Size = new System.Drawing.Size(169, 25);
             this.dev2IDT.TabIndex = 21;
             this.dev2IDT.Text = "0";
+            this.dev2IDT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
@@ -389,10 +391,11 @@ namespace SocketServer
             this.dev1IDT.Location = new System.Drawing.Point(609, 174);
             this.dev1IDT.Name = "dev1IDT";
             this.dev1IDT.ReadOnly = true;
-            this.dev1IDT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dev1IDT.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dev1IDT.Size = new System.Drawing.Size(169, 25);
             this.dev1IDT.TabIndex = 17;
             this.dev1IDT.Text = "0";
+            this.dev1IDT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // colist1
             // 
@@ -443,8 +446,7 @@ namespace SocketServer
             this.rebootbtn.TabIndex = 34;
             this.rebootbtn.Text = "重启（选择）";
             this.rebootbtn.UseVisualStyleBackColor = true;
-            this.rebootbtn.Click += new System.EventHandler(reboot_TextClicked);
-           // this.rebootbtn.Visible = false;
+            this.rebootbtn.Click += new System.EventHandler(this.reboot_TextClicked);
             // 
             // Form1
             // 

@@ -6,9 +6,9 @@
  
  
 <!-- collector：                
-    scada_frequency  ：   暂时没用
-    attempts_num     ：   采集失败，尝试继续采集次数,
-    attempts_interval ：  采集数据等待超时时间,    
+    scada_frequency  ：   发送间隔时间，单位：min
+    attempts_num     ：   采集失败，尝试继续采集次数，单位：s,
+    attempts_interval ：  采集数据等待超时时间,单位：s    
  -->
 <collector>
   <attr scada_frequency="2" attempts_num="3" attempts_interval="3" />

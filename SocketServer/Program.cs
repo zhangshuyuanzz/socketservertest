@@ -39,7 +39,7 @@ namespace SocketServer
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             try
-            {
+            {                
                 MessageBox.Show(e.Exception.Message);
             }
             catch { }
