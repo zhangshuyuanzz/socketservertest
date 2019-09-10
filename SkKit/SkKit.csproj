@@ -97,7 +97,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(TargetDir)*  $(SolutionDir)SocketServer\bin\Debug /f /y
-xcopy $(TargetDir)*  $(SolutionDir)Fujidev\bin\Debug /f /y</PostBuildEvent>
+xcopy $(TargetDir)*  $(SolutionDir)Fujidev\bin\Debug /f /y
+xcopy $(TargetDir)*  $(SolutionDir)KJtest\bin\Debug /f /y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.111.0\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.111.0\build\net40\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

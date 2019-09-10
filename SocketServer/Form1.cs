@@ -265,6 +265,7 @@ namespace SocketServer
                 logger.Debug("thie file is exist!!!");
                 System.Threading.Thread.Sleep(1000);
                 ServerHandle.CoSendFile(ip, IsExistPath);
+                System.Threading.Thread.Sleep(500);
                 ServerHandle.CoSendString(ip, "send-file-end");
             }
             else

@@ -35,4 +35,3 @@ C:\Users\zyq\Desktop\socketservertest\SocketServer\obj\x86\Debug\SocketServer.cs
 C:\Users\zyq\Desktop\socketservertest\SocketServer\obj\x86\Debug\SocketServer.csproj.CopyComplete
 C:\Users\zyq\Desktop\socketservertest\SocketServer\obj\x86\Debug\SocketServer.exe
 C:\Users\zyq\Desktop\socketservertest\SocketServer\obj\x86\Debug\SocketServer.pdb
-C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csprojAssemblyReference.cache

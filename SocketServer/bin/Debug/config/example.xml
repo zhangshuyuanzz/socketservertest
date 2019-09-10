@@ -67,8 +67,8 @@ dlt645：
     type:float=1  long=2 
     DIid： DI0 DI1  
 -->
-  <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="809930081004" serialport="8" actstate="0" interval="3">
-    <tag name="FEATURE_POWER_FACTOR"                DIid="50B6" id="30" type="1" />
+  <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="041008309980" serialport="8" actstate="0" interval="3">
+    <tag name="FEATURE_POWER_FACTOR"                DIid="B650" id="30" type="1" />
     <tag name="FEATURE_VOLTAGE_A"                   DIid="B611" id="30" type="1" />
     <tag name="FEATURE_VOLTAGE_B"                   DIid="B612" id="31" type="1" />
     <tag name="FEATURE_VOLTAGE_C"                   DIid="B613" id="32" type="1" />

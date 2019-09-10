@@ -281,10 +281,11 @@ namespace SocketServer
             this.tagname3.Location = new System.Drawing.Point(373, 329);
             this.tagname3.Name = "tagname3";
             this.tagname3.ReadOnly = true;
-            this.tagname3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tagname3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tagname3.Size = new System.Drawing.Size(169, 25);
             this.tagname3.TabIndex = 27;
             this.tagname3.Text = "0";
+            this.tagname3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tagname3.TextChanged += new System.EventHandler(this.Tagname3_TextChanged);
             // 
             // tagname2
@@ -292,10 +293,11 @@ namespace SocketServer
             this.tagname2.Location = new System.Drawing.Point(373, 230);
             this.tagname2.Name = "tagname2";
             this.tagname2.ReadOnly = true;
-            this.tagname2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tagname2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tagname2.Size = new System.Drawing.Size(169, 25);
             this.tagname2.TabIndex = 26;
             this.tagname2.Text = "0";
+            this.tagname2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tagname2.TextChanged += new System.EventHandler(this.Tagname2_TextChanged);
             // 
             // tagname1
@@ -490,7 +492,7 @@ namespace SocketServer
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "琪朗(dl)-科技";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1Closed);
             this.Load += new System.EventHandler(this.Form1_Load);
