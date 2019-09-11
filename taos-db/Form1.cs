@@ -15,21 +15,20 @@ namespace taos_db
     {
         private NLOG logger = new NLOG("SkServer");
 
-        public Form1(String[] argv)
+        public Form1()
         {
             logger.Debug("---Form1------------- - ");
             InitializeComponent();
-            TDengineStart(argv);
+            TDengineStart();
         }
-        public void TDengineStart(String[] argv)
+        public void TDengineStart()
         {
             TDengineTest tester = new TDengineTest();
-            tester.ReadArgument(argv);
+            tester.ReadArgument();
 
-            logger.Debug("-------------------------------------------------------------- - ");
-            logger.Debug("---------------------------------------------------------------");
-            logger.Debug("Starting Testing...");
-            logger.Debug("---------------------------------------------------------------");
+            logger.Debug("---------------------------------------------------------------------------------------------------- - ");
+            logger.Debug("Starting TDengine...");
+            logger.Debug("-------------------------------------------------------------------------------------------------------");
 
             tester.InitTDengine();
             tester.ConnectTDengine();
@@ -39,7 +38,6 @@ namespace taos_db
             tester.CloseConnection();
 
             logger.Debug("---------------------------------------------------------------");
-            logger.Debug("Stop Testing...");
             logger.Debug("---------------------------------------------------------------");
         }
 

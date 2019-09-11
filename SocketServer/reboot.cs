@@ -24,8 +24,8 @@ namespace SocketServer
         public void RebootFormClosingEventHandler(object sender, FormClosingEventArgs e)
         {
             logger.Debug("FormClosingEventHandler");
-            this.Dispose();
-            this.Close();
+         //   this.Dispose();
+          //  this.Close();
         }
         public void RebootEventHandler(object sender, EventArgs e)
         {

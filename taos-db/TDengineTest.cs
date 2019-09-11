@@ -32,6 +32,7 @@ namespace TDengineDriver
         private string user;
         private string password;
         private int port = 6020;
+        private int keeplive = 100;
 
         //sql parameters
         private string dbName;
@@ -104,59 +105,52 @@ namespace TDengineDriver
             return defaultValue;
         }
 
-        public void PrintHelp(String[] argv)
+        public void PrintHelp( )
         {
-            for (int i = 0; i < argv.Length; ++i)
-            {
-                if ("--help" == argv[i])
-                {
-                    String indent = "    ";
-                    logger.Debug("taosTest is simple example to operate TDengine use C# Language.\n");
-                    logger.Debug("{0:G}{1:G}", indent, "-h");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "TDEngine server IP address to connect");
-                    logger.Debug("{0:G}{1:G}", indent, "-u");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "The TDEngine user name to use when connecting to the server, default is root");
-                    logger.Debug("{0:G}{1:G}", indent, "-p");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "The TDEngine user name to use when connecting to the server, default is taosdata");
-                    logger.Debug("{0:G}{1:G}", indent, "-d");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Database used to create table or import data, default is db");
-                    logger.Debug("{0:G}{1:G}", indent, "-s");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Super Tables used to create table, default is mt");
-                    logger.Debug("{0:G}{1:G}", indent, "-t");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Table prefixs, default is t");
-                    logger.Debug("{0:G}{1:G}", indent, "-w");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Whether to insert data");
-                    logger.Debug("{0:G}{1:G}", indent, "-r");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Whether to query data");
-                    logger.Debug("{0:G}{1:G}", indent, "-n");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "How many Tables to create, default is 10");
-                    logger.Debug("{0:G}{1:G}", indent, "-b");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "How many rows per insert batch, default is 10");
-                    logger.Debug("{0:G}{1:G}", indent, "-i");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "How many rows to insert, default is 100");
-                    logger.Debug("{0:G}{1:G}", indent, "-c");
-                    logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Configuration directory");
 
-                    ExitProgram();
-                }
-            }
+            String indent = "    ";
+            logger.Debug("taosTest is simple example to operate TDengine use C# Language.\n");
+            logger.Debug("{0:G}{1:G}", indent, "-h");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "TDEngine server IP address to connect");
+            logger.Debug("{0:G}{1:G}", indent, "-u");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "The TDEngine user name to use when connecting to the server, default is root");
+            logger.Debug("{0:G}{1:G}", indent, "-p");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "The TDEngine user name to use when connecting to the server, default is taosdata");
+            logger.Debug("{0:G}{1:G}", indent, "-d");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Database used to create table or import data, default is db");
+            logger.Debug("{0:G}{1:G}", indent, "-s");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Super Tables used to create table, default is mt");
+            logger.Debug("{0:G}{1:G}", indent, "-t");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Table prefixs, default is t");
+            logger.Debug("{0:G}{1:G}", indent, "-w");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Whether to insert data");
+            logger.Debug("{0:G}{1:G}", indent, "-r");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Whether to query data");
+            logger.Debug("{0:G}{1:G}", indent, "-n");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "How many Tables to create, default is 10");
+            logger.Debug("{0:G}{1:G}", indent, "-b");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "How many rows per insert batch, default is 10");
+            logger.Debug("{0:G}{1:G}", indent, "-i");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "How many rows to insert, default is 100");
+            logger.Debug("{0:G}{1:G}", indent, "-c");
+            logger.Debug("{0:G}{1:G}{2:G}", indent, indent, "Configuration directory");
         }
 
-        public void ReadArgument(String[] argv)
+        public void ReadArgument()
         {
-            PrintHelp(argv);
-            host = this.GetArgumentAsString(argv, "-h", "192.168.138.134");
-            user = this.GetArgumentAsString(argv, "-u", "root");
-            password = this.GetArgumentAsString(argv, "-p", "taosdata");
-            dbName = this.GetArgumentAsString(argv, "-d", "zyq");
-            stableName = this.GetArgumentAsString(argv, "-s", "st");
-            tablePrefix = this.GetArgumentAsString(argv, "-t", "t");
-            isInsertData = this.GetArgumentAsLong(argv, "-w", 0, 1, 1) != 0;
-            isQueryData = this.GetArgumentAsLong(argv, "-r", 0, 1, 1) != 0;
-            tableCount = this.GetArgumentAsLong(argv, "-n", 1, 10000, 10);
-            batchRows = this.GetArgumentAsLong(argv, "-b", 1, 1000, 500);
-            totalRows = this.GetArgumentAsLong(argv, "-i", 1, 10000000, 10000);
-            configDir = this.GetArgumentAsString(argv, "-c", "C:/TDengine/cfg");
+            PrintHelp();
+            host = "192.168.138.134";
+            user = "root";
+            password = "taosdata";
+            dbName = "TD_QL_DB";
+            stableName = "co_st"; //采集机超级表名
+            tablePrefix = "t";
+            isInsertData = true;
+            isQueryData =true;
+            tableCount = 100;
+            batchRows = 500;
+            totalRows = 10000;
+            configDir = "./config";
             logger.Debug("---host[{}], user[{}], password[{}], dbName[{}]----", host, user, password, dbName);
             logger.Debug("---stableName[{}], tablePrefix[{}], isInsertData[{}]----", stableName, tablePrefix, isInsertData);
             logger.Debug("---isQueryData[{}], tableCount[{}], configDir[{}]----", isQueryData, tableCount, configDir);
@@ -194,8 +188,8 @@ namespace TDengineDriver
             }
 
             StringBuilder sql = new StringBuilder();
-            sql.Append("create database if not exists ").Append(this.dbName);
-            logger.Debug("name [{}]--", this.dbName);
+            sql.Append("create database if not exists ").Append(this.dbName).Append(" days ").Append(this.keeplive);
+            logger.Debug("database sql [{}]--", sql.ToString());
             int code = TDengine.Query(this.conn, sql.ToString());
             if (code == TDengine.TSDB_CODE_SUCCESS)
             {
@@ -274,6 +268,7 @@ namespace TDengineDriver
                         long rows = loop * this.batchRows + batch;
                         sql.Append("(").Append(this.beginTimestamp + rows).Append(",").Append(rows).Append(")");
                     }
+                    logger.Debug("insert sql[{}]", sql.ToString();
                     int code = TDengine.Query(conn, sql.ToString());
                     if (code != TDengine.TSDB_CODE_SUCCESS)
                     {
@@ -288,7 +283,7 @@ namespace TDengineDriver
             System.DateTime end = new System.DateTime();
             TimeSpan ts = end - start;
 
-            Console.Write("Total {0:G} rows inserted, {1:G} rows failed, time spend {2:G} seconds.\n"
+            logger.Debug("Total {0:G} rows inserted, {1:G} rows failed, time spend {2:G} seconds.\n"
               , this.rowsInserted, this.totalRows * this.tableCount - this.rowsInserted, ts.TotalSeconds);
         }
 
@@ -305,7 +300,7 @@ namespace TDengineDriver
             for (int i = 0; i < this.tableCount; ++i)
             {
                 String sql = "select * from " + this.dbName + "." + tablePrefix + i;
-                logger.Debug(sql);
+                logger.Debug("select sql---[{}]",sql);
 
                 int code = TDengine.Query(conn, sql);
                 if (code != TDengine.TSDB_CODE_SUCCESS)
@@ -315,13 +310,13 @@ namespace TDengineDriver
                 }
 
                 int fieldCount = TDengine.FieldCount(conn);
-                //logger.Debug("field count: " + fieldCount);
+                logger.Debug("field count: " + fieldCount);
 
                 List<TDengineMeta> metas = TDengine.FetchFields(conn);
                 for (int j = 0; j < metas.Count; j++)
                 {
                     TDengineMeta meta = (TDengineMeta)metas[j];
-                    //logger.Debug("index:" + j + ", type:" + meta.type + ", typename:" + meta.TypeName() + ", name:" + meta.name + ", size:" + meta.size);
+                    logger.Debug("index:" + j + ", type:" + meta.type + ", typename:" + meta.TypeName() + ", name:" + meta.name + ", size:" + meta.size);
                 }
 
                 long result = TDengine.UseResult(conn);
@@ -341,11 +336,8 @@ namespace TDengineDriver
                         int offset = 8 * fields;
                         IntPtr data = Marshal.ReadIntPtr(rowdata, offset);
 
-                        //Console.Write("---");
-
                         if (data == IntPtr.Zero)
                         {
-                            //Console.Write("NULL");
                             continue;
                         }
 
@@ -353,43 +345,43 @@ namespace TDengineDriver
                         {
                             case TDengineDataType.TSDB_DATA_TYPE_BOOL:
                                 bool v1 = Marshal.ReadByte(data) == 0 ? false : true;
-                                //Console.Write(v1);
+                                logger.Debug(v1);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_TINYINT:
                                 byte v2 = Marshal.ReadByte(data);
-                                //Console.Write(v2);
+                                //logger.Debug(v2);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_SMALLINT:
                                 short v3 = Marshal.ReadInt16(data);
-                                //Console.Write(v3);
+                                //logger.Debug(v3);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_INT:
                                 int v4 = Marshal.ReadInt32(data);
-                                //Console.Write(v4);
+                                //logger.Debug(v4);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_BIGINT:
                                 long v5 = Marshal.ReadInt64(data);
-                                //Console.Write(v5);
+                                //logger.Debug(v5);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_FLOAT:
                                 float v6 = (float)Marshal.PtrToStructure(data, typeof(float));
-                                //Console.Write(v6);
+                                //logger.Debug(v6);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_DOUBLE:
                                 double v7 = (double)Marshal.PtrToStructure(data, typeof(double));
-                                //Console.Write(v7);
+                                //logger.Debug(v7);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_BINARY:
                                 string v8 = Marshal.PtrToStringAnsi(data);
-                                //Console.Write(v8);
+                                //logger.Debug(v8);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_TIMESTAMP:
                                 long v9 = Marshal.ReadInt64(data);
-                                //Console.Write(v9);
+                                //logger.Debug(v9);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_NCHAR:
                                 string v10 = Marshal.PtrToStringAnsi(data);
-                                //Console.Write(v10);
+                                //logger.Debug(v10);
                                 break;
                         }
                     }
@@ -398,7 +390,7 @@ namespace TDengineDriver
 
                 if (TDengine.ErrorNo(conn) != 0)
                 {
-                    Console.Write("Query is not complete， Error {0:G}", TDengine.ErrorNo(conn), TDengine.Error(conn));
+                    logger.Debug("Query is not complete， Error {0:G}", TDengine.ErrorNo(conn), TDengine.Error(conn));
                 }
 
                 TDengine.FreeResult(result);
@@ -407,7 +399,7 @@ namespace TDengineDriver
             System.DateTime end = new System.DateTime();
             TimeSpan ts = end - start;
 
-            Console.Write("Total {0:G} rows inserted, {1:G} rows query, time spend {2:G} seconds.\n"
+            logger.Debug("Total {0:G} rows inserted, {1:G} rows query, time spend {2:G} seconds.\n"
              , this.rowsInserted, queryRows, ts.TotalSeconds);
         }
 

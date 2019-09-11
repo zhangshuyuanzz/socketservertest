@@ -15,7 +15,7 @@ namespace taos_db
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(args));
+            Application.Run(new Form1());
         }
     }
 }
