@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\OpcClientForMetering.exe
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\OpcClientForMetering.pdb
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.Form1.resources
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.Properties.Resources.resources
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.exe
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.pdb

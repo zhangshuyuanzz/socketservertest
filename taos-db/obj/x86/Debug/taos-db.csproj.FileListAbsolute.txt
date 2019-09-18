@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos-db.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos_db.Form1.resources
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos_db.Properties.Resources.resources
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos-db.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos-db.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\bin\x86\Debug\taos-db.exe
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\bin\x86\Debug\taos-db.pdb
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\bin\x86\Debug\NLog.dll
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\bin\x86\Debug\NLog.xml
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos-db.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos-db.exe
+C:\Users\Administrator\Desktop\onesocketserver\taos-db\obj\x86\Debug\taos-db.pdb

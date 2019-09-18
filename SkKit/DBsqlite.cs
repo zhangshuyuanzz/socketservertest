@@ -344,13 +344,13 @@ namespace SQLite
             this.EnsureConnection();  //no useless
             logger.Debug("sql[{}]", sql);
 
-            DbTransaction dbTrans = this.Connection.BeginTransaction();
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
             int count = 0;
             foreach (DataItem s in entity) {
                 SQLiteParameter[] arr = BuildParamArray(s);
                 count += ExecuteNonQuery(sql, arr);
             }
-            dbTrans.Commit();
+            SqlhelpCommitDTS(dbTrans);
             return count;
         }
 
@@ -361,14 +361,16 @@ namespace SQLite
                 throw new ArgumentNullException("table=null");
             }
             this.EnsureConnection();
-            DbTransaction dbTrans = this.Connection.BeginTransaction();
+
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
 
             string sql = "delete from " + table + " where devip = @delip" ;
             SQLiteParameter[] wpara = new SQLiteParameter[1];
             wpara[0] = new SQLiteParameter("@delip", Delp);
             logger.Debug("sql[{}]",sql);
             int ret = this.ExecuteNonQuery(sql, wpara);
-            dbTrans.Commit();
+            SqlhelpCommitDTS(dbTrans);
+
             return ret;
         }
         private static SQLiteParameter[] BuildUpdateParamArray(DataItem tagidata)
@@ -389,16 +391,45 @@ namespace SQLite
             int total = 0;
             StringBuilder UpdateBuf = new StringBuilder();
 
-            DbTransaction dbTrans = this.Connection.BeginTransaction();
-
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection); //this.Connection.BeginTransaction();
             UpdateBuf.Append("UPDATE ").Append(table).Append(" SET value=@value,time=@time WHERE name=@name");
             string updatesql = UpdateBuf.ToString();
+            logger.Debug("updatesql[{}]", updatesql);
             foreach (DataItem s in entity)
             {
                 total += ExecuteNonQuery(updatesql, BuildUpdateParamArray(s));
             }
-            dbTrans.Commit();
+            SqlhelpCommitDTS(dbTrans);
             return total;
+        }
+        private DbTransaction SqlhelpBeginDTS(SQLiteConnection DbConn)
+        {
+            DbTransaction dbTrans = null;
+            try
+            {
+                dbTrans = DbConn.BeginTransaction();
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("begin Dts error: [{}]",ex.ToString());
+                dbTrans.Commit();
+                dbTrans = DbConn.BeginTransaction();
+            }
+            return dbTrans;
+        }
+        private void SqlhelpCommitDTS(DbTransaction DTSHandle)
+        {
+            if (DTSHandle == null) {
+                return;
+            }
+            try
+            {
+                DTSHandle.Commit(); ;
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("begin Dts error: [{}]", ex.ToString());
+            }
         }
     }
 

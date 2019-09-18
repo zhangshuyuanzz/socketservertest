@@ -215,7 +215,7 @@ namespace TDengineDriver
             }
 
             sql.Clear();
-            sql.Append("create table if not exists ").Append(this.stableName).Append("(ts timestamp, v1 int) tags(t1 int)");
+            sql.Append("create table if not exists ").Append(this.stableName).Append("(tagtm timestamp, v1 int) tags(devip varchar(20),devname varchar(255))");
             code = TDengine.Query(this.conn, sql.ToString());
             if (code == TDengine.TSDB_CODE_SUCCESS)
             {
@@ -268,7 +268,7 @@ namespace TDengineDriver
                         long rows = loop * this.batchRows + batch;
                         sql.Append("(").Append(this.beginTimestamp + rows).Append(",").Append(rows).Append(")");
                     }
-                    logger.Debug("insert sql[{}]", sql.ToString();
+                    logger.Debug("insert sql[{}]", sql.ToString());
                     int code = TDengine.Query(conn, sql.ToString());
                     if (code != TDengine.TSDB_CODE_SUCCESS)
                     {
@@ -345,7 +345,7 @@ namespace TDengineDriver
                         {
                             case TDengineDataType.TSDB_DATA_TYPE_BOOL:
                                 bool v1 = Marshal.ReadByte(data) == 0 ? false : true;
-                                logger.Debug(v1);
+                                logger.Debug("v1[{}]",v1);
                                 break;
                             case TDengineDataType.TSDB_DATA_TYPE_TINYINT:
                                 byte v2 = Marshal.ReadByte(data);
