@@ -25,6 +25,8 @@ namespace Base.kit
             this.DataType = 1;
             this.Quality = 192;
             this.Active = true;
+            this.Value = 0;
+            this.DataTime = DateTime.Now.ToString(); 
         }
 
         public DataItem(string name,int id,byte type,object value,string time,string inip)

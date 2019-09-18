@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 
+
 namespace OpcClientForMetering
 {
     class OpcSetConfig
@@ -14,7 +15,8 @@ namespace OpcClientForMetering
         readonly NLOG logger = new NLOG("OpcSetConfig");
         XmlDocument xDoc = null;
         string XmlPath = null;
-        public List<DataItem> TagListAll = new List<DataItem>();
+
+        public ConcurrentDictionary<string, DataItem> TagListAll = new ConcurrentDictionary<string, DataItem>();
         public string OpcHandle = null;    //Uri("opcda://127.0.0.1/Matrikon.OPC.Simulation.1")
         public OpcSetConfig()
         {
@@ -28,17 +30,20 @@ namespace OpcClientForMetering
             }
             xDoc = new XmlDocument();
         }
-        private void addintotagall(ConcurrentDictionary<int, string> wholet, int a, string b)
+        public bool OpcAddIntoTagList(DataItem NewTag)
         {
-            if (wholet.ContainsKey(a) == false)
+            bool RetOp = false;
+            logger.Debug("OpcAddIntoTagList--TagName[{}]", NewTag.TagName);
+            if (this.TagListAll.ContainsKey(NewTag.TagName) == false)
             {
-                wholet.TryAdd(a, b);
+                this.TagListAll.TryAdd(NewTag.TagName, NewTag);
+                RetOp = true;
             }
             else
             {
-                wholet[a] = b;
                 logger.Debug("this dic had this tag info ,so,back check you config file!!");
             }
+            return RetOp;
         }
         private void addintotagname(ConcurrentDictionary<string, int> wholet, int a, string b)
         {
@@ -65,17 +70,12 @@ namespace OpcClientForMetering
                 XmlNode root = xDoc.SelectSingleNode("root");
                 logger.Debug("Opc name[{}]", XmlKit.GetByXml("name", root));
 
-                /*清空两个字典*/
+                /*清空字典*/
                 if (this.TagListAll.Count != 0)
                 {
                     logger.Info("clear TagListAll strart");
                     this.TagListAll.Clear();
                 }
-
-           //     XmlNode opctroot = root.SelectSingleNode("Opc");
-         //       string OpcIpw = XmlKit.GetByXml("tip", opctroot);
-         //       string OpcNamew = XmlKit.GetByXml("name", opctroot);
-           //     logger.Debug("11111OpcIp[{}]OpcName[{}]", OpcIp, OpcNamew);
 
                 foreach (XmlNode onenode in root.SelectNodes("Opc"))
                 {
@@ -91,8 +91,11 @@ namespace OpcClientForMetering
                     {
                         DataItem Onetag = new DataItem();
                         Onetag.TagName = XmlKit.GetByXml("tagname", n);
-                        this.TagListAll.Add(Onetag);
                         logger.Info("tag--parse xml file---------tagname[{}]", Onetag.TagName);
+                        if (OpcAddIntoTagList(Onetag) == true)
+                        {
+                            //CfgTagList.Add(Onetag);
+                        }
                     }
                 }
             }

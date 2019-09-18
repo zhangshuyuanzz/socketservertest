@@ -35,11 +35,13 @@ namespace OpcClientForMetering
         {
             logger.Debug("OnlyOnceThread");
             string CuTime = DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss", DateTimeFormatInfo.InvariantInfo);//string.Format("{0:f}",System.DateTime.Now) 
-            foreach (DataItem d in OpcSetCfg.TagListAll)
+
+            var result3 = from v in OpcSetCfg.TagListAll.Keys orderby v select v;
+            foreach (string d in result3)
             {
-                d.DataTime = CuTime;
-                d.Value = 0.00;
-                OpcClientInsetData(d);
+                DataItem ooo = new DataItem();
+                ooo.TagName = d;
+                OpcClientInsetData(ooo);
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace OpcClientForMetering
             li.SubItems.Add(onett.DataTime);
 
             listView1.Items.Add(li);
-            logger.Debug("OpcClientInsetData");
+            logger.Debug("OpcClientInsetData---name[{}]", onett.TagName);
 
         }
         private void AddItem_Click(object sender, EventArgs e)
@@ -66,8 +68,16 @@ namespace OpcClientForMetering
             }
             DataItem tt = new DataItem();
             tt.TagName = this.inputitem.Text;
-            OpcClientInsetData(tt);
-          //  testinsertdata();
+            if (OpcSetCfg.OpcAddIntoTagList(tt) == true)
+            {
+                logger.Debug("now insert taglist now!!");
+                OpcClientInsetData(tt);
+            }
+            else
+            {
+                logger.Debug("now have this tag,return now!!");
+            }
+            //  testinsertdata();
         }
 
         private void Inputitem_TextChanged(object sender, EventArgs e)
