@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace OpcClientForMetering
@@ -15,7 +16,7 @@ namespace OpcClientForMetering
     public partial class Form1 : Form
     {
         readonly NLOG logger = new NLOG("Form1");
-
+        OpcSetConfig OpcSetCfg ;
         public Form1()
         {
             InitializeComponent();
@@ -23,22 +24,35 @@ namespace OpcClientForMetering
             this.tagName.Width = this.listView1.Width * 7 / 16-10;
             this.tagValue.Width = this.listView1.Width * 4 / 16-10;
             this.tagTime.Width  = this.listView1.Width * 5 / 16-2;
-        }
+            OpcSetCfg = new OpcSetConfig();
+            OpcSetCfg.OpcSetConfigParseXml();
 
+            Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
+            scanThread.IsBackground = true;
+            scanThread.Start();
+        }
+        void OnlyOnceThread()
+        {
+            logger.Debug("OnlyOnceThread");
+            string CuTime = DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss", DateTimeFormatInfo.InvariantInfo);//string.Format("{0:f}",System.DateTime.Now) 
+            foreach (DataItem d in OpcSetCfg.TagListAll)
+            {
+                d.DataTime = CuTime;
+                d.Value = 0.00;
+                OpcClientInsetData(d);
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
         void OpcClientInsetData(DataItem onett)
         {
-            DataItem tt = onett;
-            string name = tt.TagName ;
-            string CuTime = DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss", DateTimeFormatInfo.InvariantInfo);
             ListViewItem li = new ListViewItem();
-            li.Text = name;
-            li.SubItems.Add(name);
-            li.SubItems.Add("1.50");
-            li.SubItems.Add(CuTime);
+            li.Text = onett.TagName;
+            li.SubItems.Add(onett.TagName);
+            li.SubItems.Add(onett.Value.ToString());
+            li.SubItems.Add(onett.DataTime);
 
             listView1.Items.Add(li);
             logger.Debug("OpcClientInsetData");
