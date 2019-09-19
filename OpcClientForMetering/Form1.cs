@@ -15,8 +15,9 @@ namespace OpcClientForMetering
 {
     public partial class Form1 : Form
     {
-        readonly NLOG logger = new NLOG("Form1");
+        static public readonly NLOG logger = new NLOG("Form1");
         OpcSetConfig OpcSetCfg ;
+        OpcClientMain OpcSetClientH = null;
         public Form1()
         {
             InitializeComponent();
@@ -26,27 +27,54 @@ namespace OpcClientForMetering
             this.tagTime.Width  = this.listView1.Width * 5 / 16-2;
             OpcSetCfg = new OpcSetConfig();
             OpcSetCfg.OpcSetConfigParseXml();
-
-            Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
-            scanThread.IsBackground = true;
-            scanThread.Start();
         }
         void OnlyOnceThread()
         {
             logger.Debug("OnlyOnceThread");
-            string CuTime = DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss", DateTimeFormatInfo.InvariantInfo);//string.Format("{0:f}",System.DateTime.Now) 
+            this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.TagListAll);
 
-            var result3 = from v in OpcSetCfg.TagListAll.Keys orderby v select v;
-            foreach (string d in result3)
+            var result3 = from v in OpcSetCfg.TagListAll orderby v.Key select v;
+
+            List<string> AllTagList = new List<string>();
+          
+            this.listView1.BeginUpdate();
+            foreach (KeyValuePair<string, DataItem> d in result3)
             {
-                DataItem ooo = new DataItem();
-                ooo.TagName = d;
+                DataItem ooo = d.Value; ;
                 OpcClientInsetData(ooo);
+                AllTagList.Add(d.Key);
+            }
+            this.listView1.EndUpdate();
+            string[] mmmsf = AllTagList.ToArray();
+            this.OpcSetClientH.OpcClientMainSubscription(mmmsf);
+            this.OpcSetClientH.OpcSetTagChanged += new SkKit.kit.TagEventHandler(OpcClientChangeTag);
+        }
+        void OpcClientChangeTag(List<DataItem>Taglist)
+        {
+            logger.Debug("Taglist[{}]", Taglist.Count);
+            foreach (DataItem tl in Taglist)
+            {
+                ListViewItem listview = this.listView1.FindItemWithText(tl.TagName);
+                logger.Debug("TagName[{}]", tl.TagName);
+                if (listview != null)
+                {
+                    logger.Debug("Indexe [{}]", listview.Index);
+                    this.listView1.Items[listview.Index].SubItems[2].Text = tl.Value.ToString();
+                    this.listView1.Items[listview.Index].SubItems[3].Text = tl.DataTime;
+                    logger.Debug("opc client name[{}] value[{}] time [{}]", tl.TagName, tl.Value, tl.DataTime);
+                }
+                else {
+                    logger.Debug("listview find none");
+                }
             }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            logger.Debug("Form1_Load");
+            OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcHandle);
+            Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
+            scanThread.IsBackground = true;
+            scanThread.Start();
         }
         void OpcClientInsetData(DataItem onett)
         {
@@ -56,8 +84,8 @@ namespace OpcClientForMetering
             li.SubItems.Add(onett.Value.ToString());
             li.SubItems.Add(onett.DataTime);
 
-            listView1.Items.Add(li);
-            logger.Debug("OpcClientInsetData---name[{}]", onett.TagName);
+            this.listView1.Items.Add(li);
+            logger.Debug("OpcClient  display window---name[{}]Value[{}]", onett.TagName, onett.Value);
 
         }
         private void AddItem_Click(object sender, EventArgs e)
@@ -68,6 +96,7 @@ namespace OpcClientForMetering
             }
             DataItem tt = new DataItem();
             tt.TagName = this.inputitem.Text;
+            tt.Value = "-";
             if (OpcSetCfg.OpcAddIntoTagList(tt) == true)
             {
                 logger.Debug("now insert taglist now!!");
@@ -124,47 +153,35 @@ namespace OpcClientForMetering
         {
             logger.Debug("OpcSetFindTagIndex--[{}]",tagname);
             ListViewItem onetag = this.listView1.FindItemWithText(tagname);
+            if (onetag == null) {
+                MessageBox.Show("无此条目，请再次检查！！","WARN", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                return;
+            }
             logger.Debug("Index--[{}]", onetag.Index);
             if (onetag.Index >= 1) {
                 this.listView1.Items.RemoveAt(onetag.Index);
             }
         }
-        void testinsertdata()
-        {
-
-         //   this.listView1.BeginUpdate();
-
-            for (int i = 0; i < 10; i++)
-            {
-                ListViewItem lvi = new ListViewItem();
-
-                lvi.ImageIndex = i;
-
-                lvi.Text = "subitem" + i;
-
-                lvi.SubItems.Add("第2列,第" + i + "行");
-
-                lvi.SubItems.Add("第3列,第" + i + "行");
-
-                this.listView1.Items.Add(lvi);
-            }
-
-
-            logger.Debug("listView1.Width[{}]", this.listView1.Width);
-            logger.Debug("tagName.Width[{}]", this.tagName.Width);
-            logger.Debug("tagValue.Width[{}]", this.tagValue.Width);
-            logger.Debug("tagTime.Width[{}]", this.tagTime.Width);
-
-        //    this.listView1.EndUpdate();
-        }
-
         private void DelitemBtn_Click(object sender, EventArgs e)
         {
-            logger.Debug("DelitemBtn_Click");
-            if (this.DelInputItem.Text.Length == 0 | this.DelInputItem.Text == null) {
-                return;
+            try
+            {
+                logger.Debug("DelitemBtn_Click");
+                if (this.DelInputItem.Text.Length == 0 | this.DelInputItem.Text == null)
+                {
+                    return;
+                }
+                OpcSetFindTagIndex(this.DelInputItem.Text);
             }
-            OpcSetFindTagIndex(this.DelInputItem.Text);
+            catch (Exception ex)
+            {
+                logger.Debug("error insert [{}]",ex.ToString());
+            }
+        }
+
+        private void ListView1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

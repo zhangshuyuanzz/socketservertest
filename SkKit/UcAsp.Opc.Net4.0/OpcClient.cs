@@ -125,6 +125,10 @@ namespace UcAsp.Opc
         {
             return _client.Read<T>(itemName);
         }
+        public OpcItemValue ReadOneTag<T>(string itemName)
+        {
+            return _client.ReadOne<T>(itemName);
+        }
         public List<OpcItemValue> Read(string[] tag)
         {
             return _client.Read(tag);

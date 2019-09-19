@@ -35,6 +35,7 @@ namespace OpcClientForMetering
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tagName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tagValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tagTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,7 +46,6 @@ namespace OpcClientForMetering
             this.DelitemBtn = new System.Windows.Forms.Button();
             this.DelItem = new System.Windows.Forms.Label();
             this.DelInputItem = new System.Windows.Forms.TextBox();
-            this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -79,8 +79,14 @@ namespace OpcClientForMetering
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            //this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
-            this.listView1.MouseDoubleClick += ListView1_MouseDoubleClick;
+           // this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged_1);
+            this.listView1.MouseDoubleClick += new MouseEventHandler(ListView1_MouseDoubleClick);        
+            // 
+            // index
+            // 
+            this.index.DisplayIndex = 3;
+            this.index.Text = "ID";
+            this.index.Width = 0;
             // 
             // tagName
             // 
@@ -171,12 +177,6 @@ namespace OpcClientForMetering
             this.DelInputItem.Name = "DelInputItem";
             this.DelInputItem.Size = new System.Drawing.Size(100, 25);
             this.DelInputItem.TabIndex = 6;
-            // 
-            // index
-            // 
-            this.index.DisplayIndex = 3;
-            this.index.Text = "ID";
-            this.index.Width = 0;
             // 
             // Form1
             // 

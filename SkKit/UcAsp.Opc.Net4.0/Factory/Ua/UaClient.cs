@@ -208,7 +208,23 @@ namespace UcAsp.Opc.Ua
             CheckReturnValue(val.StatusCode);
             return (T)ConvertToT.ConvertT<T>(val.Value);
         }
-
+        public OpcItemValue ReadOne<T>(string tag)
+        {
+            var nodesToRead = BuildReadValueIdCollection(new string[] { tag }, Attributes.Value);
+            DataValueCollection results;
+            DiagnosticInfoCollection diag;
+            _session.Read(
+                requestHeader: null,
+                maxAge: 0,
+                timestampsToReturn: TimestampsToReturn.Neither,
+                nodesToRead: nodesToRead,
+                results: out results,
+                diagnosticInfos: out diag);
+            var val = results[0];
+            OpcItemValue rettag = new OpcItemValue { ItemId = tag, Value = val.Value, Quality = val.StatusCode.ToString(), Timestamp = val.SourceTimestamp };
+            CheckReturnValue(val.StatusCode);
+            return rettag;
+        }
 
         public List<OpcItemValue> Read(string[] tag)
         {

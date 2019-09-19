@@ -40,6 +40,7 @@ namespace OpcClientForMetering
         {
             try
             {
+                Form1.logger.Debug("error,win [{}]",e.ToString());
                 MessageBox.Show(e.Exception.Message);
             }
             catch { }

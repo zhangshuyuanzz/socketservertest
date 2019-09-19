@@ -158,7 +158,7 @@ namespace SkKit
                         return;
                     }
                     else {
-                        SkParseFrame(TagsL, GetData);
+                        SkParseFrame(TagsL, GetData);    // FE FE 01 01 00 00 00 00 00 FE
                         Server_get_handle?.Invoke(TagsL, reip);
                     }
                 }

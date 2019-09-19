@@ -150,6 +150,18 @@ namespace UcAsp.Opc.Da
             TryCastResult(result.Value, out casted);
             return casted;
         }
+        public OpcItemValue ReadOne<T>(string tag)
+        {
+            var item = new OpcDa.Item { ItemName = tag };
+            if (Status == OpcStatus.NotConnected)
+            {
+                throw new OpcException("Server not connected. Cannot read tag.");
+            }
+            var result = _server.Read(new[] { item })[0];
+            CheckResult(result, tag);
+            OpcItemValue casted = new OpcItemValue { ItemId = result.ItemName, Quality = result.Quality.ToString(), Value = result.Value, Timestamp = result.Timestamp };
+            return casted;
+        }
         public List<OpcItemValue> Read(string[] tag)
         {
             if (Status == OpcStatus.NotConnected)

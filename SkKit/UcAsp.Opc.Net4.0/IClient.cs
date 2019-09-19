@@ -41,6 +41,7 @@ namespace UcAsp.Opc
         /// E.g: the tag `foo.bar` reads the tag `bar` on the folder `foo`</param>
         /// <returns>The value retrieved from the OPC</returns>
         T Read<T>(string tag);
+        OpcItemValue ReadOne<T>(string tag);
 
 
         List<OpcItemValue> Read(string[] tag);

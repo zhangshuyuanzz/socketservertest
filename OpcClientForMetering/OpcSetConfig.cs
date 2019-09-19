@@ -18,6 +18,7 @@ namespace OpcClientForMetering
 
         public ConcurrentDictionary<string, DataItem> TagListAll = new ConcurrentDictionary<string, DataItem>();
         public string OpcHandle = null;    //Uri("opcda://127.0.0.1/Matrikon.OPC.Simulation.1")
+        public int SocketPort;
         public OpcSetConfig()
         {
             string path1 = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
@@ -76,6 +77,9 @@ namespace OpcClientForMetering
                     logger.Info("clear TagListAll strart");
                     this.TagListAll.Clear();
                 }
+                XmlNode SkNode = root.SelectSingleNode("Socket");
+                this.SocketPort = int.Parse(XmlKit.GetByXml("port", SkNode));
+                logger.Info("SocketPort[{}]", SocketPort);
 
                 foreach (XmlNode onenode in root.SelectNodes("Opc"))
                 {
@@ -91,6 +95,7 @@ namespace OpcClientForMetering
                     {
                         DataItem Onetag = new DataItem();
                         Onetag.TagName = XmlKit.GetByXml("tagname", n);
+                        Onetag.Value = "-";
                         logger.Info("tag--parse xml file---------tagname[{}]", Onetag.TagName);
                         if (OpcAddIntoTagList(Onetag) == true)
                         {

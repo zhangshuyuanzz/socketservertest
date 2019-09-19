@@ -1,6 +1,8 @@
 <root name="opcsetconfig">
-  <Opc tip="127.0.0.0" name="Matric.1.00">
+  <Opc tip="127.0.0.1" name="ICONICS.SimulatorOPCDA.2">
   </Opc>
+  <Socket port="11220">
+  </Socket>
   <Item>
     <tag tagname="zhang1" />
     <tag tagname="zhang2" />
@@ -10,17 +12,13 @@
     <tag tagname="zhang6" />
     <tag tagname="zhang7" />
     <tag tagname="zhang8" />
-    <tag tagname="zhang9" />
-    <tag tagname="zhang11" />
-    <tag tagname="zhang12" />
-    <tag tagname="zhang13" />
-    <tag tagname="zhang14" />
-    <tag tagname="zhang15" />
-    <tag tagname="1645" />
-    <tag tagname="353" />
-    <tag tagname="68687" />
-    <tag tagname="35" />
-    <tag tagname="2452" />
-    <tag tagname="6876" />
+    <tag tagname="111.222" />
+    <tag tagname="111.333" />
+    <tag tagname="111.444" />
+    <tag tagname="111.555" />
+    <tag tagname="111.666" />
+    <tag tagname="111.777" />
+    <tag tagname="111.888" />
+    <tag tagname="111.999" />
   </Item>
 </root>

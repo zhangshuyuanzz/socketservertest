@@ -111,6 +111,7 @@
     <Compile Include="DBsqlite.cs" />
     <Compile Include="FileWatch\XmlFileWatch.cs" />
     <Compile Include="kit\DataItem.cs" />
+    <Compile Include="kit\EventEnum.cs" />
     <Compile Include="kit\map.cs" />
     <Compile Include="kit\XmlKit.cs" />
     <Compile Include="LittleTools.cs" />
