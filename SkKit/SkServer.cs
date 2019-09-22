@@ -158,8 +158,10 @@ namespace SkKit
                         return;
                     }
                     else {
-                        SkParseFrame(TagsL, GetData);    // FE FE 01 01 00 00 00 00 00 FE
-                        Server_get_handle?.Invoke(TagsL, reip);
+                        if (SkParseFrame(TagsL, GetData) == true)            // FE FE 01 01 00 00 00 00 00 FE
+                        {
+                            Server_get_handle?.Invoke(TagsL, reip);
+                        }
                     }
                 }
             }
@@ -298,6 +300,26 @@ namespace SkKit
             catch (Exception ex)
             {
                 logger.Debug("send string error:[{}]",ex.ToString());
+            }
+        }
+        public void CoSendByte(string ip, byte[] medata)
+        {
+            logger.Debug("CoSendByte--ip[{}]data[{}]", ip, string.Join(",", medata));
+            try
+            {
+                if (DevSkList.ContainsKey(ip))
+                {
+                    DevSkList[ip].Send(medata);
+                }
+                else
+                {
+                    logger.Debug("no this device");
+                }
+                logger.Debug("CoSendByte end");
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("send string error:[{}]", ex.ToString());
             }
         }
         private void init_timer()

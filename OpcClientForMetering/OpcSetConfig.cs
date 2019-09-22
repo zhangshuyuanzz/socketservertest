@@ -19,6 +19,8 @@ namespace OpcClientForMetering
         public ConcurrentDictionary<string, DataItem> TagListAll = new ConcurrentDictionary<string, DataItem>();
         public string OpcHandle = null;    //Uri("opcda://127.0.0.1/Matrikon.OPC.Simulation.1")
         public int SocketPort;
+        public int SocketPeriod;
+        public Dictionary<string, DataItem> TagBannerList = new Dictionary<string, DataItem>();
         public OpcSetConfig()
         {
             string path1 = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
@@ -46,16 +48,15 @@ namespace OpcClientForMetering
             }
             return RetOp;
         }
-        private void addintotagname(ConcurrentDictionary<string, int> wholet, int a, string b)
+        private void OpcAddIntoOracleList(DataItem NewTag)
         {
-            if (wholet.ContainsKey(b) == false)
+            if (this.TagBannerList.ContainsKey(NewTag.TagName) == false)
             {
-                wholet.TryAdd(b, a);
+                this.TagBannerList.Add(NewTag.TagName, NewTag);
             }
             else
             {
-                wholet[b] = a;
-                logger.Debug("name--this dic had this tag info ,so,bach check you config file!!");
+                logger.Debug("name--this dic had this oracle tag info ,so,bach check you config file!!");
             }
         }
         public void OpcSetConfigParseXml()
@@ -77,9 +78,16 @@ namespace OpcClientForMetering
                     logger.Info("clear TagListAll strart");
                     this.TagListAll.Clear();
                 }
+                if (this.TagBannerList.Count != 0)
+                {
+                    logger.Info("clear TagBannerList strart");
+                    this.TagBannerList.Clear();
+                }
+
                 XmlNode SkNode = root.SelectSingleNode("Socket");
                 this.SocketPort = int.Parse(XmlKit.GetByXml("port", SkNode));
-                logger.Info("SocketPort[{}]", SocketPort);
+                this.SocketPeriod = int.Parse(XmlKit.GetByXml("period", SkNode));
+                logger.Info("SocketPort[{}]SocketPeriod[{}]", SocketPort, SocketPeriod);
 
                 foreach (XmlNode onenode in root.SelectNodes("Opc"))
                 {
@@ -95,12 +103,25 @@ namespace OpcClientForMetering
                     {
                         DataItem Onetag = new DataItem();
                         Onetag.TagName = XmlKit.GetByXml("tagname", n);
+                        Onetag.TagId = int.Parse(XmlKit.GetByXml("id", n));
                         Onetag.Value = "-";
-                        logger.Info("tag--parse xml file---------tagname[{}]", Onetag.TagName);
+                        logger.Info("tag--parse xml file---------tagname[{}]TagId[{}]", Onetag.TagName, Onetag.TagId);
                         if (OpcAddIntoTagList(Onetag) == true)
                         {
                             //CfgTagList.Add(Onetag);
                         }
+                    }
+                }
+                foreach (XmlNode node in root.SelectNodes("OracleItem"))
+                {
+                    foreach (XmlNode n in node.SelectNodes("tag"))
+                    {
+                        DataItem Onetag = new DataItem();
+                        Onetag.TagName = XmlKit.GetByXml("tagname", n);
+                        Onetag.TagId = int.Parse(XmlKit.GetByXml("id", n));
+                        Onetag.Value = "-";
+                        logger.Info("tag--parse xml file-oracle--------tagname[{}]TagId[{}]", Onetag.TagName, Onetag.TagId);
+                        OpcAddIntoOracleList(Onetag);
                     }
                 }
             }

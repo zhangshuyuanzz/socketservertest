@@ -29,6 +29,16 @@ namespace OpcClientForMetering
                 logger.Debug("Connected fail!!");
             }
         }
+
+        public void OpcClientMainReadOneTag(ref DataItem ReadOTag)
+        {
+            logger.Debug("OpcClientMainReadOneTag-TagName[{}]", ReadOTag.TagName);
+            OpcItemValue data = this.OClient.ReadOneTag<string>(ReadOTag.TagName);
+            logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", data.ItemId, data.Value, data.Timestamp);
+            ReadOTag.Value = data.Value;
+            ReadOTag.DataTime = data.Timestamp.ToString();
+            ReadOTag.Active = true;
+        }
         public void OpcClientMainRead(ref ConcurrentDictionary<string, DataItem> ReadTagList)
         {
             logger.Debug("OpcClientMainRead--Count[{}]", ReadTagList.Count);
@@ -40,6 +50,7 @@ namespace OpcClientForMetering
                 logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", data.ItemId, data.Value, data.Timestamp);
                 TagData.Value = data.Value;
                 TagData.DataTime = data.Timestamp.ToString();
+                TagData.Active = true;
             }
         }
         OpcGroup OpcSetSubGroup = null;
@@ -57,7 +68,7 @@ namespace OpcClientForMetering
         private void OpcSetGroup_DataChange(object sender, ItemDataEventArgs e)
         {
             List<DataItem> UPTagList = new List<DataItem>();
-            logger.Debug("------------------------------------------------------------");
+            logger.Debug("---subcription-------get----opc----server-----data------start-------------------------------");
             foreach (OpcItemValue o in e.Data)
             {
                 DataItem one = new DataItem();

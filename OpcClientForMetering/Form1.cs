@@ -18,15 +18,18 @@ namespace OpcClientForMetering
         static public readonly NLOG logger = new NLOG("Form1");
         OpcSetConfig OpcSetCfg ;
         OpcClientMain OpcSetClientH = null;
+        // OpcSetOracle OpcSetOracleH;
+        OpcSetSocketSver OpcSetSKServer;
         public Form1()
         {
             InitializeComponent();
-            //this.tagName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tagName.Width = this.listView1.Width * 7 / 16-10;
             this.tagValue.Width = this.listView1.Width * 4 / 16-10;
             this.tagTime.Width  = this.listView1.Width * 5 / 16-2;
             OpcSetCfg = new OpcSetConfig();
             OpcSetCfg.OpcSetConfigParseXml();
+            //  OpcSetOracleH = new OpcSetOracle("ip","zhang","x","z","AAA");
+            OpcSetSKServer = new OpcSetSocketSver(OpcSetCfg);
         }
         void OnlyOnceThread()
         {
@@ -44,28 +47,56 @@ namespace OpcClientForMetering
                 OpcClientInsetData(ooo);
                 AllTagList.Add(d.Key);
             }
+            foreach (KeyValuePair<string, DataItem> h in OpcSetCfg.TagBannerList)
+            {
+                DataItem ooo = h.Value; ;
+                AllTagList.Add(h.Key);
+            }
+            logger.Debug("Count[{}]", AllTagList.Count);
             this.listView1.EndUpdate();
             string[] mmmsf = AllTagList.ToArray();
-            this.OpcSetClientH.OpcClientMainSubscription(mmmsf);
+
             this.OpcSetClientH.OpcSetTagChanged += new SkKit.kit.TagEventHandler(OpcClientChangeTag);
+            this.OpcSetClientH.OpcClientMainSubscription(mmmsf);
         }
         void OpcClientChangeTag(List<DataItem>Taglist)
         {
-            logger.Debug("Taglist[{}]", Taglist.Count);
+            logger.Debug("get opc server Taglist---count[{}]", Taglist.Count);
             foreach (DataItem tl in Taglist)
             {
-                ListViewItem listview = this.listView1.FindItemWithText(tl.TagName);
-                logger.Debug("TagName[{}]", tl.TagName);
-                if (listview != null)
+                if (this.OpcSetCfg.TagBannerList.ContainsKey(tl.TagName) == true)
                 {
-                    logger.Debug("Indexe [{}]", listview.Index);
-                    this.listView1.Items[listview.Index].SubItems[2].Text = tl.Value.ToString();
-                    this.listView1.Items[listview.Index].SubItems[3].Text = tl.DataTime;
-                    logger.Debug("opc client name[{}] value[{}] time [{}]", tl.TagName, tl.Value, tl.DataTime);
+                    logger.Debug("this is oracle tag!!TagName[{}]", tl.TagName);
+                    DataItem oracleone = this.OpcSetCfg.TagBannerList[tl.TagName];
+                    oracleone.Value = tl.Value;
+                    oracleone.DataTime = tl.DataTime;
+                    oracleone.Active = true;
+                }
+                else if (this.OpcSetCfg.TagListAll.ContainsKey(tl.TagName) == true)
+                {
+                    logger.Debug("TagName[{}]", tl.TagName);
+                    DataItem utimeone = this.OpcSetCfg.TagListAll[tl.TagName];
+                    utimeone.Value = tl.Value;
+                    utimeone.DataTime = tl.DataTime;
+                    utimeone.Active = true;
+
+                    ListViewItem listview = this.listView1.FindItemWithText(tl.TagName);
+                    if (listview != null)
+                    {
+                        logger.Debug("Indexe [{}]", listview.Index);
+                        this.listView1.Items[listview.Index].SubItems[2].Text = tl.Value.ToString();
+                        this.listView1.Items[listview.Index].SubItems[3].Text = tl.DataTime;
+                        logger.Debug("opc client name[{}] value[{}] time [{}]", tl.TagName, tl.Value, tl.DataTime);
+                    }
+                    else
+                    {
+                        logger.Debug("listview find none");
+                    }
                 }
                 else {
-                    logger.Debug("listview find none");
+                    logger.Debug("unkown tag name");
                 }
+
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -75,6 +106,13 @@ namespace OpcClientForMetering
             Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
             scanThread.IsBackground = true;
             scanThread.Start();
+        }
+        private void Form1Closed(object sender, EventArgs e)
+        {
+            logger.Debug("form1_closed");
+            System.Environment.Exit(System.Environment.ExitCode);
+            this.Dispose();
+            this.Close();
         }
         void OpcClientInsetData(DataItem onett)
         {
@@ -97,10 +135,15 @@ namespace OpcClientForMetering
             DataItem tt = new DataItem();
             tt.TagName = this.inputitem.Text;
             tt.Value = "-";
-            if (OpcSetCfg.OpcAddIntoTagList(tt) == true)
+            if (OpcSetCfg.OpcAddIntoTagList(tt) == true)    //更新内存
             {
+                this.OpcSetClientH.OpcClientMainReadOneTag(ref tt);
                 logger.Debug("now insert taglist now!!");
-                OpcClientInsetData(tt);
+                OpcClientInsetData(tt);    //更新界面
+
+                string[] onetag = { tt.TagName };
+                this.OpcSetClientH.OpcClientMainSubscription(onetag);
+
             }
             else
             {

@@ -24,7 +24,7 @@ namespace Base.kit
             this.TagName = "unKown name";
             this.DataType = 1;
             this.Quality = 192;
-            this.Active = true;
+            this.Active = false;
             this.Value = 0;
             this.DataTime = DateTime.Now.ToString(); 
         }

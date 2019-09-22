@@ -21,6 +21,18 @@ namespace SkKit
                 return false;
             }
         }
+        public static string ByteToHexStr(byte[] bytes)
+        {
+            string returnStr = "";
+            if (bytes != null)
+            {
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    returnStr +=  "0x" +bytes[i].ToString("X2") + ",";
+                }
+            }
+            return returnStr;
+        }
     }
     public class LTMap<K, T> : Dictionary<K, T>
     {

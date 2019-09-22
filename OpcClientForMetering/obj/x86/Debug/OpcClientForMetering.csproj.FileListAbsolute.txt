@@ -64,4 +64,5 @@ C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Sy
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\NLog.xml
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\System.Data.SQLite.xml
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Oracle.ManagedDataAccess.dll
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\x86\Debug\OpcClientForMetering.csprojAssemblyReference.cache
