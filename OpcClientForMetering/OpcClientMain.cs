@@ -13,7 +13,7 @@ namespace OpcClientForMetering
     class OpcClientMain
     {
         readonly NLOG logger = new NLOG("OpcClientMain");
-        OpcClient OClient = null;
+        public OpcClient OClient = null;
         public TagEventHandler OpcSetTagChanged;
         public OpcClientMain(string ClientHandle)
         {
@@ -27,11 +27,15 @@ namespace OpcClientForMetering
             }
             else {
                 logger.Debug("Connected fail!!");
+                OClient = null;
             }
         }
 
         public void OpcClientMainReadOneTag(ref DataItem ReadOTag)
         {
+            if (OClient == null) {
+                return;
+            }
             logger.Debug("OpcClientMainReadOneTag-TagName[{}]", ReadOTag.TagName);
             OpcItemValue data = this.OClient.ReadOneTag<string>(ReadOTag.TagName);
             logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", data.ItemId, data.Value, data.Timestamp);
@@ -41,6 +45,10 @@ namespace OpcClientForMetering
         }
         public void OpcClientMainRead(ref ConcurrentDictionary<string, DataItem> ReadTagList)
         {
+            if (OClient == null)
+            {
+                return;
+            }
             logger.Debug("OpcClientMainRead--Count[{}]", ReadTagList.Count);
             foreach (KeyValuePair<string, DataItem> one in ReadTagList)
             {
@@ -57,6 +65,10 @@ namespace OpcClientForMetering
         string OpcSetClientGName = "OpcSetClient";
         public void OpcClientMainSubscription(string[] Tagname)
         {
+            if (OClient == null)
+            {
+                return;
+            }
             string msg;
             logger.Debug("OpcClientMainSubscription---Length[{}]", Tagname.Length);
             if (this.OpcSetSubGroup == null) {

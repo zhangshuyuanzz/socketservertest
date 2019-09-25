@@ -13,7 +13,7 @@
     实时数据数据区域 ，id范围从1-300，上限299
 -->
   <Item>
-    <tag tagname="zhang1" id="1" />
+    <tag tagname="zhang1" des="this is item what it is!!" id="1" />
     <tag tagname="zhang2" id="2" />
     <tag tagname="zhang3" id="3" />
     <tag tagname="zhang4" id="4" />

@@ -46,6 +46,9 @@ namespace OpcClientForMetering
             this.DelitemBtn = new System.Windows.Forms.Button();
             this.DelItem = new System.Windows.Forms.Label();
             this.DelInputItem = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.version = new System.Windows.Forms.Label();
+            this.trueversion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -79,8 +82,7 @@ namespace OpcClientForMetering
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-           // this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged_1);
-            this.listView1.MouseDoubleClick += new MouseEventHandler(ListView1_MouseDoubleClick);        
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListView1_MouseDoubleClick);
             // 
             // index
             // 
@@ -178,11 +180,41 @@ namespace OpcClientForMetering
             this.DelInputItem.Size = new System.Drawing.Size(100, 25);
             this.DelInputItem.TabIndex = 6;
             // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(2, 611);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(239, 25);
+            this.textBox1.TabIndex = 9;
+            // 
+            // version
+            // 
+            this.version.AutoSize = true;
+            this.version.Location = new System.Drawing.Point(8, 618);
+            this.version.Name = "version";
+            this.version.Size = new System.Drawing.Size(97, 15);
+            this.version.TabIndex = 10;
+            this.version.Text = "当前版本号：";
+            // 
+            // trueversion
+            // 
+            this.trueversion.AutoSize = true;
+            this.trueversion.Location = new System.Drawing.Point(123, 618);
+            this.trueversion.Name = "trueversion";
+            this.trueversion.Size = new System.Drawing.Size(39, 15);
+            this.trueversion.TabIndex = 11;
+            this.trueversion.Text = "----";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 639);
+            this.Controls.Add(this.trueversion);
+            this.Controls.Add(this.version);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.DelitemBtn);
             this.Controls.Add(this.DelItem);
             this.Controls.Add(this.DelInputItem);
@@ -217,6 +249,9 @@ namespace OpcClientForMetering
         private ColumnHeader tagValue;
         private ColumnHeader tagTime;
         private ColumnHeader index;
+        private TextBox textBox1;
+        private Label version;
+        private Label trueversion;
     }
 }
 

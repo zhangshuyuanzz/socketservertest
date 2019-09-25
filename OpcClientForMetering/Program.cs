@@ -22,6 +22,8 @@ namespace OpcClientForMetering
                 {
                     Application.ThreadException += Application_ThreadException;
                     Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+                    AppDomain currentDomain = AppDomain.CurrentDomain;
+                    currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
 
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
@@ -45,6 +47,12 @@ namespace OpcClientForMetering
             }
             catch { }
 
+        }
+        static void MyHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Exception e = (Exception)args.ExceptionObject;
+            Form1.logger.Fatal("**************MyHandler caught : ", e.Message);
+            Form1.logger.Fatal("**************error caught : [{}]", e.ToString());
         }
     }
 }

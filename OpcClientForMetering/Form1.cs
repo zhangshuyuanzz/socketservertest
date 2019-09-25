@@ -30,10 +30,25 @@ namespace OpcClientForMetering
             OpcSetCfg.OpcSetConfigParseXml();
             //  OpcSetOracleH = new OpcSetOracle("ip","zhang","x","z","AAA");
             OpcSetSKServer = new OpcSetSocketSver(OpcSetCfg);
+            this.trueversion.Text = "V." + Application.ProductVersion;
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            logger.Debug("Form1_Load");
+            OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcHandle);
+
+            Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
+            scanThread.IsBackground = true;
+            scanThread.Start();
         }
         void OnlyOnceThread()
         {
             logger.Debug("OnlyOnceThread");
+            if (OpcSetClientH.OClient == null)
+            {
+                MessageBox.Show("invalid opc server hangdle!!", "warn!!");
+                return;
+            }
             this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.TagListAll);
 
             var result3 = from v in OpcSetCfg.TagListAll orderby v.Key select v;
@@ -98,14 +113,6 @@ namespace OpcClientForMetering
                 }
 
             }
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            logger.Debug("Form1_Load");
-            OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcHandle);
-            Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
-            scanThread.IsBackground = true;
-            scanThread.Start();
         }
         private void Form1Closed(object sender, EventArgs e)
         {
