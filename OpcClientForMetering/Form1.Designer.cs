@@ -66,6 +66,9 @@ namespace OpcClientForMetering
             // listView1
             // 
             this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.index,
             this.tagName,
@@ -76,9 +79,10 @@ namespace OpcClientForMetering
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(57, 86);
+            this.listView1.Location = new System.Drawing.Point(28, 86);
+            this.listView1.Margin = new System.Windows.Forms.Padding(20, 100, 3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(650, 354);
+            this.listView1.Size = new System.Drawing.Size(746, 451);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -86,33 +90,31 @@ namespace OpcClientForMetering
             // 
             // index
             // 
-            this.index.DisplayIndex = 3;
             this.index.Text = "ID";
             this.index.Width = 0;
             // 
             // tagName
             // 
-            this.tagName.DisplayIndex = 0;
             this.tagName.Text = "tag名字";
             this.tagName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tagName.Width = 239;
             // 
             // tagValue
             // 
-            this.tagValue.DisplayIndex = 1;
             this.tagValue.Text = "tag值";
             this.tagValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tagValue.Width = 185;
             // 
             // tagTime
             // 
-            this.tagTime.DisplayIndex = 2;
             this.tagTime.Text = "tag时间";
             this.tagTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tagTime.Width = 222;
             // 
             // itemlist
             // 
+            this.itemlist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.itemlist.AutoSize = true;
             this.itemlist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.itemlist.Location = new System.Drawing.Point(340, 59);
@@ -127,6 +129,7 @@ namespace OpcClientForMetering
             this.inputitem.Name = "inputitem";
             this.inputitem.Size = new System.Drawing.Size(100, 25);
             this.inputitem.TabIndex = 3;
+            this.inputitem.Visible = false;
             this.inputitem.TextChanged += new System.EventHandler(this.Inputitem_TextChanged);
             // 
             // itemname
@@ -138,6 +141,7 @@ namespace OpcClientForMetering
             this.itemname.Size = new System.Drawing.Size(67, 15);
             this.itemname.TabIndex = 4;
             this.itemname.Text = "增加条目";
+            this.itemname.Visible = false;
             // 
             // AddItem
             // 
@@ -149,6 +153,7 @@ namespace OpcClientForMetering
             this.AddItem.TabIndex = 5;
             this.AddItem.Text = "Add";
             this.AddItem.UseVisualStyleBackColor = false;
+            this.AddItem.Visible = false;
             this.AddItem.Click += new System.EventHandler(this.AddItem_Click);
             // 
             // DelitemBtn
@@ -161,6 +166,7 @@ namespace OpcClientForMetering
             this.DelitemBtn.TabIndex = 8;
             this.DelitemBtn.Text = "Del";
             this.DelitemBtn.UseVisualStyleBackColor = false;
+            this.DelitemBtn.Visible = false;
             this.DelitemBtn.Click += new System.EventHandler(this.DelitemBtn_Click);
             // 
             // DelItem
@@ -172,6 +178,7 @@ namespace OpcClientForMetering
             this.DelItem.Size = new System.Drawing.Size(67, 15);
             this.DelItem.TabIndex = 7;
             this.DelItem.Text = "删除条目";
+            this.DelItem.Visible = false;
             // 
             // DelInputItem
             // 
@@ -179,18 +186,21 @@ namespace OpcClientForMetering
             this.DelInputItem.Name = "DelInputItem";
             this.DelInputItem.Size = new System.Drawing.Size(100, 25);
             this.DelInputItem.TabIndex = 6;
+            this.DelInputItem.Visible = false;
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(2, 611);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(239, 25);
+            this.textBox1.Size = new System.Drawing.Size(298, 25);
             this.textBox1.TabIndex = 9;
             // 
             // version
             // 
+            this.version.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.version.AutoSize = true;
             this.version.Location = new System.Drawing.Point(8, 618);
             this.version.Name = "version";
@@ -200,6 +210,7 @@ namespace OpcClientForMetering
             // 
             // trueversion
             // 
+            this.trueversion.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.trueversion.AutoSize = true;
             this.trueversion.Location = new System.Drawing.Point(123, 618);
             this.trueversion.Name = "trueversion";

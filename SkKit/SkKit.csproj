@@ -113,6 +113,7 @@
     <Compile Include="kit\DataItem.cs" />
     <Compile Include="kit\EventEnum.cs" />
     <Compile Include="kit\map.cs" />
+    <Compile Include="kit\NormalDev.cs" />
     <Compile Include="kit\XmlKit.cs" />
     <Compile Include="LittleTools.cs" />
     <Compile Include="OpcSvr\opcserver.cs" />

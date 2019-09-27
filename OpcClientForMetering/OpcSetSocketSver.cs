@@ -84,8 +84,8 @@ namespace OpcClientForMetering
         {
             try
             {
-                int counttag = OpcSKConfig.TagListAll.Count;
-                int CountOracle = OpcSKConfig.TagBannerList.Count;
+                int counttag = OpcSKConfig.DevListAll.Count;
+                int CountOracle = OpcSKConfig.DevBannerList.Count;
                 int TotalCount = counttag + CountOracle;
                 if ((TotalCount) <= 255)
                 {
@@ -96,7 +96,7 @@ namespace OpcClientForMetering
 
                     for (int count = 0; count < counttag; count++)
                     {
-                        DataItem element = OpcSKConfig.TagListAll.ElementAt(count).Value;
+                        DataItem element = null;//OpcSKConfig.TagListAll.ElementAt(count).Value;
                         if (element.Active == false) {
                             continue;
                         }
@@ -112,7 +112,7 @@ namespace OpcClientForMetering
 
                     for (int count = counttag; count < TotalCount; count++)
                     {
-                        DataItem element = OpcSKConfig.TagBannerList.ElementAt(count- counttag).Value;
+                        DataItem element = null;//OpcSKConfig.evBannerList.ElementAt(count- counttag).Value;
                         logger.Debug("oracel--TagName[{}]TagId[{}]Value[{}]", element.TagName, element.TagId, element.Value);
                         if (element.Active == false)
                         {

@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Xml;
 using System.Collections.Generic;
-
+using SkKit.kit;
 
 namespace OpcClientForMetering
 {
@@ -16,11 +16,11 @@ namespace OpcClientForMetering
         XmlDocument xDoc = null;
         string XmlPath = null;
 
-        public ConcurrentDictionary<string, DataItem> TagListAll = new ConcurrentDictionary<string, DataItem>();
-        public string OpcHandle = null;    //Uri("opcda://127.0.0.1/Matrikon.OPC.Simulation.1")
+        public ConcurrentDictionary<string, NMDev> DevListAll = new ConcurrentDictionary<string, NMDev>();
+        public string OpcHandle = null;    
         public int SocketPort;
         public int SocketPeriod;
-        public Dictionary<string, DataItem> TagBannerList = new Dictionary<string, DataItem>();
+        public ConcurrentDictionary<string, NMDev> DevBannerList = new ConcurrentDictionary<string, NMDev>();
         public OpcSetConfig()
         {
             string path1 = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
@@ -33,13 +33,12 @@ namespace OpcClientForMetering
             }
             xDoc = new XmlDocument();
         }
-        public bool OpcAddIntoTagList(DataItem NewTag)
+        public bool OpcAddIntoTagList(NMDev NewDev)
         {
             bool RetOp = false;
-            logger.Debug("OpcAddIntoTagList--TagName[{}]", NewTag.TagName);
-            if (this.TagListAll.ContainsKey(NewTag.TagName) == false)
+            if (this.DevListAll.ContainsKey(NewDev.devname) == false)
             {
-                this.TagListAll.TryAdd(NewTag.TagName, NewTag);
+                this.DevListAll.TryAdd(NewDev.devname, NewDev);
                 RetOp = true;
             }
             else
@@ -48,11 +47,11 @@ namespace OpcClientForMetering
             }
             return RetOp;
         }
-        private void OpcAddIntoOracleList(DataItem NewTag)
+        private void OpcAddIntoOracleList(NMDev NewDev)
         {
-            if (this.TagBannerList.ContainsKey(NewTag.TagName) == false)
+            if (this.DevBannerList.ContainsKey(NewDev.devname) == false)
             {
-                this.TagBannerList.Add(NewTag.TagName, NewTag);
+                this.DevBannerList.TryAdd(NewDev.devname, NewDev);
             }
             else
             {
@@ -73,20 +72,20 @@ namespace OpcClientForMetering
                 logger.Debug("Opc name[{}]", XmlKit.GetByXml("name", root));
 
                 /*清空字典*/
-                if (this.TagListAll.Count != 0)
+                if (this.DevListAll.Count != 0)
                 {
                     logger.Info("clear TagListAll strart");
-                    this.TagListAll.Clear();
+                    this.DevListAll.Clear();
                 }
-                if (this.TagBannerList.Count != 0)
+                if (this.DevBannerList.Count != 0)
                 {
                     logger.Info("clear TagBannerList strart");
-                    this.TagBannerList.Clear();
+                    this.DevBannerList.Clear();
                 }
 
                 XmlNode SkNode = root.SelectSingleNode("Socket");
-                this.SocketPort = int.Parse(XmlKit.GetByXml("port", SkNode));
-                this.SocketPeriod = int.Parse(XmlKit.GetByXml("period", SkNode));
+                this.SocketPort = int.Parse(XmlKit.GetByXml("port", SkNode,"0"));
+                this.SocketPeriod = int.Parse(XmlKit.GetByXml("period", SkNode,"0"));
                 logger.Info("SocketPort[{}]SocketPeriod[{}]", SocketPort, SocketPeriod);
 
                 foreach (XmlNode onenode in root.SelectNodes("Opc"))
@@ -94,35 +93,20 @@ namespace OpcClientForMetering
                     string Opcstr = "opcda://{0}/{1}";
                     string OpcIp = XmlKit.GetByXml("tip", onenode);
                     string OpcName = XmlKit.GetByXml("name", onenode);
-                    this.OpcHandle = string.Format(Opcstr, OpcIp, OpcName);//Uri("opcda://127.0.0.1/Matrikon.OPC.Simulation.1")
+                    this.OpcHandle = string.Format(Opcstr, OpcIp, OpcName);
                     logger.Debug("OpcIp[{}]OpcName[{}]OpcHandle[{}]", OpcIp, OpcName, this.OpcHandle);
                 }
-                foreach (XmlNode node in root.SelectNodes("Item"))
+
+                XmlNode devsNode = root.SelectSingleNode("devs");
+                foreach (XmlNode node in devsNode.SelectNodes("dev"))
                 {
-                    foreach (XmlNode n in node.SelectNodes("tag"))
-                    {
-                        DataItem Onetag = new DataItem();
-                        Onetag.TagName = XmlKit.GetByXml("tagname", n);
-                        Onetag.TagId = int.Parse(XmlKit.GetByXml("id", n));
-                        Onetag.Value = "-";
-                        logger.Info("tag--parse xml file---------tagname[{}]TagId[{}]", Onetag.TagName, Onetag.TagId);
-                        if (OpcAddIntoTagList(Onetag) == true)
-                        {
-                            //CfgTagList.Add(Onetag);
-                        }
-                    }
+                    OpcAddIntoTagList(ParseDevNode(node));
                 }
-                foreach (XmlNode node in root.SelectNodes("OracleItem"))
+
+                XmlNode OradevsNode = root.SelectSingleNode("OracleDevs");
+                foreach (XmlNode node in OradevsNode.SelectNodes("dev"))
                 {
-                    foreach (XmlNode n in node.SelectNodes("tag"))
-                    {
-                        DataItem Onetag = new DataItem();
-                        Onetag.TagName = XmlKit.GetByXml("tagname", n);
-                        Onetag.TagId = int.Parse(XmlKit.GetByXml("id", n));
-                        Onetag.Value = "-";
-                        logger.Info("tag--parse xml file-oracle--------tagname[{}]TagId[{}]", Onetag.TagName, Onetag.TagId);
-                        OpcAddIntoOracleList(Onetag);
-                    }
+                    OpcAddIntoOracleList(ParseDevNode(node));
                 }
             }
             catch (Exception e)
@@ -131,6 +115,26 @@ namespace OpcClientForMetering
             }
             xDoc.Save(XmlPath);
             return;
+        }
+        NMDev ParseDevNode(XmlNode oNode)
+        {
+            string devname = XmlKit.GetByXml("devname", oNode);
+            string devdesc = XmlKit.GetByXml("des", oNode);
+            string devprefix = XmlKit.GetByXml("Prefix", oNode);
+            int devid = int.Parse(XmlKit.GetByXml("id", oNode, "0"));
+            logger.Info("-parse dev node---devname[{}]devprefix[{}]devdesc[{}]devid[{}]", devname, devprefix, devdesc, devid);
+
+            NMDev OraNewDev = new NMDev(devid, devname, devprefix, devdesc);
+            foreach (XmlNode n in oNode.SelectNodes("tag"))
+            {
+                DataItem Onetag = new DataItem();
+                Onetag.TagName = XmlKit.GetByXml("tagname", n);
+                Onetag.Tagstr = XmlKit.GetByXml("unit", n);
+                Onetag.Value = "-";
+                logger.Info("tag--parse xml file-oracle--------tagname[{}]UNIT[{}]", Onetag.TagName, Onetag.Tagstr);
+                OraNewDev.AddTagList(Onetag);
+            }
+            return OraNewDev ;
         }
     }
 }

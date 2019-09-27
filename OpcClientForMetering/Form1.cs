@@ -1,5 +1,6 @@
 ﻿using Base.kit;
 using Common.log;
+using SkKit.kit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,8 +19,9 @@ namespace OpcClientForMetering
         static public readonly NLOG logger = new NLOG("Form1");
         OpcSetConfig OpcSetCfg ;
         OpcClientMain OpcSetClientH = null;
+        OpcSetSqlite OpcSetSqlite;
         // OpcSetOracle OpcSetOracleH;
-        OpcSetSocketSver OpcSetSKServer;
+        //OpcSetSocketSver OpcSetSKServer;
         public Form1()
         {
             InitializeComponent();
@@ -28,13 +30,13 @@ namespace OpcClientForMetering
             this.tagTime.Width  = this.listView1.Width * 5 / 16-2;
             OpcSetCfg = new OpcSetConfig();
             OpcSetCfg.OpcSetConfigParseXml();
+            OpcSetSqlite = new OpcSetSqlite();
             //  OpcSetOracleH = new OpcSetOracle("ip","zhang","x","z","AAA");
-            OpcSetSKServer = new OpcSetSocketSver(OpcSetCfg);
+            //  OpcSetSKServer = new OpcSetSocketSver(OpcSetCfg);
             this.trueversion.Text = "V." + Application.ProductVersion;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            logger.Debug("Form1_Load");
             OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcHandle);
 
             Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
@@ -43,80 +45,102 @@ namespace OpcClientForMetering
         }
         void OnlyOnceThread()
         {
-            logger.Debug("OnlyOnceThread");
             if (OpcSetClientH.OClient == null)
             {
-                MessageBox.Show("invalid opc server hangdle!!", "warn!!");
+                MessageBox.Show("invalid opc server handle!!", "warn!!");
                 return;
             }
-            this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.TagListAll);
+           // this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevListAll);
 
-            var result3 = from v in OpcSetCfg.TagListAll orderby v.Key select v;
+            var result3 = from v in OpcSetCfg.DevListAll orderby v.Key select v;
 
             List<string> AllTagList = new List<string>();
-          
-            this.listView1.BeginUpdate();
-            foreach (KeyValuePair<string, DataItem> d in result3)
-            {
-                DataItem ooo = d.Value; ;
-                OpcClientInsetData(ooo);
-                AllTagList.Add(d.Key);
-            }
-            foreach (KeyValuePair<string, DataItem> h in OpcSetCfg.TagBannerList)
-            {
-                DataItem ooo = h.Value; ;
-                AllTagList.Add(h.Key);
-            }
-            logger.Debug("Count[{}]", AllTagList.Count);
-            this.listView1.EndUpdate();
-            string[] mmmsf = AllTagList.ToArray();
+            List<string> AllBannerTagList = new List<string>();  //订阅用
+            List<NMDev> Devlist = new List<NMDev>();           //写入数据库
 
-            this.OpcSetClientH.OpcSetTagChanged += new SkKit.kit.TagEventHandler(OpcClientChangeTag);
-            this.OpcSetClientH.OpcClientMainSubscription(mmmsf);
+            this.listView1.BeginUpdate();
+            foreach (KeyValuePair<string, NMDev> d in result3)
+            {
+                List<DataItem> listbuf = d.Value.NmTagList;
+                Devlist.Add(d.Value);
+                OpcSetSqlite.OpcSetWriteTag("RealTimeOpc", d.Key, listbuf);   //实时设备的tag 写到数据库
+
+                foreach (DataItem oo in listbuf)
+                {
+                    OpcClientInsetData(oo);
+                    AllTagList.Add(oo.OpcTagName);
+                }
+            }
+          //  this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevBannerList);
+            foreach (KeyValuePair<string, NMDev> h in OpcSetCfg.DevBannerList)
+            {
+                List<DataItem> blistbuf = h.Value.NmTagList;
+                Devlist.Add(h.Value);
+                OpcSetSqlite.OpcSetWriteTag("BannerOpc", h.Key, blistbuf);
+                foreach (DataItem ooo in blistbuf)
+                {
+                    AllBannerTagList.Add(ooo.OpcTagName);
+                }
+            }
+            OpcSetSqlite.OpcSetWriteDev(Devlist);
+
+            this.listView1.EndUpdate();
+
+            string[] mmmsf = AllTagList.ToArray();
+            string[] bannerzhu = AllBannerTagList.ToArray();
+
+            this.OpcSetClientH.OpcSetTagChanged += new SkKit.kit.TagEventHandler(OpcClientChangeTagNew);
+            this.OpcSetClientH.OpcClientMainSubscription(mmmsf, "realtime");
+            this.OpcSetClientH.OpcClientMainSubscription(bannerzhu, "banner");
         }
-        void OpcClientChangeTag(List<DataItem>Taglist)
+        void OpcClientChangeTagNew(List<DataItem> Taglist)
         {
             logger.Debug("get opc server Taglist---count[{}]", Taglist.Count);
+            List<DataItem> RealList = new List<DataItem>();
+            List<DataItem> BanList = new List<DataItem>();
+
             foreach (DataItem tl in Taglist)
             {
-                if (this.OpcSetCfg.TagBannerList.ContainsKey(tl.TagName) == true)
+                logger.Debug("OpcClientChangeTagNew--GroupName[{}]TagName[{}]", tl.GroupName, tl.TagName);
+                if (tl.GroupName == "realtime") {
+                    DataItem newtag = new DataItem();
+                    newtag.OpcTagName = tl.TagName;
+                    newtag.Value = tl.Value;
+                    newtag.DataTime = tl.DataTime;
+                    OpcSetUpdateTag(newtag);
+                    RealList.Add(newtag);
+                }
+                else if (tl.GroupName == "banner")
                 {
-                    logger.Debug("this is oracle tag!!TagName[{}]", tl.TagName);
-                    DataItem oracleone = this.OpcSetCfg.TagBannerList[tl.TagName];
-                    oracleone.Value = tl.Value;
-                    oracleone.DataTime = tl.DataTime;
-                    oracleone.Active = true;
+                    DataItem newtag = new DataItem();
+                    newtag.OpcTagName = tl.TagName;
+                    newtag.Value = tl.Value;
+                    newtag.DataTime = tl.DataTime;
+                    BanList.Add(newtag);
                 }
-                else if (this.OpcSetCfg.TagListAll.ContainsKey(tl.TagName) == true)
-                {
-                    logger.Debug("TagName[{}]", tl.TagName);
-                    DataItem utimeone = this.OpcSetCfg.TagListAll[tl.TagName];
-                    utimeone.Value = tl.Value;
-                    utimeone.DataTime = tl.DataTime;
-                    utimeone.Active = true;
+            }
+            this.OpcSetSqlite.OpcSetUpdateTag("RealTimeOpc", RealList);
+            this.OpcSetSqlite.OpcSetUpdateTag("BannerOpc", BanList);
 
-                    ListViewItem listview = this.listView1.FindItemWithText(tl.TagName);
-                    if (listview != null)
-                    {
-                        logger.Debug("Indexe [{}]", listview.Index);
-                        this.listView1.Items[listview.Index].SubItems[2].Text = tl.Value.ToString();
-                        this.listView1.Items[listview.Index].SubItems[3].Text = tl.DataTime;
-                        logger.Debug("opc client name[{}] value[{}] time [{}]", tl.TagName, tl.Value, tl.DataTime);
-                    }
-                    else
-                    {
-                        logger.Debug("listview find none");
-                    }
-                }
-                else {
-                    logger.Debug("unkown tag name");
-                }
-
+        }
+        void OpcSetUpdateTag(DataItem OTag)
+        {
+            ListViewItem listview = this.listView1.FindItemWithText(OTag.OpcTagName);
+            if (listview != null)
+            {
+                this.listView1.Items[listview.Index].SubItems[2].Text = OTag.Value.ToString();
+                this.listView1.Items[listview.Index].SubItems[3].Text = OTag.DataTime;
+                logger.Debug("update win-Indexe[{}]opc client name[{}]value[{}] time [{}]", listview.Index, OTag.OpcTagName, OTag.Value, OTag.DataTime);
+            }
+            else
+            {
+                logger.Debug("listview find none");
             }
         }
         private void Form1Closed(object sender, EventArgs e)
         {
-            logger.Debug("form1_closed");
+            logger.Debug("win_closed!!");
+            this.OpcSetSqlite.OpcSetDelAll();
             System.Environment.Exit(System.Environment.ExitCode);
             this.Dispose();
             this.Close();
@@ -124,7 +148,7 @@ namespace OpcClientForMetering
         void OpcClientInsetData(DataItem onett)
         {
             ListViewItem li = new ListViewItem();
-            li.Text = onett.TagName;
+            li.Text = onett.OpcTagName;
             li.SubItems.Add(onett.TagName);
             li.SubItems.Add(onett.Value.ToString());
             li.SubItems.Add(onett.DataTime);
@@ -136,26 +160,6 @@ namespace OpcClientForMetering
         private void AddItem_Click(object sender, EventArgs e)
         {
             logger.Debug("AddItem_Click  [{}]",this.inputitem.Text);
-            if (this.inputitem.Text == null || this.inputitem.Text.Length == 0) {
-                return;
-            }
-            DataItem tt = new DataItem();
-            tt.TagName = this.inputitem.Text;
-            tt.Value = "-";
-            if (OpcSetCfg.OpcAddIntoTagList(tt) == true)    //更新内存
-            {
-                this.OpcSetClientH.OpcClientMainReadOneTag(ref tt);
-                logger.Debug("now insert taglist now!!");
-                OpcClientInsetData(tt);    //更新界面
-
-                string[] onetag = { tt.TagName };
-                this.OpcSetClientH.OpcClientMainSubscription(onetag);
-
-            }
-            else
-            {
-                logger.Debug("now have this tag,return now!!");
-            }
             //  testinsertdata();
         }
 

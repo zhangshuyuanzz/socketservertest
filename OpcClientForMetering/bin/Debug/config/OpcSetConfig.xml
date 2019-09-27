@@ -1,5 +1,5 @@
 <root name="opcsetconfig">
-  <Opc tip="127.0.0.1" name="ICONICS.SimulatorOPCDA.2">
+  <Opc tip="192.168.0.241" name="Aspen.Infoplus21_DA.1">
   </Opc>
   <!--  OracleDB节点无效 -->
   <OracleDB dbip="192.168.0.240" port="1521" servername="orcl" usrid="ZHANGYONGQIANG" usrpw="ZHANGYONGQIANG" tablename="AAA">
@@ -10,29 +10,30 @@
   <Socket port="11220" period="60">
   </Socket>
   <!--
-    实时数据数据区域 ，id范围从1-300，上限299
+  
+    实时数据数据区域
+   
+
 -->
-  <Item>
-    <tag tagname="zhang1" des="this is item what it is!!" id="1" />
-    <tag tagname="zhang2" id="2" />
-    <tag tagname="zhang3" id="3" />
-    <tag tagname="zhang4" id="4" />
-    <tag tagname="zhang5" id="5" />
-    <tag tagname="zhang6" id="6" />
-    <tag tagname="zhang7" id="7" />
-    <tag tagname="zhang8" id="8" />
-  </Item>
+  <devs>
+    <dev id="1"  devname="M_DG_ZQ.PV" Prefix="yes" des="this is Flow item what it is!!">
+      <tag tagname="M_DG_ZQ.PV_D" unit="t/h" />
+      <tag tagname="M_DG_ZQ.PV_J" unit="t/h" />
+      <tag tagname="M_DG_ZQ.PV_S" unit="t/h" />
+      <tag tagname="M_DG_ZQ.PV_T" unit="t/h" />
+      <tag tagname="M_DG_ZQ.PV_W" unit="t/h" />
+    </dev>
+  </devs>
   <!--
-    oracle数据数据区域，id建议从300开始配置
+    oracle数据数据区域
 -->
-  <OracleItem>
-    <tag tagname="111.222" id="309" />
-    <tag tagname="111.333" id="310" />
-    <tag tagname="111.444" id="311" />
-    <tag tagname="111.555" id="312" />
-    <tag tagname="111.666" id="313" />
-    <tag tagname="111.777" id="314" />
-    <tag tagname="111.888" id="315" />
-    <tag tagname="111.999" id="316" />
-  </OracleItem>
+  <OracleDevs>
+    <dev id="2" devtype="2" devname="M_CYC_D_QWZSJ1" Prefix="no" des="this is EM item what it is!!">
+      <tag tagname="M_CYC_D_QWZSJ1_E" unit="t/h" />
+      <tag tagname="M_CYC_D_QWZSJ1_EAAP" unit="t/h" />
+      <tag tagname="M_CYC_D_QWZSJ1_EAVL" unit="t/h" />
+      <tag tagname="M_CYC_D_QWZSJ1_EBAP" unit="t/h" />
+      <tag tagname="M_CYC_D_QWZSJ1_EC_AP" unit="t/h" />
+    </dev>
+  </OracleDevs>
 </root>

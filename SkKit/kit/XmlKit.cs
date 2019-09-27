@@ -35,13 +35,19 @@ namespace Base.kit
         }
         public static string GetByXml(string name, XmlNode node, string def = null)
         {
-            XmlAttribute typeAttr = node.Attributes[name];
-            if (typeAttr == null)
+            try
+            {
+                XmlAttribute typeAttr = node.Attributes[name];
+                if (typeAttr == null)
+                {
+                    return def;
+                }
+                return typeAttr.Value;
+            }
+            catch (Exception)
             {
                 return def;
             }
-            return typeAttr.Value;
-
         }
         private static M ParseXmlFileRecursion(XmlNode node)
         {

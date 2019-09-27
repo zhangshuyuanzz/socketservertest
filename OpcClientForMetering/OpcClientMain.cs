@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using UcAsp.Opc;
 
 namespace OpcClientForMetering
@@ -43,39 +44,47 @@ namespace OpcClientForMetering
             ReadOTag.DataTime = data.Timestamp.ToString();
             ReadOTag.Active = true;
         }
-        public void OpcClientMainRead(ref ConcurrentDictionary<string, DataItem> ReadTagList)
+        public void OpcClientMainRead(ref ConcurrentDictionary<string, NMDev> ReadDevList)
         {
-            if (OClient == null)
+            try
             {
-                return;
+                if (OClient == null)
+                {
+                    return;
+                }
+                foreach (KeyValuePair<string, NMDev> one in ReadDevList)
+                {
+                    logger.Debug("read opc-- dev name[{}]", one.Key);
+                    List<DataItem> taglist = one.Value.NmTagList;
+                    foreach (DataItem tag in taglist)
+                    {
+                        OpcItemValue data = this.OClient.ReadOneTag<string>(tag.OpcTagName);
+                        logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", data.ItemId, data.Value, data.Timestamp);
+                        tag.Value = data.Value;
+                        tag.DataTime = data.Timestamp.ToString();
+                        tag.Active = true;
+                    }
+                }
             }
-            logger.Debug("OpcClientMainRead--Count[{}]", ReadTagList.Count);
-            foreach (KeyValuePair<string, DataItem> one in ReadTagList)
+            catch (Exception ex)
             {
-                logger.Debug("name[{}]", one.Key);
-                DataItem TagData = one.Value;
-                OpcItemValue data =  this.OClient.ReadOneTag<string>(TagData.TagName);
-                logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", data.ItemId, data.Value, data.Timestamp);
-                TagData.Value = data.Value;
-                TagData.DataTime = data.Timestamp.ToString();
-                TagData.Active = true;
+                logger.Debug("error[{}]",ex.ToString());
             }
+
+
         }
-        OpcGroup OpcSetSubGroup = null;
-        string OpcSetClientGName = "OpcSetClient";
-        public void OpcClientMainSubscription(string[] Tagname)
+        public void OpcClientMainSubscription(string[] Tagname,string groupname)
         {
             if (OClient == null)
             {
                 return;
             }
             string msg;
-            logger.Debug("OpcClientMainSubscription---Length[{}]", Tagname.Length);
-            if (this.OpcSetSubGroup == null) {
-                this.OpcSetSubGroup = this.OClient.AddGroup(OpcSetClientGName);
-                this.OpcSetSubGroup.DataChange += OpcSetGroup_DataChange;
-            }
-            this.OClient.AddItems(OpcSetClientGName, Tagname, out msg);
+            OpcGroup OpcSetSubGroup = this.OClient.AddGroup(groupname);
+            logger.Debug("OpcClientMainSubscription---Length[{}]groupname[{}]", Tagname.Length, groupname);
+            OpcSetSubGroup.DataChange += OpcSetGroup_DataChange;
+            this.OClient.AddItems(groupname, Tagname, out msg);
+
         }
         private void OpcSetGroup_DataChange(object sender, ItemDataEventArgs e)
         {
@@ -84,7 +93,8 @@ namespace OpcClientForMetering
             foreach (OpcItemValue o in e.Data)
             {
                 DataItem one = new DataItem();
-                logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", o.ItemId,o.Value,o.Timestamp);
+                logger.Debug("base--GroupName[{}]ItemId[{}]Value[{}]Timestamp[{}]", o.GroupName, o.ItemId,o.Value,o.Timestamp);
+                one.GroupName = o.GroupName;
                 one.TagName = o.ItemId;
                 one.Value = o.Value;
                 one.DataTime = o.Timestamp.ToString();
