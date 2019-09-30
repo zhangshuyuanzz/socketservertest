@@ -741,6 +741,12 @@ namespace UcAsp.Opc.Ua
             }
 
         }
+
+        public void ConnectNew()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// This event is raised when the connection to the OPC server is lost.
         /// </summary>

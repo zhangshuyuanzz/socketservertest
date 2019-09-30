@@ -21,6 +21,7 @@ namespace UcAsp.Opc
         private Dictionary<string, OpcGroup> _groups = new Dictionary<string, OpcGroup>();
 
         public OpcStatus Connect { get; set; }
+
         public OpcClient(Uri url)
         {
             string m_scheme = url.Scheme.ToLower();
@@ -35,6 +36,19 @@ namespace UcAsp.Opc
             try
             {
                 _client.Connect();
+                Connect = OpcStatus.Connected;
+            }
+            catch (Exception )
+            {
+                Connect = OpcStatus.NotConnected;
+            }
+        }
+        public OpcClient(string ip,string name)
+        {
+            _client = new Da.DaClient(ip,name);
+            try
+            {
+                _client.ConnectNew();
                 Connect = OpcStatus.Connected;
             }
             catch (Exception ex)

@@ -17,7 +17,9 @@ namespace OpcClientForMetering
         string XmlPath = null;
 
         public ConcurrentDictionary<string, NMDev> DevListAll = new ConcurrentDictionary<string, NMDev>();
-        public string OpcHandle = null;    
+        public string OpcIP = null;
+        public string OpcName = null;
+
         public int SocketPort;
         public int SocketPeriod;
         public ConcurrentDictionary<string, NMDev> DevBannerList = new ConcurrentDictionary<string, NMDev>();
@@ -90,11 +92,12 @@ namespace OpcClientForMetering
 
                 foreach (XmlNode onenode in root.SelectNodes("Opc"))
                 {
-                    string Opcstr = "opcda://{0}/{1}";
-                    string OpcIp = XmlKit.GetByXml("tip", onenode);
-                    string OpcName = XmlKit.GetByXml("name", onenode);
-                    this.OpcHandle = string.Format(Opcstr, OpcIp, OpcName);
-                    logger.Debug("OpcIp[{}]OpcName[{}]OpcHandle[{}]", OpcIp, OpcName, this.OpcHandle);
+                    //string Opcstr = "opcda://{0}/{1}";
+                    OpcIP = XmlKit.GetByXml("tip", onenode);
+                    OpcName = XmlKit.GetByXml("name", onenode);
+                    //this.OpcHandle = string.Format(Opcstr, OpcIp, OpcName);
+
+                    logger.Debug("OpcIp[{}]OpcName[{}]", OpcIP, OpcName);
                 }
 
                 XmlNode devsNode = root.SelectSingleNode("devs");

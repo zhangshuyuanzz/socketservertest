@@ -16,6 +16,7 @@ namespace UcAsp.Opc
         /// Connect the client to the OPC Server
         /// </summary>
         void Connect();
+        void ConnectNew();
 
         OpcGroup AddGroup(string groupName);
 

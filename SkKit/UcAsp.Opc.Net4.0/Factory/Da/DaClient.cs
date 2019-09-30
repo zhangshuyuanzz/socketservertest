@@ -16,6 +16,7 @@ using Opc;
 using Factory = OpcCom.Factory;
 using OpcDa = Opc.Da;
 using System.Threading.Tasks;
+using Common.log;
 
 namespace UcAsp.Opc.Da
 {
@@ -24,6 +25,8 @@ namespace UcAsp.Opc.Da
     /// </summary>
     public partial class DaClient : IClient<DaNode>
     {
+        readonly NLOG logger = new NLOG("DaClient");
+
         private readonly URL _url;
         private OpcDa.Server _server;
         private long _sub;
@@ -33,6 +36,8 @@ namespace UcAsp.Opc.Da
 
         // default monitor interval in Milliseconds
         private const int DefaultMonitorInterval = 100;
+        private Server OpcServer;
+
 
         public event EventHandler<ItemDataEventArgs> DataChange;
 
@@ -48,7 +53,31 @@ namespace UcAsp.Opc.Da
                 HostName = serverUrl.Host
             };
         }
-
+        public DaClient(string ip, string name)
+        {
+            IDiscovery m_discovery = new OpcCom.ServerEnumerator();
+            Server[] servers = m_discovery.GetAvailableServers(Specification.COM_DA_20, ip, null);
+            if (servers != null)
+            {
+                foreach (Server server in servers)
+                {
+                    logger.Info("server-name--[{}]--Url+[{}]--Locale[{}]--IsConnected[{}]", server.Name, server.Url, server.Locale, server.IsConnected);
+                    if (server.Name.Contains(name) == true)
+                    {
+                        logger.Info(" right one--- server.Name[{}]ThisServerName[{}]", server.Name, name);
+                        this.OpcServer = server;
+                        break;
+                    }
+                    else {
+                        logger.Info(" other one--- server.Name[{}]ThisServerName[{}]", server.Name, name);
+                    }
+                }
+            }
+            else
+            {
+                logger.Info("no servers--");
+            }
+        }
         /// <summary>
         /// Initialize a new Data Access Client
         /// </summary>
@@ -112,6 +141,16 @@ namespace UcAsp.Opc.Da
                 return;
             _server = new OpcDa.Server(new Factory(), _url);
             _server.Connect();
+            var root = new DaNode(string.Empty, string.Empty);
+            RootNode = root;
+            AddNodeToCache(root);
+        }
+        public void ConnectNew()
+        {
+            if (Status == OpcStatus.Connected)
+                return;
+            _server = (OpcDa.Server)this.OpcServer;
+           this.OpcServer.Connect();
             var root = new DaNode(string.Empty, string.Empty);
             RootNode = root;
             AddNodeToCache(root);

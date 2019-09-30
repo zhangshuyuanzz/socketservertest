@@ -31,7 +31,26 @@ namespace OpcClientForMetering
                 OClient = null;
             }
         }
+        public OpcClientMain(string ip,string name)
+        {
+            if (name == null)
+            {
+                return;
+            }
+            logger.Debug("ip [{}]name[{}]", ip,name);
+         //   OClient = new OpcClient(new Uri(ClientHandle));
+            OClient = new OpcClient(ip,name);
 
+            if (OClient.Connect == OpcStatus.Connected)
+            {
+                logger.Debug("Connected success");
+            }
+            else
+            {
+                logger.Debug("Connected fail!!");
+                OClient = null;
+            }
+        }
         public void OpcClientMainReadOneTag(ref DataItem ReadOTag)
         {
             if (OClient == null) {

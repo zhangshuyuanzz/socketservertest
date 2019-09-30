@@ -37,7 +37,7 @@ namespace OpcClientForMetering
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcHandle);
+            OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcIP, OpcSetCfg.OpcName);
 
             Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
             scanThread.IsBackground = true;
