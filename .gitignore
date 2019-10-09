@@ -3,3 +3,6 @@
 *.ide-wal
 *.bak
 *.ide-shm
+*.gitignore
+*.zip
+/OpcClientForMetering/bin/Debug/DB/333
