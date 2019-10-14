@@ -55,3 +55,4 @@ C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\System.IO.
 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\System.Runtime.xml
 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\bin\Debug\System.Threading.Tasks.xml
 C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csproj.App.config
+C:\Users\Administrator\Desktop\onesocketserver\SocketServer\obj\x86\Debug\SocketServer.csprojAssemblyReference.cache

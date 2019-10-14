@@ -5,9 +5,8 @@
     实时数据数据区域
 -->
   <devs>
-    <dev id="1"  devname="M_DG_ZQ.PV" Prefix="yes" des="this is realtime item what it is!!">
+    <dev id="1" devname="M_DG_ZQ.PV" Prefix="yes" des="this is realtime item what it is!!">
       <tag tagname="M_DG_ZQ.PV_D" unit="t/h" />
-
     </dev>
   </devs>
   <!--
@@ -16,7 +15,6 @@
   <OracleDevs>
     <dev id="2" devname="M_CYC_D_QWZSJ1" Prefix="no" des="this is oracle item what it is!!">
       <tag tagname="M_CYC_D_QWZSJ1_E" unit="t/h" />
-
     </dev>
   </OracleDevs>
 </root>

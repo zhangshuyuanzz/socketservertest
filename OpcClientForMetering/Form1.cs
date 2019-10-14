@@ -50,7 +50,7 @@ namespace OpcClientForMetering
                 MessageBox.Show("invalid opc server handle!!", "warn!!");
                 return;
             }
-           // this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevListAll);
+            this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevListAll);
 
             var result3 = from v in OpcSetCfg.DevListAll orderby v.Key select v;
 

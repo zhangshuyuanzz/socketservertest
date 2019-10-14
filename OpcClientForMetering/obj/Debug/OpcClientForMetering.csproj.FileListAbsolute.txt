@@ -36,3 +36,4 @@ C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Sy
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csproj.App.config
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csprojAssemblyReference.cache
