@@ -38,9 +38,9 @@ namespace OpcClientForMetering
         public bool OpcAddIntoTagList(NMDev NewDev)
         {
             bool RetOp = false;
-            if (this.DevListAll.ContainsKey(NewDev.devname) == false)
+            if (this.DevListAll.ContainsKey(NewDev.taginfo.TagName) == false)
             {
-                this.DevListAll.TryAdd(NewDev.devname, NewDev);
+                this.DevListAll.TryAdd(NewDev.taginfo.TagName, NewDev);
                 RetOp = true;
             }
             else
@@ -51,9 +51,9 @@ namespace OpcClientForMetering
         }
         private void OpcAddIntoOracleList(NMDev NewDev)
         {
-            if (this.DevBannerList.ContainsKey(NewDev.devname) == false)
+            if (this.DevBannerList.ContainsKey(NewDev.taginfo.TagName) == false)
             {
-                this.DevBannerList.TryAdd(NewDev.devname, NewDev);
+                this.DevBannerList.TryAdd(NewDev.taginfo.TagName, NewDev);
             }
             else
             {
@@ -101,13 +101,13 @@ namespace OpcClientForMetering
                 }
 
                 XmlNode devsNode = root.SelectSingleNode("devs");
-                foreach (XmlNode node in devsNode.SelectNodes("dev"))
+                foreach (XmlNode node in devsNode.SelectNodes("tag"))
                 {
                     OpcAddIntoTagList(ParseDevNode(node));
                 }
 
                 XmlNode OradevsNode = root.SelectSingleNode("OracleDevs");
-                foreach (XmlNode node in OradevsNode.SelectNodes("dev"))
+                foreach (XmlNode node in OradevsNode.SelectNodes("tag"))
                 {
                     OpcAddIntoOracleList(ParseDevNode(node));
                 }
@@ -121,22 +121,26 @@ namespace OpcClientForMetering
         }
         NMDev ParseDevNode(XmlNode oNode)
         {
-            string devname = XmlKit.GetByXml("devname", oNode);
-            string devdesc = XmlKit.GetByXml("des", oNode);
-            string devprefix = XmlKit.GetByXml("Prefix", oNode);
-            int devid = int.Parse(XmlKit.GetByXml("id", oNode, "0"));
-            logger.Info("-parse dev node---devname[{}]devprefix[{}]devdesc[{}]devid[{}]", devname, devprefix, devdesc, devid);
+            NMDev OraNewDev = new NMDev() {
+                taginfo = new DataItem() {
+                    TagName = XmlKit.GetByXml("tagname", oNode),
+                    TagId = int.Parse(XmlKit.GetByXml("id", oNode, "0")),
+                } ,
+                devuint = XmlKit.GetByXml("unit", oNode),
+                devdescription = XmlKit.GetByXml("des", oNode),
+                devfac = XmlKit.GetByXml("tagfac", oNode),
+                devtype = int.Parse(XmlKit.GetByXml("type", oNode, "1")),
+                devprefix = XmlKit.GetByXml("Prefix", oNode) == "yes"?true:false,
+        };
+            OraNewDev.setTagLable();
+            logger.Info("-parse dev node--devid[{}]", OraNewDev.taginfo.TagId);
+            logger.Info("-parse dev node--devname[{}]", OraNewDev.taginfo.TagName);
+            logger.Info("-parse dev node--devuint[{}]", OraNewDev.devuint);
+            logger.Info("-parse dev node--devdescription[{}]", OraNewDev.devdescription);
+            logger.Info("-parse dev node--devfac[{}]", OraNewDev.devfac);
+            logger.Info("-parse dev node--devtype[{}]", OraNewDev.devtype);
+            logger.Info("-parse dev node--devprefix[{}]", OraNewDev.devprefix);
 
-            NMDev OraNewDev = new NMDev(devid, devname, devprefix, devdesc);
-            foreach (XmlNode n in oNode.SelectNodes("tag"))
-            {
-                DataItem Onetag = new DataItem();
-                Onetag.TagName = XmlKit.GetByXml("tagname", n);
-                Onetag.Tagstr = XmlKit.GetByXml("unit", n);
-                Onetag.Value = "-";
-                logger.Info("tag--parse xml file-oracle--------tagname[{}]UNIT[{}]", Onetag.TagName, Onetag.Tagstr);
-                OraNewDev.AddTagList(Onetag);
-            }
             return OraNewDev ;
         }
     }

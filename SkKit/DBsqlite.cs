@@ -286,8 +286,8 @@ namespace SQLite
         private static SQLiteParameter[] IinsertBuildParamArray(NMDev devdata)
         {
             List<SQLiteParameter> list = new List<SQLiteParameter>();
-            list.Add(new SQLiteParameter("@ID", devdata.devid));
-            list.Add(new SQLiteParameter("@DevName", devdata.devname));
+            list.Add(new SQLiteParameter("@ID", devdata.taginfo.TagId));
+            list.Add(new SQLiteParameter("@DevName", devdata.taginfo.TagName));
             list.Add(new SQLiteParameter("@Decription", devdata.devdescription));
 
             if (list.Count == 0)
@@ -314,17 +314,31 @@ namespace SQLite
             SqlhelpCommitDTS(dbTrans);
             return count;
         }
-        private static SQLiteParameter[] SaveBuildTagArray(string devname,DataItem devdata)
+        private static SQLiteParameter[] SaveBuildTagArray(NMDev devdata)
         {
             List<SQLiteParameter> list = new List<SQLiteParameter>();
-            list.Add(new SQLiteParameter("@DevName", devname));
-            list.Add(new SQLiteParameter("@OpcItemName", devdata.OpcTagName));
-            list.Add(new SQLiteParameter("@TagName", devdata.TagName));
-            list.Add(new SQLiteParameter("@value", devdata.Value));
-            list.Add(new SQLiteParameter("@Unit", devdata.Tagstr));
-            list.Add(new SQLiteParameter("@Time", devdata.DataTime));
+            list.Add(new SQLiteParameter("@tagId", devdata.taginfo.TagId));
+            list.Add(new SQLiteParameter("@OpcItemName", devdata.taginfo.OpcTagName));
+            list.Add(new SQLiteParameter("@TagName", devdata.taginfo.TagName));
+            list.Add(new SQLiteParameter("@value", devdata.taginfo.Value));
+            list.Add(new SQLiteParameter("@Unit", devdata.devuint));
+            list.Add(new SQLiteParameter("@Time", devdata.taginfo.DataTime));
+            list.Add(new SQLiteParameter("@TagType", devdata.devtype));
+            list.Add(new SQLiteParameter("@tagDesc", devdata.devdescription));
+            list.Add(new SQLiteParameter("@owner", devdata.devfac));
+            list.Add(new SQLiteParameter("@tagQuality", devdata.taginfo.Quality));
 
-            logger.Debug("devname[{}]OpcTagName[{}]TagName[{}]Value[{}]Tagstr[{}]DataTime[{}]", devname, devdata.OpcTagName, devdata.TagName, devdata.Value, devdata.Tagstr, devdata.DataTime);
+            logger.Debug("----TagId[{}]", devdata.taginfo.TagId);
+            logger.Debug("----OpcTagName[{}]", devdata.taginfo.OpcTagName);
+            logger.Debug("----TagName[{}]", devdata.taginfo.TagName);
+            logger.Debug("----Value[{}]", devdata.taginfo.Value);
+            logger.Debug("----devuint[{}]", devdata.devuint);
+            logger.Debug("----DataTime[{}]", devdata.taginfo.DataTime);
+            logger.Debug("----devtype[{}]", devdata.devtype);
+            logger.Debug("----devdescription[{}]", devdata.devdescription);
+            logger.Debug("----devfac[{}]", devdata.devfac);
+            logger.Debug("----Quality[{}]", devdata.taginfo.Quality);
+
             if (list.Count == 0)
                 return null;
             return list.ToArray();
@@ -332,7 +346,7 @@ namespace SQLite
         private static string BuildSaveTag(string table)
         {
             StringBuilder buf = new StringBuilder();
-            buf.Append("REPLACE INTO ").Append(table).Append(" ( DevName,OpcItemName,TagName,value,Unit,Time) values ( @DevName,@OpcItemName,@TagName,@value,@Unit,@Time)");
+            buf.Append("REPLACE INTO ").Append(table).Append(" ( tagId,OpcItemName,TagName,value,Unit,Time,TagType,tagDesc,owner,tagQuality) values ( @tagId,@OpcItemName,@TagName,@value,@Unit,@Time,@TagType,@tagDesc,@owner,@tagQuality)");
             return buf.ToString();
         }
 
@@ -341,9 +355,10 @@ namespace SQLite
             List<SQLiteParameter> list = new List<SQLiteParameter>();
             list.Add(new SQLiteParameter("@value", devdata.Value));
             list.Add(new SQLiteParameter("@Time", devdata.DataTime));
+            list.Add(new SQLiteParameter("@tagQuality", devdata.Quality));
             list.Add(new SQLiteParameter("@OpcItemName", devdata.OpcTagName));
 
-            logger.Debug("Value[{}]DataTime[{}]OpcItemName[{}]", devdata.Value, devdata.DataTime, devdata.OpcTagName);
+            logger.Debug("Value[{}]DataTime[{}]OpcItemName[{}]Quality[{}]", devdata.Value, devdata.DataTime, devdata.OpcTagName, devdata.Quality);
             if (list.Count == 0)
                 return null;
             return list.ToArray();
@@ -354,7 +369,7 @@ namespace SQLite
             {
                 throw new ArgumentNullException("table=null");
             }
-            string sql = "UPDATE " + table + " SET value=@value,time=@time WHERE OpcItemName=@OpcItemName"; 
+            string sql = "UPDATE " + table + " SET value=@value,time=@time,tagQuality=@tagQuality WHERE OpcItemName=@OpcItemName"; 
             this.EnsureConnection();  //no useless
             logger.Debug("sql[{}]", sql);
 
@@ -368,7 +383,7 @@ namespace SQLite
             SqlhelpCommitDTS(dbTrans);
             return count;
         }
-        public int SaveTag(string table, string devname,List<DataItem> entity)
+        public int SaveTag(string table, List<NMDev> entity)
         {
             if (table == null)
             {
@@ -380,9 +395,9 @@ namespace SQLite
 
             DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
             int count = 0;
-            foreach (DataItem s in entity)
+            foreach (NMDev s in entity)
             {
-                SQLiteParameter[] arr = SaveBuildTagArray(devname, s);
+                SQLiteParameter[] arr = SaveBuildTagArray(s);
                 count += ExecuteNonQuery(sql, arr);
             }
             SqlhelpCommitDTS(dbTrans);

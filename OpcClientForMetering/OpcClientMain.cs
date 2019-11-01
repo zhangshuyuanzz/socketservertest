@@ -38,7 +38,6 @@ namespace OpcClientForMetering
                 return;
             }
             logger.Debug("ip [{}]name[{}]", ip,name);
-         //   OClient = new OpcClient(new Uri(ClientHandle));
             OClient = new OpcClient(ip,name);
 
             if (OClient.Connect == OpcStatus.Connected)
@@ -74,15 +73,11 @@ namespace OpcClientForMetering
                 foreach (KeyValuePair<string, NMDev> one in ReadDevList)
                 {
                     logger.Debug("read opc-- dev name[{}]", one.Key);
-                    List<DataItem> taglist = one.Value.NmTagList;
-                    foreach (DataItem tag in taglist)
-                    {
-                        OpcItemValue data = this.OClient.ReadOneTag<string>(tag.OpcTagName);
-                        logger.Debug("ItemId[{}]Value[{}]Timestamp[{}]", data.ItemId, data.Value, data.Timestamp);
-                        tag.Value = data.Value;
-                        tag.DataTime = data.Timestamp.ToString();
-                        tag.Active = true;
-                    }
+                    OpcItemValue data = this.OClient.ReadOneTag<string>(one.Value.taginfo.OpcTagName);
+                    one.Value.taginfo.Value = data.Value;
+                    one.Value.taginfo.DataTime = data.Timestamp.ToString();
+                    one.Value.taginfo.Active = true;
+                    one.Value.taginfo.Quality = (ushort)(data.Quality == "good" ? 1 : 2);
                 }
             }
             catch (Exception ex)
@@ -103,7 +98,6 @@ namespace OpcClientForMetering
             logger.Debug("OpcClientMainSubscription---Length[{}]groupname[{}]", Tagname.Length, groupname);
             OpcSetSubGroup.DataChange += OpcSetGroup_DataChange;
             this.OClient.AddItems(groupname, Tagname, out msg);
-
         }
         private void OpcSetGroup_DataChange(object sender, ItemDataEventArgs e)
         {

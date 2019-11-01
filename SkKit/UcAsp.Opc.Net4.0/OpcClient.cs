@@ -29,10 +29,7 @@ namespace UcAsp.Opc
             {
                 _client = new Da.DaClient(url);
             }
-            else if ("opc.tcp" == m_scheme)
-            {
-                _client = new Ua.UaClient(url);
-            }
+
             try
             {
                 _client.Connect();
@@ -63,10 +60,6 @@ namespace UcAsp.Opc
             if ("opcda" == m_scheme)
             {
                 _client = new Da.DaClient(url, _options);
-            }
-            else if ("opc.tcp" == m_scheme)
-            {
-                _client = new Ua.UaClient(url, _options);
             }
             try
             {

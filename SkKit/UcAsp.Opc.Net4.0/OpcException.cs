@@ -1,5 +1,4 @@
-﻿using Opc.Ua;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace UcAsp.Opc
@@ -23,20 +22,6 @@ namespace UcAsp.Opc
     public OpcException(string message)
       : base(message)
     {
-    }
-
-    /// <summary>
-    /// Returns an (optional) associated OPC UA StatusCode for the exception.
-    /// </summary>
-    public StatusCode? Status { get; private set; }
-
-    /// <summary>
-    /// Initialize a new instance of the OpcException class
-    /// </summary>
-    public OpcException(string message, StatusCode status)
-      : base(message)
-    {
-      Status = status;
     }
 
     /// <summary>

@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Opc.Ua;
 using System.Security.Cryptography.X509Certificates;
 namespace UcAsp.Opc
 {
@@ -99,11 +98,6 @@ namespace UcAsp.Opc
         /// Gets or sets the max publish request count.
         /// </summary>
         public int MaxPublishRequestCount { get; set; }
-
-        /// <summary>
-        /// The identity to connect to the OPC server as
-        /// </summary>
-        public UserIdentity UserIdentity { get; set; }
 
         internal ClientOptions()
         {

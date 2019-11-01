@@ -43,6 +43,8 @@ namespace OpcClientForMetering
             try
             {
                 Form1.logger.Debug("error,win [{}]",e.ToString());
+                Form1.logger.Debug("error,win [{}]", e.Exception.ToString());
+
                 MessageBox.Show(e.Exception.Message);
             }
             catch { }

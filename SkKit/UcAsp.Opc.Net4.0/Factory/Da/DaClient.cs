@@ -11,10 +11,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using UcAsp.Opc;
 using Opc;
-using Factory = OpcCom.Factory;
 using OpcDa = Opc.Da;
+using Factory = OpcCom.Factory;
 using System.Threading.Tasks;
 using Common.log;
 
@@ -80,7 +79,6 @@ namespace UcAsp.Opc.Da
         }
         /// <summary>
         /// Initialize a new Data Access Client
-        /// </summary>
         /// <param name="serverUrl">the url of the server to connect to</param>
         public DaClient(Uri serverUrl, ClientOptions options)
         {
@@ -169,13 +167,6 @@ namespace UcAsp.Opc.Da
             }
         }
 
-        /// <summary>
-        /// Read a tag
-        /// </summary>
-        /// <typeparam name="T">The type of tag to read</typeparam>
-        /// <param name="tag">The fully-qualified identifier of the tag. You can specify a subfolder by using a comma delimited name.
-        /// E.g: the tag `foo.bar` reads the tag `bar` on the folder `foo`</param>
-        /// <returns>The value retrieved from the OPC</returns>
         public T Read<T>(string tag)
         {
             var item = new OpcDa.Item { ItemName = tag };

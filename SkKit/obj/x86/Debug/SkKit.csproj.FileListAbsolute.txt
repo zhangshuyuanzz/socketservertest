@@ -34,9 +34,6 @@ C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\SkKit.dll.config
 C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\Microsoft.Threading.Tasks.dll
 C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
-C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\Opc.Ua.Client.dll
-C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\Opc.Ua.Configuration.dll
-C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\Opc.Ua.Core.dll
 C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\OpcComRcw.dll
 C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\OpcNetApi.Com.dll
 C:\Users\Administrator\Desktop\onesocketserver\SkKit\bin\Debug\OpcNetApi.dll

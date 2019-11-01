@@ -15,9 +15,6 @@ C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Sk
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\System.IO.dll
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\System.Runtime.dll
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\System.Threading.Tasks.dll
-C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Opc.Ua.Core.dll
-C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Opc.Ua.Client.dll
-C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Opc.Ua.Configuration.dll
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\OpcNetApi.dll
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\OpcNetApi.Com.dll
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\NLog.dll
@@ -37,3 +34,5 @@ C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\Sy
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csproj.App.config
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csproj.CopyComplete
 C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\obj\Debug\OpcClientForMetering.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\11111111.dll
+C:\Users\Administrator\Desktop\onesocketserver\OpcClientForMetering\bin\Debug\11111111.pdb

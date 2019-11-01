@@ -6,3 +6,5 @@
 *.gitignore
 *.zip
 /OpcClientForMetering/bin/Debug/DB/333
+*.config
+/OpcServer/bin/x86/Debug

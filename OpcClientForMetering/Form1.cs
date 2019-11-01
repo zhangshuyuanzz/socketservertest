@@ -1,5 +1,7 @@
 ﻿using Base.kit;
 using Common.log;
+using OpcDa1tt;
+using SkKit;
 using SkKit.kit;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,13 @@ namespace OpcClientForMetering
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            OpcDa1 DA1 = new OpcDa1();
+            DA1.JudgeOpcServerConnectability(OpcSetCfg.OpcIP);
+            logger.Debug("--------------------------------------");
+            logger.Debug("--------------------------------------");
+            logger.Debug("--------------------------------------");
+            logger.Debug("--------------------------------------");
+
             OpcSetClientH = new OpcClientMain(OpcSetCfg.OpcIP, OpcSetCfg.OpcName);
 
             Thread scanThread = new Thread(new ThreadStart(OnlyOnceThread));
@@ -45,44 +54,31 @@ namespace OpcClientForMetering
         }
         void OnlyOnceThread()
         {
-            if (OpcSetClientH.OClient == null)
-            {
-                MessageBox.Show("invalid opc server handle!!", "warn!!");
-                return;
-            }
             this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevListAll);
 
             var result3 = from v in OpcSetCfg.DevListAll orderby v.Key select v;
 
-            List<string> AllTagList = new List<string>();
-            List<string> AllBannerTagList = new List<string>();  //订阅用
-            List<NMDev> Devlist = new List<NMDev>();           //写入数据库
+            List<string> AllTagList = new List<string>();//实时 订阅用
+            List<string> AllBannerTagList = new List<string>();  //班量 订阅用
 
             this.listView1.BeginUpdate();
             foreach (KeyValuePair<string, NMDev> d in result3)
             {
-                List<DataItem> listbuf = d.Value.NmTagList;
-                Devlist.Add(d.Value);
-                OpcSetSqlite.OpcSetWriteTag("RealTimeOpc", d.Key, listbuf);   //实时设备的tag 写到数据库
-
-                foreach (DataItem oo in listbuf)
-                {
-                    OpcClientInsetData(oo);
-                    AllTagList.Add(oo.OpcTagName);
-                }
+                AllTagList.Add(d.Value.taginfo.OpcTagName);
+                OpcClientInsetData(d.Value.taginfo);
             }
-          //  this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevBannerList);
+            List<NMDev>cutimelist =  OpcSetCfg.DevListAll.Values.ToList();
+            OpcSetSqlite.OpcSetWriteTag("RealTimeOpc", cutimelist);   //实时设备的tag 写到数据库
+
+            //  this.OpcSetClientH.OpcClientMainRead(ref OpcSetCfg.DevBannerList);
             foreach (KeyValuePair<string, NMDev> h in OpcSetCfg.DevBannerList)
             {
-                List<DataItem> blistbuf = h.Value.NmTagList;
-                Devlist.Add(h.Value);
-                OpcSetSqlite.OpcSetWriteTag("BannerOpc", h.Key, blistbuf);
-                foreach (DataItem ooo in blistbuf)
-                {
-                    AllBannerTagList.Add(ooo.OpcTagName);
-                }
+                AllBannerTagList.Add(h.Value.taginfo.OpcTagName);
             }
-            OpcSetSqlite.OpcSetWriteDev(Devlist);
+            List<NMDev> bantimelist = OpcSetCfg.DevBannerList.Values.ToList();
+            OpcSetSqlite.OpcSetWriteTag("BannerOpc", bantimelist);
+
+            //OpcSetSqlite.OpcSetWriteDev(Devlist);
 
             this.listView1.EndUpdate();
 
@@ -90,8 +86,6 @@ namespace OpcClientForMetering
             string[] bannerzhu = AllBannerTagList.ToArray();
 
             this.OpcSetClientH.OpcSetTagChanged += new SkKit.kit.TagEventHandler(OpcClientChangeTagNew);
-            this.OpcSetClientH.OpcClientMainSubscription(mmmsf, "realtime");
-            this.OpcSetClientH.OpcClientMainSubscription(bannerzhu, "banner");
         }
         void OpcClientChangeTagNew(List<DataItem> Taglist)
         {
@@ -107,6 +101,7 @@ namespace OpcClientForMetering
                     newtag.OpcTagName = tl.TagName;
                     newtag.Value = tl.Value;
                     newtag.DataTime = tl.DataTime;
+                    newtag.Quality = (ushort)(tl.Quality == (ushort)192?1:2);
                     OpcSetUpdateTag(newtag);
                     RealList.Add(newtag);
                 }
@@ -116,6 +111,7 @@ namespace OpcClientForMetering
                     newtag.OpcTagName = tl.TagName;
                     newtag.Value = tl.Value;
                     newtag.DataTime = tl.DataTime;
+                    newtag.Quality = (ushort)(tl.Quality == (ushort)192 ? 1 : 2);
                     BanList.Add(newtag);
                 }
             }
@@ -180,7 +176,6 @@ namespace OpcClientForMetering
                 ListViewItem sectag =  this.listView1.SelectedItems[0];
                 logger.Debug("-index[{}]--Text[{}]", this.listView1.SelectedIndices[0], sectag.Text);
                 this.DelInputItem.Text = sectag.Text;
-
             }
             catch (Exception ex)
             {

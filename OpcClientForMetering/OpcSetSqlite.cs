@@ -41,13 +41,13 @@ namespace OpcClientForMetering
             }
             this.OpcSetDBHandle.SaveDev("ADevTb", devlist);
         }
-        public bool OpcSetWriteTag(string Table,string devname,List<DataItem> taglist)
+        public bool OpcSetWriteTag(string Table, List<NMDev> taglist)
         {
             if (OpcSetDBHandle == null || taglist == null || taglist.Count == 0)
             {
                 return false;
             }
-            this.OpcSetDBHandle.SaveTag(Table, devname, taglist);
+            this.OpcSetDBHandle.SaveTag(Table, taglist);
 
             return true;
         }

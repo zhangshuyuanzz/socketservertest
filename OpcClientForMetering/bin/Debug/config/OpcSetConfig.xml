@@ -1,20 +1,16 @@
 <root name="opcsetconfig">
-  <Opc tip="192.168.0.241" name="Aspen.Infoplus21_DA">
+  <Opc tip="127.0.0.1" name="Aspen.Infoplus21_DA">
   </Opc>
   <!--
-    实时数据数据区域
+    实时数据数据区域  流量计=1；电=2；蒸汽=3   Good=1;Bad=2;Feq failed=3
 -->
   <devs>
-    <dev id="1" devname="M_DG_ZQ.PV" Prefix="yes" des="this is realtime item what it is!!">
-      <tag tagname="M_DG_ZQ.PV_D" unit="t/h" />
-    </dev>
+    <tag id="12" tagname="M_DG_ZQ.PV_D" unit="t/h" des="this is realtime item what it is!!" tagfac="shandong.linyi" type="1" Prefix="yes" />
   </devs>
   <!--
     oracle数据数据区域
 -->
   <OracleDevs>
-    <dev id="2" devname="M_CYC_D_QWZSJ1" Prefix="no" des="this is oracle item what it is!!">
-      <tag tagname="M_CYC_D_QWZSJ1_E" unit="t/h" />
-    </dev>
+    <tag id="13" tagname="M_CYC_D_QWZSJ1_E" unit="t/h" des="this is realtime item what it is!!" tagfac="shandong.rizhao" type="1" Prefix="no" />
   </OracleDevs>
 </root>

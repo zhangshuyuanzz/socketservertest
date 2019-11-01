@@ -1,5 +1,4 @@
-﻿using SkKit.kit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,7 +46,7 @@ namespace Base.kit
             this.TagIP = inip;
         }
     }
-    public class FlowDev: INormalDev
+    public class FlowDev
     {
         public int devid ;
         public string devname;
@@ -88,10 +87,7 @@ namespace Base.kit
             }
             FlowTagList.Add(TagBuf);
         }
-        string INormalDev.GetDevName()
-        {
-            return this.devname;
-        }
+
         public string GetTagName(string name)
         {
             string retName = name;
@@ -113,7 +109,7 @@ namespace Base.kit
             return this.devdescription;
         }
     }
-    public class EMDev : INormalDev
+    public class EMDev 
     {
         public int devid;
         public string devname;
@@ -165,10 +161,6 @@ namespace Base.kit
             return retName;
         }
 
-        string INormalDev.GetDevName()
-        {
-            return this.devname;
-        }
 
         public int GetDevId()
         {
@@ -182,46 +174,32 @@ namespace Base.kit
     }
     public class NMDev 
     {
-        public int devid;
-        public string devname;
         public string devdescription;
-        private bool devprefix;
 
-        public List<DataItem> NmTagList = new List<DataItem>();
+        public DataItem taginfo;
+        public bool devprefix;
+        public string devuint;
+        public string devfac;
+        public int devtype;
 
-        public NMDev(int id, string name, string prefix, string desc)
+        public NMDev()
         {
-            this.devid = id;
-            this.devname = name;
-            this.devdescription = desc;
-            this.devid = id;
-            this.devname = name;
-            this.devdescription = desc;
-            if (prefix.Contains("no") == true)
-            {
-                devprefix = false;
-            }
-            else
-            {
-                devprefix = true;
-            }
 
         }
-        public void AddTagList(DataItem TagBuf)
+        public void setTagLable()
         {
-            if (TagBuf == null)
+
+            if (taginfo.TagName == null)
             {
-                return;
             }
             if (devprefix == true)
             {
-                TagBuf.OpcTagName = "DefinitionRecords.IP_AnalogDef.\"" + TagBuf.TagName + "\"";
+                taginfo.OpcTagName = "DefinitionRecords.IP_AnalogDef.\"" + taginfo.TagName + "\"";
             }
             else
             {
-                TagBuf.OpcTagName = TagBuf.TagName;
+                taginfo.OpcTagName = taginfo.TagName;
             }
-            NmTagList.Add(TagBuf);
         }
     }
 
