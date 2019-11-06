@@ -33,12 +33,14 @@ namespace OpcClientForMetering
             OpcSetCfg = new OpcSetConfig();
             OpcSetCfg.OpcSetConfigParseXml();
             OpcSetSqlite = new OpcSetSqlite();
-            //  OpcSetOracleH = new OpcSetOracle("ip","zhang","x","z","AAA");
-            //  OpcSetSKServer = new OpcSetSocketSver(OpcSetCfg);
             this.trueversion.Text = "V." + Application.ProductVersion;
+            logger.Debug("Form1---finish!!");
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            logger.Debug("Form1_Load--OpcSetCfg.OpcIP[{}]", OpcSetCfg.OpcIP);
+
             OpcDa1 DA1 = new OpcDa1();
             DA1.JudgeOpcServerConnectability(OpcSetCfg.OpcIP);
             logger.Debug("--------------------------------------");

@@ -95,7 +95,6 @@ namespace OpcClientForMetering
                     //string Opcstr = "opcda://{0}/{1}";
                     OpcIP = XmlKit.GetByXml("tip", onenode);
                     OpcName = XmlKit.GetByXml("name", onenode);
-                    //this.OpcHandle = string.Format(Opcstr, OpcIp, OpcName);
 
                     logger.Debug("OpcIp[{}]OpcName[{}]", OpcIP, OpcName);
                 }
