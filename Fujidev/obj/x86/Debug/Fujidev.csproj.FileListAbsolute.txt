@@ -1,0 +1,5 @@
+C:\Users\zyq\Desktop\socketservertest\Fujidev\obj\x86\Debug\Fujidev.csprojAssemblyReference.cache
+C:\Users\zyq\Desktop\socketservertest\Fujidev\obj\x86\Debug\Fujidev.Form1.resources
+C:\Users\zyq\Desktop\socketservertest\Fujidev\obj\x86\Debug\Fujidev.Properties.Resources.resources
+C:\Users\zyq\Desktop\socketservertest\Fujidev\obj\x86\Debug\Fujidev.csproj.GenerateResource.cache
+C:\Users\zyq\Desktop\socketservertest\Fujidev\obj\x86\Debug\Fujidev.csproj.CoreCompileInputs.cache

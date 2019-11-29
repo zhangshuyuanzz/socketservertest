@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- attempts_interval 定义值，不可随意设置（最少0.5s）：                
+    1S     = 1,
+    2S     = 2,    
+ -->
+<!-- device protocol：                
+    modbus  ,
+    dlt645-07     = 07协议,
+    dlt645-97     = 97协议,    
+ -->
+<collector>
+  <attr scada_frequency="2" attempts_num="15" attempts_interval="3" />
+  <!-- serial：                
+    modify:baude bits parity stop
+		yes	,可修改
+		no  ,不可修改
+ -->
+</collector>
