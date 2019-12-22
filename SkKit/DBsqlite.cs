@@ -8,6 +8,7 @@ using System.Data.SQLite;
 using Common.log;
 using Base.kit;
 using System.Data.Common;
+using SkKit.kit;
 
 namespace SQLite
 {
@@ -157,7 +158,7 @@ namespace SQLite
 
         public int ExecuteNonQuery(string sql, SQLiteParameter[] paramArr)
         {
-            if (sql == null || paramArr == null)
+            if (sql == null )
             {
                 throw new ArgumentNullException("sql=null || paramArr == null");
             }
@@ -276,19 +277,153 @@ namespace SQLite
             return row;
         }
 
-        public int Save(string table, List<DataItem> entity)
+        private static string BuildInsert(string table)
+        {
+            StringBuilder buf = new StringBuilder();
+            buf.Append("REPLACE INTO ").Append(table).Append(" ( ID,DevName,Decription) values ( @ID,@DevName,@Decription)");
+            return buf.ToString();
+        }
+        private static SQLiteParameter[] IinsertBuildParamArray(NMDev devdata)
+        {
+            List<SQLiteParameter> list = new List<SQLiteParameter>();
+            list.Add(new SQLiteParameter("@ID", devdata.taginfo.TagId));
+            list.Add(new SQLiteParameter("@DevName", devdata.taginfo.TagName));
+            list.Add(new SQLiteParameter("@Decription", devdata.devdescription));
+
+            if (list.Count == 0)
+                return null;
+            return list.ToArray();
+        }
+        public int SaveDev(string table, List<NMDev> entity)
         {
             if (table == null)
             {
                 throw new ArgumentNullException("table=null");
             }
-            this.EnsureConnection();
-            string sql = BuildInsert(table, entity);
+            string sql = BuildInsert(table);
+            this.EnsureConnection();  //no useless
+            logger.Debug("sql[{}]", sql);
 
-            int count = this.ExecuteNonQuery(sql, BuildParamArray(entity[0]));
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
+            int count = 0;
+            foreach (NMDev s in entity)
+            {
+                SQLiteParameter[] arr = IinsertBuildParamArray(s);
+                count += ExecuteNonQuery(sql, arr);
+            }
+            SqlhelpCommitDTS(dbTrans);
             return count;
         }
+        private static SQLiteParameter[] SaveBuildTagArray(NMDev devdata)
+        {
+            List<SQLiteParameter> list = new List<SQLiteParameter>();
+            list.Add(new SQLiteParameter("@tagId", devdata.taginfo.TagId));
+            list.Add(new SQLiteParameter("@OpcItemName", devdata.taginfo.OpcTagName));
+            list.Add(new SQLiteParameter("@TagName", devdata.taginfo.TagName));
+            list.Add(new SQLiteParameter("@value", devdata.taginfo.Value));
+            list.Add(new SQLiteParameter("@Unit", devdata.devuint));
+            list.Add(new SQLiteParameter("@Time", devdata.taginfo.DataTime));
+            list.Add(new SQLiteParameter("@TagType", devdata.devtype));
+            list.Add(new SQLiteParameter("@tagDesc", devdata.devdescription));
+            list.Add(new SQLiteParameter("@owner", devdata.devfac));
+            list.Add(new SQLiteParameter("@tagQuality", devdata.taginfo.Quality));
 
+            logger.Debug("----TagId[{}]", devdata.taginfo.TagId);
+            logger.Debug("----OpcTagName[{}]", devdata.taginfo.OpcTagName);
+            logger.Debug("----TagName[{}]", devdata.taginfo.TagName);
+            logger.Debug("----Value[{}]", devdata.taginfo.Value);
+            logger.Debug("----devuint[{}]", devdata.devuint);
+            logger.Debug("----DataTime[{}]", devdata.taginfo.DataTime);
+            logger.Debug("----devtype[{}]", devdata.devtype);
+            logger.Debug("----devdescription[{}]", devdata.devdescription);
+            logger.Debug("----devfac[{}]", devdata.devfac);
+            logger.Debug("----Quality[{}]", devdata.taginfo.Quality);
+
+            if (list.Count == 0)
+                return null;
+            return list.ToArray();
+        }
+        private static string BuildSaveTag(string table)
+        {
+            StringBuilder buf = new StringBuilder();
+            buf.Append("REPLACE INTO ").Append(table).Append(" ( tagId,OpcItemName,TagName,value,Unit,Time,TagType,tagDesc,owner,tagQuality) values ( @tagId,@OpcItemName,@TagName,@value,@Unit,@Time,@TagType,@tagDesc,@owner,@tagQuality)");
+            return buf.ToString();
+        }
+
+        private static SQLiteParameter[] UpdateBuildTagArray(DataItem devdata)
+        {
+            List<SQLiteParameter> list = new List<SQLiteParameter>();
+            list.Add(new SQLiteParameter("@value", devdata.Value));
+            list.Add(new SQLiteParameter("@Time", devdata.DataTime));
+            list.Add(new SQLiteParameter("@tagQuality", devdata.Quality));
+            list.Add(new SQLiteParameter("@OpcItemName", devdata.OpcTagName));
+
+            logger.Debug("Value[{}]DataTime[{}]OpcItemName[{}]Quality[{}]", devdata.Value, devdata.DataTime, devdata.OpcTagName, devdata.Quality);
+            if (list.Count == 0)
+                return null;
+            return list.ToArray();
+        }
+        public int UpdateTag(string table, List<DataItem> entity)
+        {
+            if (table == null)
+            {
+                throw new ArgumentNullException("table=null");
+            }
+            string sql = "UPDATE " + table + " SET value=@value,time=@time,tagQuality=@tagQuality WHERE OpcItemName=@OpcItemName"; 
+            this.EnsureConnection();  //no useless
+            logger.Debug("sql[{}]", sql);
+
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
+            int count = 0;
+            foreach (DataItem s in entity)
+            {
+                SQLiteParameter[] arr = UpdateBuildTagArray( s);
+                count += ExecuteNonQuery(sql, arr);
+            }
+            SqlhelpCommitDTS(dbTrans);
+            return count;
+        }
+        public int SaveTag(string table, List<NMDev> entity)
+        {
+            if (table == null)
+            {
+                throw new ArgumentNullException("table=null");
+            }
+            string sql = BuildSaveTag(table);
+            this.EnsureConnection();  //no useless
+            logger.Debug("sql[{}]", sql);
+
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
+            int count = 0;
+            foreach (NMDev s in entity)
+            {
+                SQLiteParameter[] arr = SaveBuildTagArray(s);
+                count += ExecuteNonQuery(sql, arr);
+            }
+            SqlhelpCommitDTS(dbTrans);
+            return count;
+        }
+        public void DelAllMeter(List<string> Tables)
+        {
+            try
+            {
+                string DelTab = "delete from {0}";
+                DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
+
+                this.EnsureConnection();
+                foreach (string ss in Tables) {
+                    string sqlstr = string.Format(DelTab,ss);
+                    int ret = this.ExecuteNonQuery(sqlstr, null);
+                }
+                SqlhelpCommitDTS(dbTrans);
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("error [{}]", ex.ToString());
+            }
+
+            return ;
+        }
         private static SQLiteParameter[] BuildParamArray(DataItem tagidata)
         {
             List<SQLiteParameter> list = new List<SQLiteParameter>();
@@ -303,28 +438,6 @@ namespace SQLite
             if (list.Count == 0)
                 return null;
             return list.ToArray();
-        }
-
-        private static string BuildInsert(string table, List<DataItem> entity)
-        {
-            StringBuilder buf = new StringBuilder();
-            buf.Append("insert into ").Append(table);
-            buf.Append(" (");
-            foreach (DataItem key in entity)
-            {
-                buf.Append(key).Append(",");
-            }
-            buf.Remove(buf.Length - 1, 1); // 移除最后一个,  
-            buf.Append(") ");
-            buf.Append("values(");
-            foreach (DataItem key in entity)
-            {
-                buf.Append("@").Append(key).Append(","); // 创建一个参数  
-            }
-            buf.Remove(buf.Length - 1, 1);
-            buf.Append(") ");
-
-            return buf.ToString();
         }
 
         private static string BuildReplace(string table)
@@ -344,13 +457,13 @@ namespace SQLite
             this.EnsureConnection();  //no useless
             logger.Debug("sql[{}]", sql);
 
-            DbTransaction dbTrans = this.Connection.BeginTransaction();
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
             int count = 0;
             foreach (DataItem s in entity) {
                 SQLiteParameter[] arr = BuildParamArray(s);
                 count += ExecuteNonQuery(sql, arr);
             }
-            dbTrans.Commit();
+            SqlhelpCommitDTS(dbTrans);
             return count;
         }
 
@@ -361,14 +474,15 @@ namespace SQLite
                 throw new ArgumentNullException("table=null");
             }
             this.EnsureConnection();
-            DbTransaction dbTrans = this.Connection.BeginTransaction();
+
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection);  //this.Connection.BeginTransaction();
 
             string sql = "delete from " + table + " where devip = @delip" ;
             SQLiteParameter[] wpara = new SQLiteParameter[1];
             wpara[0] = new SQLiteParameter("@delip", Delp);
-            logger.Debug("sql[{}]",sql);
             int ret = this.ExecuteNonQuery(sql, wpara);
-            dbTrans.Commit();
+            SqlhelpCommitDTS(dbTrans);
+
             return ret;
         }
         private static SQLiteParameter[] BuildUpdateParamArray(DataItem tagidata)
@@ -389,16 +503,45 @@ namespace SQLite
             int total = 0;
             StringBuilder UpdateBuf = new StringBuilder();
 
-            DbTransaction dbTrans = this.Connection.BeginTransaction();
-
+            DbTransaction dbTrans = SqlhelpBeginDTS(this.Connection); //this.Connection.BeginTransaction();
             UpdateBuf.Append("UPDATE ").Append(table).Append(" SET value=@value,time=@time WHERE name=@name");
             string updatesql = UpdateBuf.ToString();
+            logger.Debug("updatesql[{}]", updatesql);
             foreach (DataItem s in entity)
             {
                 total += ExecuteNonQuery(updatesql, BuildUpdateParamArray(s));
             }
-            dbTrans.Commit();
+            SqlhelpCommitDTS(dbTrans);
             return total;
+        }
+        private DbTransaction SqlhelpBeginDTS(SQLiteConnection DbConn)
+        {
+            DbTransaction dbTrans = null;
+            try
+            {
+                dbTrans = DbConn.BeginTransaction();
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("begin Dts error: [{}]",ex.ToString());
+                dbTrans.Rollback();
+                dbTrans = DbConn.BeginTransaction();
+            }
+            return dbTrans;
+        }
+        private void SqlhelpCommitDTS(DbTransaction DTSHandle)
+        {
+            if (DTSHandle == null) {
+                return;
+            }
+            try
+            {
+                DTSHandle.Commit(); ;
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("begin Dts error: [{}]", ex.ToString());
+            }
         }
     }
 

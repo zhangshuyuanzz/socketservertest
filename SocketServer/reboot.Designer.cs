@@ -50,10 +50,10 @@
             this.rebootbtn1.Click += new System.EventHandler(this.RebootConfirmHandler);
             this.rebootbtn1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RebootMouseDownHandler);
             this.rebootbtn1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RebootMouseUpHandler);
-           // 
-           // warning
-           // 
-           this.warning.AutoSize = true;
+            // 
+            // warning
+            // 
+            this.warning.AutoSize = true;
             this.warning.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.warning.ForeColor = System.Drawing.Color.Blue;
             this.warning.Location = new System.Drawing.Point(122, 18);
@@ -79,7 +79,7 @@
             this.rebootip.Name = "rebootip";
             this.rebootip.Size = new System.Drawing.Size(297, 25);
             this.rebootip.TabIndex = 3;
-            this.rebootip.TextChanged += new System.EventHandler(RebootEventHandler);
+            this.rebootip.TextChanged += new System.EventHandler(this.RebootEventHandler);
             // 
             // reboot
             // 
@@ -93,7 +93,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "reboot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "reboot";
+            this.Text = "[-reboot-]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RebootFormClosingEventHandler);
             this.ResumeLayout(false);
             this.PerformLayout();

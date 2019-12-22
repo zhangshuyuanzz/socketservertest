@@ -32,22 +32,26 @@ namespace SocketServer
         }
         public bool OpcDataWriteTag(List<DataItem> taglist,bool fff)
         {
-            if (taglist == null) {
-                return false;
-            }
-            logger.Debug("Local Dbsqlite DateWrite");
-            int c;
-            if (fff == true)
+            lock (this)
             {
-                logger.Debug("DB  ReplaceReplaceReplaceReplaceReplace");
-                c = this.OpcServerDBHandle.Replace("opc_tag", taglist);
+                if (taglist == null)
+                {
+                    return false;
+                }
+                logger.Debug("Local Dbsqlite DateWrite");
+                int c;
+                if (fff == true)
+                {
+                    logger.Debug("DB  ReplaceReplaceReplaceReplaceReplace");
+                    c = this.OpcServerDBHandle.Replace("opc_tag", taglist);
+                }
+                else
+                {
+                    logger.Debug("DB  UpdateUpdateUpdateUpdateUpdate");
+                    c = this.OpcServerDBHandle.Update("opc_tag", taglist);
+                }
+                logger.Debug("c[{}]", c);
             }
-            else
-            {
-                logger.Debug("DB  UpdateUpdateUpdateUpdateUpdate");
-                c = this.OpcServerDBHandle.Update("opc_tag", taglist);
-            }
-            logger.Debug("c[{}]",c);
             return true;
         }
         public bool OpcDataDelTagWithIp(string delip)

@@ -1,0 +1,30 @@
+2019-09-06 14:03:04.8830 [DEBUG]£º---Form1------------- - 
+2019-09-06 14:03:04.9901 [DEBUG]£º---host["192.168.0.231"], user["root"], password["taosdata"], dbName["zyq"], stableName["st"], tablePrefix["t"], isInsertData[true], isQueryData[true], tableCount[10], configDir["C:/TDengine/cfg"]----
+2019-09-06 14:03:05.0519 [DEBUG]£º-------------------------------------------------------------- - 
+2019-09-06 14:03:05.0589 [DEBUG]£º---------------------------------------------------------------
+2019-09-06 14:03:05.0589 [DEBUG]£ºStarting Testing...
+2019-09-06 14:03:05.0722 [DEBUG]£º---------------------------------------------------------------
+2019-09-06 14:03:05.2580 [DEBUG]£ºTDengine Initialization finished
+2019-09-06 14:03:06.3110 [DEBUG]£ºConnect to TDengine failed
+2019-09-06 14:15:27.5976 [DEBUG]£º---Form1------------- - 
+2019-09-06 14:15:27.6774 [DEBUG]£º---host["192.168.0.231"], user["root"], password["taosdata"], dbName["zyq"]----
+2019-09-06 14:15:27.7352 [DEBUG]£º---stableName["st"], tablePrefix["t"], isInsertData[true]----
+2019-09-06 14:15:27.7442 [DEBUG]£º---isQueryData[true], tableCount[10], configDir["C:/TDengine/cfg"]----
+2019-09-06 14:15:27.7442 [DEBUG]£º-------------------------------------------------------------- - 
+2019-09-06 14:15:27.7592 [DEBUG]£º---------------------------------------------------------------
+2019-09-06 14:15:27.7592 [DEBUG]£ºStarting Testing...
+2019-09-06 14:15:27.7741 [DEBUG]£º---------------------------------------------------------------
+2019-09-06 14:15:27.9905 [DEBUG]£ºTDengine Initialization finished
+2019-09-06 14:15:27.9955 [DEBUG]£º---host["192.168.0.231"], user["root"], password["taosdata"], port[0]--
+2019-09-06 14:15:29.0398 [DEBUG]£ºConnect to TDengine failed
+2019-09-06 14:18:05.3363 [DEBUG]£º---Form1------------- - 
+2019-09-06 14:18:05.4091 [DEBUG]£º---host["192.168.0.231"], user["root"], password["taosdata"], dbName["zyq"]----
+2019-09-06 14:18:05.4649 [DEBUG]£º---stableName["st"], tablePrefix["t"], isInsertData[true]----
+2019-09-06 14:18:05.4649 [DEBUG]£º---isQueryData[true], tableCount[10], configDir["C:/TDengine/cfg"]----
+2019-09-06 14:18:05.4819 [DEBUG]£º-------------------------------------------------------------- - 
+2019-09-06 14:18:05.4819 [DEBUG]£º---------------------------------------------------------------
+2019-09-06 14:18:05.4939 [DEBUG]£ºStarting Testing...
+2019-09-06 14:18:05.4939 [DEBUG]£º---------------------------------------------------------------
+2019-09-06 14:18:05.6913 [DEBUG]£ºTDengine Initialization finished
+2019-09-06 14:18:05.6963 [DEBUG]£º---host["192.168.0.231"], user["root"], password["taosdata"], port[6020]--
+2019-09-06 14:18:06.7436 [DEBUG]£ºConnect to TDengine failed

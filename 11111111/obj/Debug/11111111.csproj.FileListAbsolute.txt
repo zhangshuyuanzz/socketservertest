@@ -1,0 +1,11 @@
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\11111111.dll
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\11111111.pdb
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\NLog.dll
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\OpcComRcw.dll
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\OpcNetApi.Com.dll
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\OpcNetApi.dll
+C:\Users\Administrator\Desktop\onesocketserver\11111111\bin\Debug\NLog.xml
+C:\Users\Administrator\Desktop\onesocketserver\11111111\obj\Debug\11111111.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\onesocketserver\11111111\obj\Debug\11111111.csproj.CopyComplete
+C:\Users\Administrator\Desktop\onesocketserver\11111111\obj\Debug\11111111.dll
+C:\Users\Administrator\Desktop\onesocketserver\11111111\obj\Debug\11111111.pdb

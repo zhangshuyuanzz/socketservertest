@@ -1,2 +1,15 @@
+<<<<<<< HEAD
 /.vs
 .vs
+=======
+*.cache
+*.log
+*.ide-wal
+*.bak
+*.ide-shm
+*.gitignore
+*.zip
+/OpcClientForMetering/bin/Debug/DB/333
+*.config
+/OpcServer/bin/x86/Debug
+>>>>>>> 0305e575cc01c3ffd92deb19ad6f4f3addcf4618

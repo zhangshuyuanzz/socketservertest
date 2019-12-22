@@ -9,7 +9,7 @@
     dlt645-97     = 97协议,    
  -->
 <collector>
-  <attr scada_frequency="5" attempts_num="15" attempts_interval="3" />
+  <attr scada_frequency="1" attempts_num="15" attempts_interval="3" />
   <!-- serial：                
     modify:baude bits parity stop
 		yes	,可修改
@@ -21,16 +21,14 @@
     <para protocol="hs96" port="/dev/ttyS4" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="no" />
     <para protocol="fuji" port="/dev/ttyS10" baude="1200" bits="8" parity="N" stop="1" resume_interval="5" detect_count="3" modify="yes" />
   </serial>
-  <device name="FUJI-name01" protocol="fuji" devmodel="haifeng" address="5" serialport="10" actstate="0" interval="10">
-    <command name="FUJI_INSTANCE_FLOWRATE" command="DQD" id="50" />
-    <command name="FUJI_CUMULANT" command="DI+" id="51" />
-  </device>
-  <device name="HS96_dev1" protocol="hs96" devmodel="hs96-panel1" address="20" serialport="4" actstate="0" interval="3">
-    <tag name="HS96_FLOW" id="5" type="1" />
-    <tag name="HS96_PRESSURE" id="6" type="1" />
-    <tag name="HS96_PRESSURE_DIFFER" id="7" type="1" />
-    <tag name="HS96_TEMPERA" id="8" type="1" />
-    <tag name="HS96_CUMULANT" id="9" type="1" />
+  <device name="modbus——dev1" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="0">
+    <tag name="modbus_quality_mass_flow" startaddr="2" quantity="2" id="10" type="1" byteOrder="4321" />
+    <tag name="modbus_heat_mass_flow" startaddr="4" quantity="2" id="11" type="1" byteOrder="4321" />
+    <tag name="modbus_quality_instant_flow" startaddr="6" quantity="2" id="12" type="1" byteOrder="4321" />
+    <tag name="modbus_heat_instant_flow" startaddr="8" quantity="2" id="13" type="1" byteOrder="4321" />
+    <tag name="modbus_temperature" startaddr="12" quantity="2" id="14" type="1" byteOrder="4321" />
+    <tag name="modbus_pressure" startaddr="14" quantity="2" id="15" type="1" byteOrder="4321" />
+    <tag name="modbus_vapor_density" startaddr="16" quantity="2" id="16" type="1" byteOrder="4321" />
   </device>
   <device name="modbus——dev2" protocol="modbus" devmodel="fc6000" endian="1" address="1" serialport="6" actstate="0" interval="0">
     <tag name="modbus_quality_mass_flow2" startaddr="2" quantity="2" id="17" type="1" byteOrder="4321" />
@@ -40,5 +38,45 @@
     <tag name="modbus_temperature2" startaddr="12" quantity="2" id="21" type="1" byteOrder="4321" />
     <tag name="modbus_pressure2" startaddr="14" quantity="2" id="22" type="1" byteOrder="4321" />
     <tag name="modbus_vapor_density2" startaddr="16" quantity="2" id="23" type="1" byteOrder="4321" />
+  </device>
+  <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="041008309980" serialport="8" actstate="0" interval="1">
+    <tag name="FEATURE_POWER_FACTOR" DIid="B650" id="30" type="1" />
+    <tag name="FEATURE_VOLTAGE_A" DIid="B611" id="30" type="1" />
+    <tag name="FEATURE_VOLTAGE_B" DIid="B612" id="31" type="1" />
+    <tag name="FEATURE_VOLTAGE_C" DIid="B613" id="32" type="1" />
+    <tag name="FEATURE_POSITIVE_REACTIVE_POWER" DIid="B640" id="38" type="1" />
+    <tag name="FEATURE_REVERSE_REACTIVE_POWER" DIid="B640" id="39" type="1" />
+    <tag name="FEATURE_POSITIVE_ENERGY" DIid="9010" id="40" type="1" />
+    <tag name="FEATURE_REVERSE_ENERGY" DIid="9020" id="41" type="1" />
+  </device>
+  <device name="dlt645_dev1" protocol="dlt645" devmodel="dlt645-97" address="041008309980" serialport="8" actstate="0" interval="1">
+    <tag name="FEATURE_POSITIVE_ACTIVE_POWER" DIid="B630" id="36" type="1" />
+    <tag name="FEATURE_REVERSE_ACTIVE_POWER" DIid="B630" id="37" type="1" />
+    <tag name="FEATURE_POSITIVE_REACTIVE_POWER" DIid="B640" id="38" type="1" />
+    <tag name="FEATURE_REVERSE_REACTIVE_POWER" DIid="B640" id="39" type="1" />
+    <tag name="FEATURE_POSITIVE_ENERGY" DIid="9010" id="40" type="1" />
+    <tag name="FEATURE_REVERSE_ENERGY" DIid="9020" id="41" type="1" />
+  </device>
+  <device name="HS96_dev1" protocol="hs96" devmodel="hs96-panel1" address="20" serialport="4" actstate="0" interval="3">
+    <tag name="HS96_FLOW" id="5" type="1" />
+    <tag name="HS96_PRESSURE" id="6" type="1" />
+    <tag name="HS96_PRESSURE_DIFFER" id="7" type="1" />
+    <tag name="HS96_TEMPERA" id="8" type="1" />
+    <tag name="HS96_CUMULANT" id="9" type="1" />
+  </device>
+  <device name="HS96_dev2" protocol="hs96" devmodel="hs96-panel2" address="188" serialport="4" actstate="0" interval="3">
+    <tag name="HS96_FLOW2" id="55" type="1" />
+    <tag name="HS96_PRESSURE2" id="56" type="1" />
+    <tag name="HS96_PRESSURE_DIFFER2" id="57" type="1" />
+    <tag name="HS96_TEMPERA2" id="58" type="1" />
+    <tag name="HS96_CUMULANT2" id="59" type="1" />
+  </device>
+  <device name="FUJI-name01" protocol="fuji" devmodel="haifeng" address="5" serialport="10" actstate="0" interval="10">
+    <command name="FUJI_INSTANCE_FLOWRATE" command="DQD" id="50" />
+    <command name="FUJI_CUMULANT" command="DI+" id="51" />
+  </device>
+  <device name="FUJI-name02" protocol="fuji" devmodel="haifeng" address="5" serialport="10" actstate="0" interval="10">
+    <command name="FUJI_INSTANCE_FLOWRATE" command="DIT" id="52" />
+    <command name="FUJI_CUMULANT" command="AT+" id="53" />
   </device>
 </collector>

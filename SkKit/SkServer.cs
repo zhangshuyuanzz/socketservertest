@@ -158,8 +158,10 @@ namespace SkKit
                         return;
                     }
                     else {
-                        SkParseFrame(TagsL, GetData);
-                        Server_get_handle?.Invoke(TagsL, reip);
+                        if (SkParseFrame(TagsL, GetData) == true)            // FE FE 01 01 00 00 00 00 00 FE
+                        {
+                            Server_get_handle?.Invoke(TagsL, reip);
+                        }
                     }
                 }
             }
@@ -259,17 +261,23 @@ namespace SkKit
         }
         public void CoSendFile(string ip, string path)
         {
-            logger.Debug("CoSendFile--ip[{}]path[{}]", ip, path);
-            if (DevSkList.ContainsKey(ip))
+            try
             {
-                DevSkList[ip].SendFile(path);
+                logger.Debug("CoSendFile--ip[{}]path[{}]", ip, path);
+                if (DevSkList.ContainsKey(ip))
+                {
+                    DevSkList[ip].SendFile(path);
+                }
+                else
+                {
+                    logger.Debug("no this device");
+                }
+                logger.Debug("CoSendFile end");
             }
-            else
+            catch (Exception ex)
             {
-                logger.Debug("no this device");
+                logger.Debug("send file error:[{}]",ex.ToString());
             }
-            logger.Debug("CoSendFile end");
-
         }
         public void CoSendString(string ip, string data)
         {
@@ -277,15 +285,42 @@ namespace SkKit
             byte[] SendData = System.Text.Encoding.ASCII.GetBytes(data);
             logger.Debug("SendData----SendData[{}]", BitConverter.ToString(SendData));
 
-            if (DevSkList.ContainsKey(ip))
+            try
             {
-                DevSkList[ip].Send(SendData);
+                if (DevSkList.ContainsKey(ip))
+                {
+                    DevSkList[ip].Send(SendData);
+                }
+                else
+                {
+                    logger.Debug("no this device");
+                }
+                logger.Debug("CoSendString end");
             }
-            else
+            catch (Exception ex)
             {
-                logger.Debug("no this device");
+                logger.Debug("send string error:[{}]",ex.ToString());
             }
-            logger.Debug("CoSendString end");
+        }
+        public void CoSendByte(string ip, byte[] medata)
+        {
+            logger.Debug("CoSendByte--ip[{}]data[{}]", ip, string.Join(",", medata));
+            try
+            {
+                if (DevSkList.ContainsKey(ip))
+                {
+                    DevSkList[ip].Send(medata);
+                }
+                else
+                {
+                    logger.Debug("no this device");
+                }
+                logger.Debug("CoSendByte end");
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("send string error:[{}]", ex.ToString());
+            }
         }
         private void init_timer()
         {

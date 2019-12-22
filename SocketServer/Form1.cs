@@ -265,6 +265,7 @@ namespace SocketServer
                 logger.Debug("thie file is exist!!!");
                 System.Threading.Thread.Sleep(1000);
                 ServerHandle.CoSendFile(ip, IsExistPath);
+                System.Threading.Thread.Sleep(500);
                 ServerHandle.CoSendString(ip, "send-file-end");
             }
             else
@@ -597,8 +598,20 @@ namespace SocketServer
         }
         private void reboot_TextClicked(object sender, EventArgs e)
         {
+            if (RebootDialog == null || RebootDialog.IsDisposed)
+            {
+                logger.Debug("new a reboot win!!");
+                RebootDialog = new reboot();
+            }
             logger.Debug("reboot_TextClicked--");
-            RebootDialog.ShowDialog();
+            try
+            {
+                RebootDialog.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("error c win:[{}]",ex.ToString());
+            }
         }
         public void GetRebootIp(object sender, string RebIp)
         {
